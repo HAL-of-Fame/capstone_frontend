@@ -9,7 +9,9 @@ import "./Navbar.css"
 export default function Navbar(
   {
     user,
-    handleLogout 
+    handleLogout,
+    searchInputValue,
+    handleOnSearchInputChange
   }
 ) {
   return (
@@ -27,19 +29,35 @@ export default function Navbar(
           <Facebook fill="var(--pure-white)" />
         </div> */}
 
+            <div className="search-bar">
+            <input
+              type="text"
+              name="search"
+              placeholder="Search"
+              value={searchInputValue}
+              onChange={handleOnSearchInputChange}
+            />
+            <i className="material-icons">search</i>
+          </div>
         <ul className="links">
           <li>
-            <Link to="/activity">Activity</Link>
+            <Link to="/genre">Genre</Link>
           </li>
           <li>
-            <Link to="/exercise">Exercise</Link>
+            <Link to="/trending">Trending</Link>
           </li>
           <li>
-            <Link to="/nutrition">Nutrition</Link>
+            <Link to="/newreleases">New Releases</Link>
           </li>
           <li>
-            <Link to="/sleep">Sleep</Link>
+            <Link to="/favorites">Favorites</Link>
           </li>
+          <div className="cart">
+              <Link to="/shopping-cart">
+                My Cart
+                <i className="material-icons">shopping_cart</i>
+              </Link>
+            </div>
           <div className="auth">
           {user?.email ? (
             <>
