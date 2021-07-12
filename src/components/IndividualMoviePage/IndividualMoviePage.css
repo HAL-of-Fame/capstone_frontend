@@ -1,0 +1,77 @@
+.individualMoviePage .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.individualMoviePage .column .top {
+    display: flex;
+    flex-direction: row;
+}
+
+.individualMoviePage .column .top .left {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.individualMoviePage .column .top .right {
+    display: flex;
+    margin-left: 50%;
+    margin-top: 100%;
+}
+
+.individualMoviePage .column .top .left .moviePoster {
+  width: 350px;
+  height: 460px;
+
+  background: #39a4a4;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: 3%;
+}
+
+
+.individualMoviePage .column .movieDescription {
+  width: 985px;
+  height: 107px;
+
+  background: #3caea3;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  inline-size: min-content;
+  overflow-wrap: word-break;
+  margin-top: 3%;
+  padding-top: 1%;
+  padding-left: 3%;
+  padding-right: 5%;
+  padding-bottom: 8%;
+}
+
+.individualMoviePage .column .movieDescription p {
+  display: flex;
+  margin: auto;
+  /* margin: 0 auto; */
+}
+
+.individualMoviePage .column .discussionSection {
+  width: 985px;
+  height: 220px;
+  background: #3caea3;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: 4%;
+  padding-top: 1%;
+  padding-left: 3%;
+  padding-right: 5%;
+  padding-bottom: 8%;
+}
+
+.individualMoviePage .column .discussionSection p {
+    display: flex;
+    margin: auto;
+}
