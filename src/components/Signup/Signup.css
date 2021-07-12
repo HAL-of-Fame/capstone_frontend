@@ -74,3 +74,11 @@
     height: 100px;
     width: 100%;
   }
+  .names{
+    display: flex;
+    justify-content: space-around;
+  }
+  .lastn{
+    margin-left: 10px;
+    margin-top: 5px;
+  }

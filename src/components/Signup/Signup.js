@@ -87,16 +87,32 @@ export default function Signup({ user, setUser }) {
         <br />
 
         <div className="form">
+        <div className="names">
           <div className="input-field">
-            <label htmlFor="name">Full Name</label>
+            <label htmlFor="name">First Name</label>
             <input
               type="text"
-              name="name"
-              placeholder="Enter your full name"
-              value={form.name}
+              name="first_name"
+              placeholder="Enter your first name"
+              value={form.first_name}
               onChange={handleOnInputChange}
             />
-            {errors.name && <span className="error">{errors.name}</span>}
+            {errors.first_name && <span className="error">{errors.first_name}</span>}
+          </div>
+
+          <div className="input-field">
+            <div className="lastn">
+            <label htmlFor="name">Last Name</label>
+            <input
+              type="text"
+              name="last_name"
+              placeholder="Enter your last name"
+              value={form.last_name}
+              onChange={handleOnInputChange}
+            />
+            {errors.last_name && <span className="error">{errors.last_name}</span>}
+            </div>
+          </div>
           </div>
 
           <div className="input-field">
