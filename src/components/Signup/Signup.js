@@ -9,7 +9,8 @@ export default function Signup({ user, setUser }) {
   const [isProcessing, setIsProcessing] = useState(false)
   const [errors, setErrors] = useState({})
   const [form, setForm] = useState({
-    name: "",
+    first_name: "",
+    last_name: "",
     email: "",
     username: "",
     password: "",
@@ -20,7 +21,7 @@ export default function Signup({ user, setUser }) {
     // if user is already logged in,
     // redirect them to the home page
     if (user?.email) {
-      navigate("/activity")
+      navigate("/")
     }
   }, [user, navigate])
 
@@ -58,10 +59,12 @@ export default function Signup({ user, setUser }) {
 
     try {
       const res = await axios.post("http://localhost:3001/auth/register", {
-        name: form.name,
+        first_name: form.first_name,
+        last_name: form.last_name,
         username: form.username,
         email: form.email,
         password: form.password,
+
       })
       if (res?.data?.user) {
         setUser(res.data.user)

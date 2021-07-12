@@ -1,0 +1,21 @@
+.Card {
+  border: 3px solid #000000;
+  border-radius: 10px;
+  margin: 30px;
+  /* display: flex;
+  flex-flow: column; */
+  /* word-wrap: break-word; */
+}
+.Poster {
+}
+.Card:hover {
+  box-shadow: 0 24px 32px 0 rgba(0, 0, 0, 0.19),
+    0 34px 100px 0 rgba(0, 0, 0, 0.19);
+}
+.Name {
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  width: 200px;
+  text-align: center;
+}
