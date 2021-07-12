@@ -52,36 +52,37 @@ export default function Navbar({
               height="37.85px"
             />
           </div>
-          <div className="links">
-            <div className="auth">
-              {user?.email ? (
-                <>
-                  <li>
-                    <span>{user.email}</span>
-                  </li>
+        </div>
 
+        <div className="links">
+          <div className="auth">
+            {user?.email ? (
+              <>
+                <li>
+                  <span>{user.email}</span>
+                </li>
+
+                <li>
+                  <span onClick={handleLogout}>Logout</span>
+                </li>
+              </>
+            ) : (
+              <>
+                <div className="Loginbut">
                   <li>
-                    <span onClick={handleLogout}>Logout</span>
+                    <Link to="/login">Login</Link>
                   </li>
-                </>
-              ) : (
-                <>
-                  <div className="Loginbut">
-                    <li>
-                      <Link to="/login">Login</Link>
-                    </li>
-                  </div>
-                  <div className="Register">
-                    <li>
-                      <Link to="/register">Sign Up</Link>
-                    </li>
-                  </div>
-                </>
-              )}
-            </div>
-            <div className="cart">
-              <Link to="/shopping-cart">My Cart</Link>
-            </div>
+                </div>
+                <div className="Register">
+                  <li>
+                    <Link to="/register">Sign Up</Link>
+                  </li>
+                </div>
+              </>
+            )}
+          </div>
+          <div className="cart">
+            <Link to="/shopping-cart">My Cart</Link>
           </div>
         </div>
       </div>
