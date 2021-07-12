@@ -7,7 +7,6 @@ export default function IndividualMoviePage() {
   //   }
   return (
     <div className="individualMoviePage">
-      <h8 className="intro">Movie</h8>
       <div className="column">
         <div className="top">
           <div className="left">
