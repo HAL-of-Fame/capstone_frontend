@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-// import logo from "../../assets/codepath.svg"
+// import logo from "../../assets/demoLogo.png"
 // import person from "../../assets/person.svg"
 // import Twitter from "../Icons/Twitter"
 // import Instagram from "../Icons/Instagram"
@@ -17,17 +17,11 @@ export default function Navbar(
   return (
     <nav className="Navbar">
       <div className="content">
-        <div className="logo">
-          {/* <Link to="/">
-            <img src={logo} alt="codepath logo" />
-          </Link> */}
+      <div className="logo">
+          <Link to="/">
+          <img src={require('../../assets/demoLogo.png').default} height={50} width={50} alt="Demo Logo"/>
+          </Link>
         </div>
-
-        {/* <div className="socials">
-          <Twitter fill="var(--pure-white)" />
-          <Instagram fill="var(--pure-white)" />
-          <Facebook fill="var(--pure-white)" />
-        </div> */}
 
             <div className="search-bar">
             <input
@@ -39,25 +33,7 @@ export default function Navbar(
             />
             <i className="material-icons">search</i>
           </div>
-        <ul className="links">
-          <li>
-            <Link to="/genre">Genre</Link>
-          </li>
-          <li>
-            <Link to="/trending">Trending</Link>
-          </li>
-          <li>
-            <Link to="/newreleases">New Releases</Link>
-          </li>
-          <li>
-            <Link to="/favorites">Favorites</Link>
-          </li>
-          <div className="cart">
-              <Link to="/shopping-cart">
-                My Cart
-                <i className="material-icons">shopping_cart</i>
-              </Link>
-            </div>
+          <div className="links">
           <div className="auth">
           {user?.email ? (
             <>
@@ -71,16 +47,25 @@ export default function Navbar(
             </>
           ) : (
             <>
+            <div className= "Loginbut">
               <li>
                 <Link to="/login">Login</Link>
               </li>
+              </div>
+              <div className="Register">
               <li>
                 <Link to="/register">Sign Up</Link>
               </li>
+              </div>
             </>
           )}
             </div>
-        </ul>
+            <div className="cart">
+              <Link to="/shopping-cart">
+                My Cart
+              </Link>
+            </div>
+            </div>
       </div>
       
     </nav>
