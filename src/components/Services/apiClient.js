@@ -33,7 +33,6 @@ class ApiClient {
     }
   }
 
-
   // LOGIN STUFF-----------------------------------
   //helps with keeping the token persistent
   async fetchUserFromToken() {
@@ -60,8 +59,11 @@ class ApiClient {
     this.setToken(null);
     localStorage.setItem(this.tokenName, "");
   }
+
+  //Movie API calls
 }
 
 export default new ApiClient(
-  process.env.REACT_APP_REMOTE_HOST_URL || "process.env.REACT_APP_REMOTE_HOST_URL"
+  process.env.REACT_APP_REMOTE_HOST_URL ||
+    "process.env.REACT_APP_REMOTE_HOST_URL"
 );
