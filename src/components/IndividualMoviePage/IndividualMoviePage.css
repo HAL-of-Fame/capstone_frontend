@@ -13,6 +13,7 @@
   border: 1px solid #000000;
   box-sizing: border-box;
   border-radius: 10px;
+  margin-top: 3%;
 }
 
 .intro .side {
@@ -40,8 +41,26 @@
 }
 
 .movieDescription p {
+  display: flex;
+  margin: auto;
+  /* margin: 0 auto; */
+}
+
+.discussionSection {
+  width: 985px;
+  height: 220px;
+  background: #3caea3;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: 5%;
+  padding-top: 1%;
+  padding-left: 3%;
+  padding-right: 5%;
+  padding-bottom: 8%;
+}
+
+.discussionSection p {
     display: flex;
-    /* flex-wrap: wrap; */
     margin: auto;
-    /* margin: 0 auto; */
 }
