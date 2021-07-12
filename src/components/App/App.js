@@ -1,19 +1,37 @@
 // import './App.css';
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
 import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
 // import Home from "../Home/Home";
+import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
+import apiClient from "../Services/apiClient";
 
 function App() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
+  // handles the persistent user token
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data, error } = await apiClient.fetchUserFromToken();
+      //everytime refresh page, app makes an api request above
+      if (data) setUser(data.user);
+      if (error) setError(error);
+    };
+    const token = localStorage.getItem("movie_review_token");
+    if (token) {
+      apiClient.setToken(token);
+      fetchUser();
+    }
+  }, []);
+
+  // handles the logout
   const handleLogout = async () => {
-    // await apiClient.logoutUser()
+    await apiClient.logoutUser();
     setUser(null);
     setError(null);
   };
@@ -24,6 +42,7 @@ function App() {
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Home user={user} />} />
+          <Route path="/movie" element={<IndividualMoviePage />} />
           <Route path="*" element={<NotFound user={user} error={error} />} />
           <Route
             path="/login"
