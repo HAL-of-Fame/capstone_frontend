@@ -15,7 +15,7 @@ export default function IndividualMoviePage() {
             <div className="rating">Rating</div>
           </div>
           <div className="right">
-            <Link to="create">
+            <Link to="orders">
               <button>Purchase</button>
             </Link>
           </div>
