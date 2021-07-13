@@ -33,6 +33,16 @@ class ApiClient {
     }
   }
 
+ // MOVIE STUFF
+  async fetchIndivMovie() {
+    return await this.request({
+      endpoint: ``
+    })
+  }
+
+
+
+
   // LOGIN STUFF-----------------------------------
   //helps with keeping the token persistent
   async fetchUserFromToken() {
