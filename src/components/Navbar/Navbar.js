@@ -7,6 +7,7 @@ import search from "../../assets/search.svg";
 // import Instagram from "../Icons/Instagram"
 // import Facebook from "../Icons/Facebook"
 import "./Navbar.css";
+import * as FaIcons from 'react-icons/fa';
 
 export default function Navbar({
   user,
@@ -44,7 +45,7 @@ export default function Navbar({
             onChange={handleOnSearchInputChange}
           />
           <div className="search-btn">
-            <img
+<img
               className="pic"
               src={search}
               alt="search button"
@@ -82,7 +83,7 @@ export default function Navbar({
             )}
           </div>
           <div className="cart">
-            <Link to="/shopping-cart">My Cart</Link>
+            <Link to="/shopping-cart"><FaIcons.FaCartPlus /></Link>
           </div>
         </div>
       </div>
