@@ -6,6 +6,8 @@ import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
 import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
+import Footer from "../Footer/Footer"
+import Sidebar from "../Sidebar/Sidebar"
 // import Home from "../Home/Home";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
@@ -40,6 +42,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
+        <Sidebar />
         <Routes>
           <Route path="/" element={<Home user={user} />} />
           <Route path="/movie/:movie_id" element={<IndividualMoviePage />} />
@@ -53,6 +56,7 @@ function App() {
             element={<Signup user={user} setUser={setUser} />}
           />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
