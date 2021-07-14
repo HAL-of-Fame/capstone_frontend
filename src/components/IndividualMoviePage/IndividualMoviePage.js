@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./IndividualMoviePage.css";
 
 const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
+// const movie_id = "503736";
 
 export default function IndividualMoviePage() {
   const [individual, setIndividual] = useState([])
   const [error, setError] = useState(null);
+
+  const { movie_id }  = useParams();
+
 
   useEffect(() => {
 
@@ -19,7 +23,7 @@ export default function IndividualMoviePage() {
     // };
     const fetchIndividual = async () => {
       const data = await fetch(
-        `https://api.themoviedb.org/3/movie/503736?api_key=` +
+        `https://api.themoviedb.org/3/movie/` + movie_id + `?api_key=` +
           api_key +
           `&language=en-US`
       );

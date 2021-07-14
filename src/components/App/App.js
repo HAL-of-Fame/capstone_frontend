@@ -42,7 +42,7 @@ function App() {
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Home user={user} />} />
-          <Route path="/movie" element={<IndividualMoviePage />} />
+          <Route path="/movie/:movie_id" element={<IndividualMoviePage />} />
           <Route path="*" element={<NotFound user={user} error={error} />} />
           <Route
             path="/login"

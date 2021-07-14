@@ -33,14 +33,6 @@ class ApiClient {
     }
   }
 
- // MOVIE STUFF
-  // async fetchIndivMovie() {
-  //   return await this.request({
-  //     endpoint: `` not sure what the endpoint is 
-  //   })
-  // }
-
-
 
 
   // LOGIN STUFF-----------------------------------

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 import MovieCard from "../MovieCard/MovieCard";
+import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 
 const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
 
