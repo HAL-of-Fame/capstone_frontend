@@ -7,6 +7,7 @@ const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
 
 export default function IndividualMoviePage() {
   const [individual, setIndividual] = useState([])
+  const [video, setVideo] = useState([]);
   const [error, setError] = useState(null);
 
   const { movie_id }  = useParams();
@@ -14,13 +15,7 @@ export default function IndividualMoviePage() {
 
   useEffect(() => {
 
-    // const fetchIndividual = async () => {
 
-    //   const { data, error } = await apiClient.fetchIndivMovie();
-    //   if (data) setIndividual(data);
-    //   if (error) setError(error);
-
-    // };
     const fetchIndividual = async () => {
       const data = await fetch(
         `https://api.themoviedb.org/3/movie/` + movie_id + `?api_key=` +
@@ -33,12 +28,25 @@ export default function IndividualMoviePage() {
       }
     };
 
+    const fetchVideo = async () => {
+      const viddata = await fetch(
+        `"https://api.themoviedb.org/3/movie/` + movie_id + `/videos?api_key=` + api_key + `&language=en-US`
+      );
+      const responseVidData = await viddata.json();
+      if (responseVidData) {
+        setVideo(responseVidData);
+      }
+    };
+
 
     fetchIndividual();
-  }, []);
+    fetchVideo();
+  }, [movie_id]);
 
   console.log(individual)
+  console.log(video)
   const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.poster_path}`;
+  // const video = 
   return (
     <div className="individualMoviePage">
       <div className="column">
