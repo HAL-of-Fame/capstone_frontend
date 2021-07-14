@@ -34,11 +34,11 @@ class ApiClient {
   }
 
  // MOVIE STUFF
-  async fetchIndivMovie() {
-    return await this.request({
-      endpoint: ``
-    })
-  }
+  // async fetchIndivMovie() {
+  //   return await this.request({
+  //     endpoint: `` not sure what the endpoint is 
+  //   })
+  // }
 
 
 
