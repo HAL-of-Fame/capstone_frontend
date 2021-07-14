@@ -53,7 +53,7 @@ export default function IndividualMoviePage() {
             <div className="duration">Duration: {individual.runtime} minutes</div>
           </div>
           <div className="right">
-            <Link to="orders">
+            <Link to="/shopping-cart">
               <button>Purchase</button>
             </Link>
           </div>
