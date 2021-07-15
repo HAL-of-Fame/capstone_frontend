@@ -26,6 +26,7 @@ export default function IndividualMoviePage() {
       if (responseData) {
         setIndividual(responseData);
       }
+      console.log(individual)
     };
 
     const fetchVideo = async () => {
@@ -36,16 +37,21 @@ export default function IndividualMoviePage() {
       if (responseVidData) {
         setVideo(responseVidData);
       }
+      // console.log(video)
     };
 
 
     fetchIndividual();
-    fetchVideo();
-  }, [movie_id]);
+    fetchVideo().then(response => {
+      console.log(response);
+    }).catch(e => {
+      console.log(e);
+    });
+  }, []);
 
   console.log(individual)
   console.log(video)
-  const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.poster_path}`;
+  const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
   // const video = 
   return (
     <div className="individualMoviePage">
@@ -57,7 +63,7 @@ export default function IndividualMoviePage() {
             </div>
             <div className="movieTitle">{individual.original_title}</div>
             <div className="releaseDate">Release date: {individual.release_date}</div>
-            <div className="rating">Rating {individual.vote_average}/10</div>
+            <div className="rating">⭐ {individual.vote_average}/10</div>
             <div className="duration">Duration: {individual.runtime} minutes</div>
           </div>
           <div className="right">
