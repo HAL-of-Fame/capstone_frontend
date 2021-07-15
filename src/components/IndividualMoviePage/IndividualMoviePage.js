@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./IndividualMoviePage.css";
+import Popup from "../Popup/Popup";
+import "../../components/Popup/Popup.css"
 
 const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
 // const movie_id = "503736";
@@ -9,7 +11,13 @@ export default function IndividualMoviePage() {
   const [individual, setIndividual] = useState([]);
   const [video, setVideo] = useState([]);
   const [error, setError] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // will strip the movie_id from the URL (holds movie ID)
   const { movie_id } = useParams();
 
   useEffect(() => {
@@ -53,6 +61,7 @@ export default function IndividualMoviePage() {
   const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
   const videolink = `https://www.youtube.com/embed/${video}`;
   console.log(videolink);
+
   return (
     <div className="individualMoviePage">
       <div className="column">
@@ -69,19 +78,34 @@ export default function IndividualMoviePage() {
             <div className="duration">
               Duration: {individual.runtime} minutes
             </div>
-            <div className="trailer">
-              <iframe title="movie trailer"
-                // width="560"
-                // height="315"
+            <input
+              type="button"
+              value="Watch Trailer"
+              onClick={togglePopup}
+            />
+            {isOpen && (
+              <Popup
+                content={
+                  <>
+              <div className="trailer">
+              <iframe
+                title="movie trailer"
+                width="560"
+                height="315"
                 src={videolink}
-                // frameborder="0"
-                // allow="autoplay; encrypted-media"
-                // allowfullscreen
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
               ></iframe>
             </div>
+                  </>
+                }
+                handleClose={togglePopup}
+              />
+            )}
           </div>
           <div className="right">
-            <Link to="/shopping-cart">
+            <Link to="/shopping-cart/">
               <button>Purchase</button>
             </Link>
           </div>
