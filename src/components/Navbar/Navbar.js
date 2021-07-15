@@ -7,14 +7,18 @@ import search from "../../assets/search.svg";
 // import Instagram from "../Icons/Instagram"
 // import Facebook from "../Icons/Facebook"
 import "./Navbar.css";
-import * as FaIcons from 'react-icons/fa';
+import * as FaIcons from "react-icons/fa";
+import { useState } from "react";
 
-export default function Navbar({
-  user,
-  handleLogout,
-  searchInputValue,
-  handleOnSearchInputChange,
-}) {
+export default function Navbar({ user, handleLogout }) {
+  const [searchInputValue, setSearchInputValue] = useState("");
+
+  const handleOnInputChange = (event) => {
+    console.log(event.target.value);
+
+    setSearchInputValue(event.target.value);
+  };
+
   return (
     <nav className="Navbar">
       <div className="content">
@@ -29,12 +33,6 @@ export default function Navbar({
           </Link>
         </div>
 
-        {/* <div className="socials">
-          <Twitter fill="var(--pure-white)" />
-          <Instagram fill="var(--pure-white)" />
-          <Facebook fill="var(--pure-white)" />
-        </div> */}
-
         <div className="search-bar-btn">
           <input
             className="search-bar"
@@ -42,17 +40,11 @@ export default function Navbar({
             name="search"
             placeholder="Search"
             value={searchInputValue}
-            onChange={handleOnSearchInputChange}
+            onChange={handleOnInputChange}
           />
-          <div className="search-btn">
-<img
-              className="pic"
-              src={search}
-              alt="search button"
-              width="39px"
-              height="37.85px"
-            />
-          </div>
+          <Link to={`search/${searchInputValue}`}>
+            <img className="search-btn" src={search} alt="search button" />
+          </Link>
         </div>
 
         <div className="links">
@@ -83,7 +75,9 @@ export default function Navbar({
             )}
           </div>
           <div className="cart">
-            <Link to="/shopping-cart"><FaIcons.FaCartPlus /></Link>
+            <Link to="/shopping-cart">
+              <FaIcons.FaCartPlus />
+            </Link>
           </div>
         </div>
       </div>
