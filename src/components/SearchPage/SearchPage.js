@@ -30,6 +30,7 @@ export default function SearchPage() {
       <div className="searched">
         {movies?.map((movie) => (
           <MovieCard movie={movie} key={movie.id} />
+          //   <Link to="/" >
         ))}
       </div>
     </div>

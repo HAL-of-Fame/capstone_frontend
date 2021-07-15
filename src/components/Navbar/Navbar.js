@@ -11,20 +11,12 @@ import * as FaIcons from "react-icons/fa";
 import { useState } from "react";
 
 export default function Navbar({ user, handleLogout }) {
-  // const handleOnSubmit = async () => {
-  //   const data = await fetch(
-  //     `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${searchInputValue}&page=1`
-  //   );
-  //   const searchedMovies = await data.json()
-  //   if (searchedMovies) {
-
-  //   }
   const [searchInputValue, setSearchInputValue] = useState("");
 
   const handleOnInputChange = (event) => {
-    if (event.target.value) {
-      setSearchInputValue(event.target.value);
-    }
+    console.log(event.target.value);
+
+    setSearchInputValue(event.target.value);
   };
 
   return (
@@ -41,12 +33,6 @@ export default function Navbar({ user, handleLogout }) {
           </Link>
         </div>
 
-        {/* <div className="socials">
-          <Twitter fill="var(--pure-white)" />
-          <Instagram fill="var(--pure-white)" />
-          <Facebook fill="var(--pure-white)" />
-        </div> */}
-
         <div className="search-bar-btn">
           <input
             className="search-bar"
@@ -56,15 +42,8 @@ export default function Navbar({ user, handleLogout }) {
             value={searchInputValue}
             onChange={handleOnInputChange}
           />
-
-          <Link to={`search/${searchInputValue}`} className="search-btn">
-            <img
-              className="pic"
-              src={search}
-              alt="search button"
-              width="39px"
-              height="37.85px"
-            />
+          <Link to={`search/${searchInputValue}`}>
+            <img className="search-btn" src={search} alt="search button" />
           </Link>
         </div>
 
