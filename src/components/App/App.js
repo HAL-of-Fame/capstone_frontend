@@ -6,11 +6,11 @@ import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
 import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
+import Footer from "../Footer/Footer";
+import Sidebar from "../Sidebar/Sidebar";
 // import Home from "../Home/Home";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
-import Footer from "../Footer/Footer";
-import Sidebar from "../Sidebar/Sidebar";
 import SearchPage from "../SearchPage/SearchPage";
 
 function App() {

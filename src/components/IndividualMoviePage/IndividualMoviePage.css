@@ -13,6 +13,7 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 
@@ -37,25 +38,26 @@
 
 .individualMoviePage .column .top .left .moviePoster .poster {
   margin-top: 10%;
-  height: 400px;
-  width: 260px;
+  height: 500px;
+  width: 320px;
   margin-bottom: 3%;
 }
 .individualMoviePage .column .movieDescription {
   width: 985px;
-  height: 70px;
+  min-height: 70px;
+  /* height: 70px; */
 
   background: #a8b8b6;
   /* border: 1px solid #000000; */
   box-sizing: border-box;
   border-radius: 10px;
-  /* inline-size: min-content;
-  overflow-wrap: word-break; */
+  /* inline-size: min-content; */
+  overflow-wrap: word-break;
   margin-top: 3%;
   padding-top: 1%;
   padding-left: 3%;
   padding-right: 5%;
-  /* padding-bottom: 8%; */
+  padding-bottom: 1%;
 }
 
 .individualMoviePage .column .movieDescription p {

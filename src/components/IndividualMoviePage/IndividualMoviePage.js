@@ -6,6 +6,7 @@ const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
 
 export default function IndividualMoviePage() {
   const [individual, setIndividual] = useState([]);
+  const [video, setVideo] = useState([]);
   const [error, setError] = useState(null);
 
   const { movie_id } = useParams();
@@ -23,13 +24,38 @@ export default function IndividualMoviePage() {
       if (responseData) {
         setIndividual(responseData);
       }
+      console.log(individual);
+    };
+
+    const fetchVideo = async () => {
+      const viddata = await fetch(
+        `"https://api.themoviedb.org/3/movie/` +
+          movie_id +
+          `/videos?api_key=` +
+          api_key +
+          `&language=en-US`
+      );
+      const responseVidData = await viddata.json();
+      if (responseVidData) {
+        setVideo(responseVidData);
+      }
+      // console.log(video)
     };
 
     fetchIndividual();
+    fetchVideo()
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }, []);
 
   console.log(individual);
-  const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.poster_path}`;
+  console.log(video);
+  const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
+  // const video =
   return (
     <div className="individualMoviePage">
       <div className="column">
@@ -42,13 +68,13 @@ export default function IndividualMoviePage() {
             <div className="releaseDate">
               Release date: {individual.release_date}
             </div>
-            <div className="rating">Rating {individual.vote_average}/10</div>
+            <div className="rating">⭐ {individual.vote_average}/10</div>
             <div className="duration">
               Duration: {individual.runtime} minutes
             </div>
           </div>
           <div className="right">
-            <Link to="orders">
+            <Link to="/shopping-cart">
               <button>Purchase</button>
             </Link>
           </div>

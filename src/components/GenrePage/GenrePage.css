@@ -1,0 +1,79 @@
+.genres a{
+    text-decoration: none;
+    width: 100%;
+}
+.header12{
+text-align: center;
+}
+
+.links12{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    font-family: 'Baloo 2', cursive;
+    border-radius: 10px;
+    font-size: 18px;
+    margin: 18px;
+    font-weight: 500;
+    padding: 50px;
+    background-color: #fff;
+}
+  .comedy-btn {
+    color: #2b6684;
+    border: 2px solid #2b6684;
+    width: 200px;
+  }
+  .comedy-btn:hover {
+    color: #fff;
+    background-color: #2b6684;
+  }
+  
+  .action-btn { 
+    color: #012e67;
+    border: 2px solid #012e67;
+    width: 200px;
+  }
+  .action-btn:hover {
+    color: #fff;
+    background-color: #012e67;
+  }
+  
+  .romance-btn {
+    color: #032e42;
+    border: 2px solid #032e42;
+    width: 200px;
+  }
+  .romance-btn:hover {
+    color: #fff;
+    background-color: #032e42;
+  }
+  .drama-btn {
+    color: #2b6684;
+    border: 2px solid #2b6684;
+    width: 200px;
+  }
+  .drama-btn:hover {
+    color: #fff;
+    background-color: #2b6684;
+  }
+  
+  .horror-btn { 
+    color: #012e67;
+    border: 2px solid #012e67;
+    width: 200px;
+  }
+  .horror-btn:hover {
+    color: #fff;
+    background-color: #012e67;
+  }
+  
+  .science-fiction-btn {
+    color: #032e42;
+    border: 2px solid #032e42;
+    width: 200px;
+  }
+  .science-fiction-btn:hover {
+    color: #fff;
+    background-color: #032e42;
+  }
