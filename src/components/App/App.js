@@ -6,11 +6,12 @@ import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
 import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
-import Footer from "../Footer/Footer"
-import Sidebar from "../Sidebar/Sidebar"
+import Footer from "../Footer/Footer";
+import Sidebar from "../Sidebar/Sidebar";
 // import Home from "../Home/Home";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
+import SearchPage from "../SearchPage/SearchPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -55,6 +56,7 @@ function App() {
             path="/register"
             element={<Signup user={user} setUser={setUser} />}
           />
+          <Route path="/search/:searchInputValue" element={<SearchPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -5,7 +5,6 @@ import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css"
 
 const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
-// const movie_id = "503736";
 
 export default function IndividualMoviePage() {
   const [individual, setIndividual] = useState([]);
