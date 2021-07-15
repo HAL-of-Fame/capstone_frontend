@@ -9,6 +9,9 @@ import NotFound from "../NotFound/NotFound";
 // import Home from "../Home/Home";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
+import Footer from "../Footer/Footer";
+import Sidebar from "../Sidebar/Sidebar";
+import SearchPage from "../SearchPage/SearchPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,6 +43,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
+        <Sidebar />
         <Routes>
           <Route path="/" element={<Home user={user} />} />
           <Route path="/movie/:movie_id" element={<IndividualMoviePage />} />
@@ -52,7 +56,9 @@ function App() {
             path="/register"
             element={<Signup user={user} setUser={setUser} />}
           />
+          <Route path="/search/:searchInputValue" element={<SearchPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

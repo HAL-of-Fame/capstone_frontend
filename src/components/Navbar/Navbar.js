@@ -7,14 +7,26 @@ import search from "../../assets/search.svg";
 // import Instagram from "../Icons/Instagram"
 // import Facebook from "../Icons/Facebook"
 import "./Navbar.css";
-import * as FaIcons from 'react-icons/fa';
+import * as FaIcons from "react-icons/fa";
+import { useState } from "react";
 
-export default function Navbar({
-  user,
-  handleLogout,
-  searchInputValue,
-  handleOnSearchInputChange,
-}) {
+export default function Navbar({ user, handleLogout }) {
+  // const handleOnSubmit = async () => {
+  //   const data = await fetch(
+  //     `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${searchInputValue}&page=1`
+  //   );
+  //   const searchedMovies = await data.json()
+  //   if (searchedMovies) {
+
+  //   }
+  const [searchInputValue, setSearchInputValue] = useState("");
+
+  const handleOnInputChange = (event) => {
+    if (event.target.value) {
+      setSearchInputValue(event.target.value);
+    }
+  };
+
   return (
     <nav className="Navbar">
       <div className="content">
@@ -42,17 +54,18 @@ export default function Navbar({
             name="search"
             placeholder="Search"
             value={searchInputValue}
-            onChange={handleOnSearchInputChange}
+            onChange={handleOnInputChange}
           />
-          <div className="search-btn">
-<img
+
+          <Link to={`search/${searchInputValue}`} className="search-btn">
+            <img
               className="pic"
               src={search}
               alt="search button"
               width="39px"
               height="37.85px"
             />
-          </div>
+          </Link>
         </div>
 
         <div className="links">
@@ -83,7 +96,9 @@ export default function Navbar({
             )}
           </div>
           <div className="cart">
-            <Link to="/shopping-cart"><FaIcons.FaCartPlus /></Link>
+            <Link to="/shopping-cart">
+              <FaIcons.FaCartPlus />
+            </Link>
           </div>
         </div>
       </div>
