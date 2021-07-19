@@ -7,11 +7,13 @@ import Login from "../Login/Login";
 import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
 import Footer from "../Footer/Footer";
+import Genre from "../GenrePage/GenrePage"
 import Sidebar from "../Sidebar/Sidebar";
 // import Home from "../Home/Home";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
 import SearchPage from "../SearchPage/SearchPage";
+import GenrePage from "../GenrePage/GenrePage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,6 +48,7 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home user={user} />} />
+          <GenrePage path="/genre" />
           <Route path="/movie/:movie_id" element={<IndividualMoviePage />} />
           <Route path="*" element={<NotFound user={user} error={error} />} />
           <Route

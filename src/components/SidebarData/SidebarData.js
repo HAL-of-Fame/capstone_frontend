@@ -29,4 +29,10 @@ export const SidebarData = [
     icon: <MdIcons.MdFiberNew />,
     cName: 'nav-text'
   },
+  {
+    title: 'Merch Store',
+    path: '/store',
+    icon: <MdIcons.MdFiberNew />,
+    cName: 'nav-text'
+  },
 ];
