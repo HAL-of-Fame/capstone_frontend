@@ -1,0 +1,4 @@
+.small{
+  display: flex;
+  flex-direction: row;
+}

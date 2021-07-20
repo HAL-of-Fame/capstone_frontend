@@ -20,45 +20,40 @@ import ComedyPage from "../ComedyPage/ComedyPage"
 import DramaPage from "../DramaPage/DramaPage"
 import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage"
 import RomancePage from "../RomancePage/RomancePage"
+import data from '../../data'
+import ShoppingCart from "../ShoppingCart/ShoppingCart"
 
 export default function App() {
+  const { products } = data;
   const [user, setUser] = useState(null)
   const [error, setError] = useState(null)
-  const [cart, setCart] = useState({})
-  const [products, setProducts] = useState([])
-  const [activeCategory, setActiveCategory] = useState("All Categories")
-  const [searchInputValue, setSearchInputValue] = useState("")
-  const [isCheckingOut, setIsCheckingOut] = useState(false)
-  const [orders, setOrders] = useState([])
-  const [isFetching, setIsFetching] = useState(false)
   const [post, setPost] = useState([])
 
-
-  const handleOnSearchInputChange = (event) => {
-    setSearchInputValue(event.target.value)
-  }
-
-  const handleOnCheckout = async () => {
-    setIsCheckingOut(true)
-  }
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setIsFetching(true)
-
-      const { data, error } = await apiClient.listProducts()
-      if (data) {
-        setPost(data.posts)
-      }
-      if (error) {
-        setError(error)
-      }
-
-      setIsFetching(false)
+  const [cartItems, setCartItems] = useState([]);
+  const onAdd = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
-
-    fetchPosts()
-  }, [])
+  };
+  const onRemove = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== product.id));
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+  };
 
   // handles the persistent user token
   useEffect(() => {
@@ -102,6 +97,12 @@ export default function App() {
             path="/register"
             element={<Signup user={user} setUser={setUser} />}
           />
+          <Route
+            path="/shopping-cart"
+            element={<ShoppingCart cartItems={cartItems}
+            onAdd={onAdd}
+            onRemove={onRemove} />}
+          />
           <Route path="/search/:searchInputValue" element={<SearchPage />} />
           <Route
             path="/genre"
@@ -134,7 +135,7 @@ export default function App() {
           <Route path="/genre/action/create" element={<PostForm user={user} post={post} addPost={addPost} />} />
             <Route
             path="/store"
-            element={<MerchStore />}
+            element={<MerchStore products={products} onAdd={onAdd}/>}
             />
         </Routes>
         <Footer />
