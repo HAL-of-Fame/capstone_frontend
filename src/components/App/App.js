@@ -3,15 +3,11 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Signup from "../Signup/Signup";
-import Orders from "../Orders/Orders"
 import Login from "../Login/Login";
 import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
 import GenrePage from "../GenrePage/GenrePage"
-import ShoppingCart from "../ShoppingCart/ShoppingCart"
 import Sidebar from "../Sidebar/Sidebar"
-import { removeFromCart, addToCart, getQuantityOfItemInCart, getTotalItemsInCart } from "../../utils/cart"
-// import Home from "../Home/Home";
 import Footer from "../Footer/Footer"
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
@@ -37,11 +33,6 @@ export default function App() {
   const [isFetching, setIsFetching] = useState(false)
   const [post, setPost] = useState([])
 
-
-  const handleOnRemoveFromCart = (item) => setCart(removeFromCart(cart, item))
-  const handleOnAddToCart = (item) => setCart(addToCart(cart, item))
-  const handleGetItemQuantity = (item) => getQuantityOfItemInCart(cart, item)
-  const handleGetTotalCartItems = () => getTotalItemsInCart(cart)
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value)
@@ -145,45 +136,6 @@ export default function App() {
             path="/store"
             element={<MerchStore />}
             />
-          <Route
-            path="/orders"
-            element={
-              <Orders
-                user={user}
-                error={error}
-                orders={orders}
-                setUser={setUser}
-                products={products}
-                isFetching={isFetching}
-                activeCategory={activeCategory}
-                setActiveCategory={setActiveCategory}
-                searchInputValue={searchInputValue}
-                handleOnSearchInputChange={handleOnSearchInputChange}
-              />
-            }
-          />
-          <Route
-            path="/shopping-cart"
-            element={
-              <ShoppingCart
-                user={user}
-                cart={cart}
-                error={error}
-                setUser={setUser}
-                products={products}
-                activeCategory={activeCategory}
-                setActiveCategory={setActiveCategory}
-                searchInputValue={searchInputValue}
-                handleOnSearchInputChange={handleOnSearchInputChange}
-                addToCart={handleOnAddToCart}
-                removeFromCart={handleOnRemoveFromCart}
-                getQuantityOfItemInCart={handleGetItemQuantity}
-                getTotalItemsInCart={handleGetTotalCartItems}
-                isCheckingOut={isCheckingOut}
-                handleOnCheckout={handleOnCheckout}
-              />
-            }
-          />
         </Routes>
         <Footer />
       </BrowserRouter>
