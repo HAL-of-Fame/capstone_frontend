@@ -14,5 +14,6 @@ export default function GenrePage(){
         <Link to='/genre/horror' className='horror-btn'>Horror</Link>
         <Link to='/genre/science-fiction' className='science-fiction-btn'>Science Fiction</Link></div>
         </div>
+
     )
   }

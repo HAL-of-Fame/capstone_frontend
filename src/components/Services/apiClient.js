@@ -61,6 +61,13 @@ class ApiClient {
     this.setToken(null);
     localStorage.setItem(this.tokenName, "");
   }
+  async createNewPost(post){
+    return await this.request({endpoint: `genre/create`, method: 'POST', data: post}) 
+  }
+
+  async listProducts() {
+    return await this.request({ endpoint: `store`, method: `GET` })
+  }
 
   //Movie API calls
 }
