@@ -24,12 +24,13 @@ import data from "../../data";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Orders from "../Orders/Orders";
 import axios from "axios";
+import PostDetail from "../PostDetail/PostDetail";
 
 export default function App() {
   const { products } = data;
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  const [post, setPost] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All Categories");
@@ -104,8 +105,20 @@ export default function App() {
     }
   }, []);
   const addPost = (newPost) => {
-    setPost((oldPost) => [...oldPost, newPost]);
+    setPosts((oldPosts) => [...oldPosts, newPost]);
   };
+
+  const updatePost = ({ postId, postUpdate }) => {
+    setPosts((oldPosts) => {
+      return oldPosts.map((post) => {
+        if (post.id === Number(postId)) {
+          return { ...post, ...postUpdate };
+        }
+        return post;
+      });
+    });
+  };
+
   // handles the logout
   const handleLogout = async () => {
     await apiClient.logoutUser();
@@ -172,8 +185,13 @@ export default function App() {
           <Route path="/genre/horror" element={<HorrorPage />} />
           <Route
             path="/genre/action/create"
-            element={<PostForm user={user} post={post} addPost={addPost} />}
+            element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
+          <Route
+            path="/posts/:postId"
+            element={<PostDetail user={user} updatePost={updatePost} />}
+          />
+
           <Route
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
