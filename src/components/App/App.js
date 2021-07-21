@@ -22,12 +22,21 @@ import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage"
 import RomancePage from "../RomancePage/RomancePage"
 import data from '../../data'
 import ShoppingCart from "../ShoppingCart/ShoppingCart"
+import Orders from "../Orders/Orders"
 
 export default function App() {
   const { products } = data;
   const [user, setUser] = useState(null)
   const [error, setError] = useState(null)
   const [post, setPost] = useState([])
+  const [orders, setOrders] = useState([])
+  const [isFetching, setIsFetching] = useState(false)
+  const [activeCategory, setActiveCategory] = useState("All Categories")
+  const [searchInputValue, setSearchInputValue] = useState("")
+
+  const handleOnSearchInputChange = (event) => {
+    setSearchInputValue(event.target.value)
+  }
 
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (product) => {
@@ -102,6 +111,23 @@ export default function App() {
             element={<ShoppingCart cartItems={cartItems}
             onAdd={onAdd}
             onRemove={onRemove} />}
+          />
+          <Route
+            path="/orders"
+            element={
+              <Orders
+                user={user}
+                error={error}
+                orders={orders}
+                setUser={setUser}
+                products={products}
+                isFetching={isFetching}
+                activeCategory={activeCategory}
+                setActiveCategory={setActiveCategory}
+                searchInputValue={searchInputValue}
+                handleOnSearchInputChange={handleOnSearchInputChange}
+              />
+            }
           />
           <Route path="/search/:searchInputValue" element={<SearchPage />} />
           <Route
