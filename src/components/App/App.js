@@ -12,6 +12,7 @@ import Footer from "../Footer/Footer";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
 import SearchPage from "../SearchPage/SearchPage";
+<<<<<<< HEAD
 import MerchStore from "../MerchStore/MerchStore";
 import PostForm from "../PostForm/PostForm";
 import ActionPage from "../ActionPage/ActionPage";
@@ -37,6 +38,29 @@ export default function App() {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+=======
+import MerchStore from "../MerchStore/MerchStore"
+import PostForm from "../PostForm/PostForm"
+import ActionPage from "../ActionPage/ActionPage"
+import HorrorPage from "../HorrorPage/HorrorPage"
+import ComedyPage from "../ComedyPage/ComedyPage"
+import DramaPage from "../DramaPage/DramaPage"
+import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage"
+import RomancePage from "../RomancePage/RomancePage"
+import data from '../../data'
+import ShoppingCart from "../ShoppingCart/ShoppingCart"
+import Orders from "../Orders/Orders"
+
+export default function App() {
+  const { products } = data;
+  const [user, setUser] = useState(null)
+  const [error, setError] = useState(null)
+  const [posts, setPosts] = useState([]);
+  const [orders, setOrders] = useState([])
+  const [isFetching, setIsFetching] = useState(false)
+  const [activeCategory, setActiveCategory] = useState("All Categories")
+  const [searchInputValue, setSearchInputValue] = useState("")
+>>>>>>> cb119a1b9ab3f7a274b4087f2326d08697221ced
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
@@ -189,6 +213,7 @@ export default function App() {
             path="/genre/action/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
+<<<<<<< HEAD
           {/* <Route
             path="/posts/:postId"
             element={<PostDetail user={user} updatePost={updatePost} />}
@@ -198,6 +223,15 @@ export default function App() {
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
           />
+=======
+          <Route path="/posts/:postId" element={<PostDetail user={user} updatePost={updatePost}/>} />
+          <Route path="/store" element={<MerchStore />} />
+            <Route
+            path="/store"
+            element={<MerchStore products={products} onAdd={onAdd}/>}
+            />
+
+>>>>>>> cb119a1b9ab3f7a274b4087f2326d08697221ced
         </Routes>
         <Footer />
       </BrowserRouter>
