@@ -1,11 +1,20 @@
-import React from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Basket(props) {
-  const { cartItems, onAdd, onRemove } = props;
+  const navigate = useNavigate();
+
+  const { cartItems, onAdd, onRemove, handleOnCheckout } = props;
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const taxPrice = itemsPrice * 0.14;
   const shippingPrice = itemsPrice > 2000 ? 0 : 20;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
+
+  const onCheckoutSubmit = async () => {
+    const order = await handleOnCheckout();
+    navigate("/orders");
+  };
+
   return (
     <aside className="block col-1">
       <h2>Cart Items</h2>
@@ -17,7 +26,7 @@ export default function Basket(props) {
             <div className="col-2">
               <button onClick={() => onRemove(item)} className="remove">
                 -
-              </button>{' '}
+              </button>{" "}
               <button onClick={() => onAdd(item)} className="add">
                 +
               </button>
@@ -57,9 +66,7 @@ export default function Basket(props) {
             </div>
             <hr />
             <div className="row">
-              <button onClick={() => alert('Implement Checkout!')}>
-                Checkout
-              </button>
+              <button onClick={onCheckoutSubmit}>Checkout</button>
             </div>
           </>
         )}
