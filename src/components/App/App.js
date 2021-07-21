@@ -12,6 +12,7 @@ import Footer from "../Footer/Footer";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
 import SearchPage from "../SearchPage/SearchPage";
+<<<<<<< HEAD
 import MerchStore from "../MerchStore/MerchStore";
 import PostForm from "../PostForm/PostForm";
 import ActionPage from "../ActionPage/ActionPage";
@@ -59,6 +60,59 @@ export default function App() {
 
     fetchPosts();
   }, []);
+=======
+import MerchStore from "../MerchStore/MerchStore"
+import PostForm from "../PostForm/PostForm"
+import ActionPage from "../ActionPage/ActionPage"
+import HorrorPage from "../HorrorPage/HorrorPage"
+import ComedyPage from "../ComedyPage/ComedyPage"
+import DramaPage from "../DramaPage/DramaPage"
+import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage"
+import RomancePage from "../RomancePage/RomancePage"
+import data from '../../data'
+import ShoppingCart from "../ShoppingCart/ShoppingCart"
+import Orders from "../Orders/Orders"
+
+export default function App() {
+  const { products } = data;
+  const [user, setUser] = useState(null)
+  const [error, setError] = useState(null)
+  const [post, setPost] = useState([])
+  const [orders, setOrders] = useState([])
+  const [isFetching, setIsFetching] = useState(false)
+  const [activeCategory, setActiveCategory] = useState("All Categories")
+  const [searchInputValue, setSearchInputValue] = useState("")
+
+  const handleOnSearchInputChange = (event) => {
+    setSearchInputValue(event.target.value)
+  }
+
+  const [cartItems, setCartItems] = useState([]);
+  const onAdd = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
+    }
+  };
+  const onRemove = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== product.id));
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+  };
+>>>>>>> e162d19e7dc540d80f17edb8bfc0ba01bffe6140
 
   // handles the persistent user token
   useEffect(() => {
@@ -116,6 +170,29 @@ export default function App() {
             path="/register"
             element={<Signup user={user} setUser={setUser} />}
           />
+          <Route
+            path="/shopping-cart"
+            element={<ShoppingCart cartItems={cartItems}
+            onAdd={onAdd}
+            onRemove={onRemove} />}
+          />
+          <Route
+            path="/orders"
+            element={
+              <Orders
+                user={user}
+                error={error}
+                orders={orders}
+                setUser={setUser}
+                products={products}
+                isFetching={isFetching}
+                activeCategory={activeCategory}
+                setActiveCategory={setActiveCategory}
+                searchInputValue={searchInputValue}
+                handleOnSearchInputChange={handleOnSearchInputChange}
+              />
+            }
+          />
           <Route path="/search/:searchInputValue" element={<SearchPage />} />
           <Route path="/genre" element={<GenrePage />} />
           <Route path="/genre/action" element={<ActionPage />} />
@@ -128,11 +205,22 @@ export default function App() {
           />
           <Route path="/genre/horror" element={<HorrorPage />} />
           <Route
+<<<<<<< HEAD
             path="/genre/action/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
           <Route path="/posts/:postId" element={<PostDetail user={user} updatePost={updatePost}/>} />
           <Route path="/store" element={<MerchStore />} />
+=======
+            path="/genre/horror"
+            element={<HorrorPage />}
+            />
+          <Route path="/genre/action/create" element={<PostForm user={user} post={post} addPost={addPost} />} />
+            <Route
+            path="/store"
+            element={<MerchStore products={products} onAdd={onAdd}/>}
+            />
+>>>>>>> e162d19e7dc540d80f17edb8bfc0ba01bffe6140
         </Routes>
         <Footer />
       </BrowserRouter>

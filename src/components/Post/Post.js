@@ -14,7 +14,7 @@ export default function Post({ post, user }) {
         </div>
         <div className="stats">
           <div className="stat">
-            <p>Duration</p>
+            <p>Text</p>
             <span>{post.text}</span>
           </div>
         </div>

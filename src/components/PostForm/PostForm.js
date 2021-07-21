@@ -61,7 +61,12 @@ export default function NewPost({ user }) {
           />
         </div>
 
+<<<<<<< HEAD
         <button className="btn" onClick={handleOnSubmit}>
+=======
+        <button className="btn" disabled={isLoading} onClick={handleOnSubmit}>
+          {isLoading ? "Loading..." : "Post"}
+>>>>>>> e162d19e7dc540d80f17edb8bfc0ba01bffe6140
         </button>
       </div>
     );

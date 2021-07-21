@@ -1,4 +1,4 @@
-import { formatPrice } from "../../utils/format"
+import { formatPrice } from "../../utils/format.js"
 import {
   calculateOrderSubtotal,
   calculateItemSubtotal,
@@ -58,6 +58,7 @@ export default function Orders({
           ) : null}
         </div>
       </div>
+
     </div>
   )
 }
