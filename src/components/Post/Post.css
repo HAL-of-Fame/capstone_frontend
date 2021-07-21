@@ -1,61 +1,10 @@
-.Post {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    grid-gap: 5px;
-    gap: 5px;
-    margin-top: 50px;
-    padding-bottom: 50px;
-    box-sizing: border-box;
-  }
-  .ExerciseCard {
-    width: 360px;
-    height: 220px;
-    border-radius: 4px;
-    display: flex;
-    align-content: center;
-    justify-content: space-between;
-    position: relative;
-    padding: 16px 32px;
-    background: #800080;
-  }
-  .ExerciseCard .header1 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .name {
-    color: white;
-  }
-  .ExerciseCard .stats {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-weight: 400;
-    font-size: 22px;
-  }
-  .ExerciseCard .meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .category {
-    color: white;
-    border: 1px solid white;
-    border-radius: 8px;
-    padding: 8px 12px;
-  }
-  .name {
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-  }
+.card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-field {
+  display: flex;
+  justify-content: center;
+}
