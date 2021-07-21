@@ -17,15 +17,15 @@ export default function NewPost({ user }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form.title)
-    console.log(form.text)
+    console.log(form.title);
+    console.log(form.text);
 
     const { data, error } = await apiClient.createPost({
       title: form.title,
       text: form.text,
     });
     if (data) {
-      console.log(data)
+      console.log(data);
       // addPost(data.post);
       setForm({ title: "", text: "" });
     }
@@ -61,13 +61,7 @@ export default function NewPost({ user }) {
           />
         </div>
 
-<<<<<<< HEAD
-        <button className="btn" onClick={handleOnSubmit}>
-=======
-        <button className="btn" disabled={isLoading} onClick={handleOnSubmit}>
-          {isLoading ? "Loading..." : "Post"}
->>>>>>> e162d19e7dc540d80f17edb8bfc0ba01bffe6140
-        </button>
+        <button className="btn" onClick={handleOnSubmit}></button>
       </div>
     );
   };

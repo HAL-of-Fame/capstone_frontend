@@ -24,7 +24,7 @@ import data from "../../data";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Orders from "../Orders/Orders";
 import axios from "axios";
-import PostDetail from "../PostDetail/PostDetail";
+// import PostDetail from "../PostDetail/PostDetail";
 
 export default function App() {
   const { products } = data;
@@ -44,9 +44,11 @@ export default function App() {
   const handleOnCheckout = async () => {
     setIsCheckingOut(true);
     console.log(cartItems);
+    console.log(user);
     try {
       const res = await axios.post("http://localhost:3001/orders", {
         order: cartItems,
+        user: user,
       });
       console.log(res.data.order);
       if (res?.data?.order) {
@@ -187,10 +189,10 @@ export default function App() {
             path="/genre/action/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
-          <Route
+          {/* <Route
             path="/posts/:postId"
             element={<PostDetail user={user} updatePost={updatePost} />}
-          />
+          /> */}
 
           <Route
             path="/store"
