@@ -3,6 +3,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as MdIcons from "react-icons/md";
+import * as SiIcons from "react-icons/si"
 
 export const SidebarData = [
   {
@@ -32,7 +33,13 @@ export const SidebarData = [
   {
     title: 'Merch Store',
     path: '/store',
-    icon: <MdIcons.MdFiberNew />,
+    icon: <MdIcons.MdStore />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'My Orders',
+    path: '/orders',
+    icon: <SiIcons.SiEventstore />,
     cName: 'nav-text'
   },
 ];

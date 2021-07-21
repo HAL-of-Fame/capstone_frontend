@@ -60,7 +60,7 @@ export default function NewPost({ user, addPost }) {
         </div>
 
         <button className="btn" disabled={isLoading} onClick={handleOnSubmit}>
-          {isLoading ? "Loading..." : "Submit"}
+          {isLoading ? "Loading..." : "Post"}
         </button>
       </div>
     )
