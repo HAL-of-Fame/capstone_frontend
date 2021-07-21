@@ -1,73 +1,88 @@
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
-import apiClient from "../../services/apiClient"
-import "./PostDetail.css"
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import apiClient from "../../services/apiClient";
+import "./PostDetail.css";
 
-const fetchPostById = async ({ postId, setIsFetching, setError, setPost, setText }) => {
-  setIsFetching(true)
+const fetchPostById = async ({
+  postId,
+  setIsFetching,
+  setError,
+  setPost,
+  setText,
+}) => {
+  setIsFetching(true);
 
-  const { data, error } = await apiClient.fetchPostById(postId)
+  const { data, error } = await apiClient.fetchPostById(postId);
   if (data) {
-    setPost(data.post)
-    setText(data.post.text)
+    setPost(data.post);
+    setText(data.post.text);
   }
   if (error) {
-    setError(error)
+    setError(error);
   }
 
-  setIsFetching(false)
-}
+  setIsFetching(false);
+};
 
 export default function PostDetail({ user, updatePost }) {
-  const { postId } = useParams()
-  const [post, setPost] = useState(null)
-  const [rating, setRating] = useState(null)
-  const [text, setText] = useState("")
-  const [isFetching, setIsFetching] = useState(false)
-  const [isUpdating, setIsUpdating] = useState(false)
-  const [isSavingRating, setIsSavingRating] = useState(false)
-  const [error, setError] = useState(null)
+  const { postId } = useParams();
+  const [post, setPost] = useState(null);
+  const [rating, setRating] = useState(null);
+  const [text, setText] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isSavingRating, setIsSavingRating] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchPostById({ postId, setIsFetching, setError, setPost, setText })
-  }, [postId])
+    fetchPostById({ postId, setIsFetching, setError, setPost, setText });
+  }, [postId]);
 
   const handleOnUpdate = async () => {
-    setIsUpdating(true)
+    setIsUpdating(true);
 
-    const postUpdate = { text }
+    const postUpdate = { text };
 
-    const { data, error } = await apiClient.updatePost({ postId, postUpdate })
+    const { data, error } = await apiClient.updatePost({ postId, postUpdate });
     if (data) {
-      setPost({ ...post, text: data.post.text, title: data.post.title })
-      updatePost({ postId, postUpdate })
+      setPost({ ...post, text: data.post.text, title: data.post.title });
+      updatePost({ postId, postUpdate });
     }
     if (error) {
-      setError(error)
+      setError(error);
     }
 
-    setIsUpdating(false)
-  }
+    setIsUpdating(false);
+  };
 
   const handleOnSaveRating = async () => {
-    setIsSavingRating(true)
+    setIsSavingRating(true);
 
-    const { data, error } = await apiClient.createRatingForPost({ postId, rating })
+    const { data, error } = await apiClient.createRatingForPost({
+      postId,
+      rating,
+    });
     if (data) {
-      await fetchPostById({ postId, setIsFetching, setError, setPost, setText })
+      await fetchPostById({
+        postId,
+        setIsFetching,
+        setError,
+        setPost,
+        setText,
+      });
     }
     if (error) {
-      setError(error)
+      setError(error);
     }
 
-    setIsSavingRating(false)
-  }
+    setIsSavingRating(false);
+  };
 
-  const userIsLoggedIn = Boolean(user?.email)
-  const userOwnsPost = user?.username && post?.username === user?.username
+  const userIsLoggedIn = Boolean(user?.email);
+  const userOwnsPost = user?.username && post?.username === user?.username;
 
-  if (!post && !isFetching) return null
-  if (!post) return <h1>Loading...</h1>
+  if (!post && !isFetching) return null;
+  if (!post) return <h1>Loading...</h1>;
 
   return (
     <div className="PostDetail">
@@ -88,7 +103,7 @@ export default function PostDetail({ user, updatePost }) {
               {formatRating(post.rating || 0)}
             </span>
           </div> */}
-{/* 
+      {/* 
           <div className="meta">
             <span className="date">{formatDate(post.createdAt)}</span>
             <span className="user">@{post.username}</span>
@@ -102,7 +117,11 @@ export default function PostDetail({ user, updatePost }) {
         {userOwnsPost ? (
           <div className="edit-post">
             <p>Edit your post</p>
-            <textarea value={text} onChange={(event) => setText(event.target.value)} name="text"></textarea>
+            <textarea
+              value={text}
+              onChange={(event) => setText(event.target.value)}
+              name="text"
+            ></textarea>
             <button className="btn" onClick={handleOnUpdate}>
               {isUpdating ? "Loading..." : "Save Post"}
             </button>
@@ -110,13 +129,17 @@ export default function PostDetail({ user, updatePost }) {
         ) : (
           <div className="rate-setup">
             <p>Rate this setup</p>
-            <StarsInput value={rating} setValue={setRating} max={10} />
-            <button className="btn" onClick={handleOnSaveRating} disabled={!userIsLoggedIn}>
+            {/* <StarsInput value={rating} setValue={setRating} max={10} /> */}
+            <button
+              className="btn"
+              onClick={handleOnSaveRating}
+              disabled={!userIsLoggedIn}
+            >
               {isSavingRating ? "Loading..." : "Save Rating"}
             </button>
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }
