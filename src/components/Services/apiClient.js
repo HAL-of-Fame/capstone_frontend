@@ -60,41 +60,58 @@ class ApiClient {
     localStorage.setItem(this.tokenName, "");
   }
 
+  // async createNewPost(post) {
+  //   return await this.request({
+  //     endpoint: `genre/create`,
+  //     method: "POST",
+  //     data: post,
+  //   });
+  // }
 
-
-
-
-  async createNewPost(post) {
-    return await this.request({
-      endpoint: `genre/create`,
-      method: "POST",
-      data: post,
-    });
-  }
-
+  // PRODUCT API CALLS
   async listProducts() {
     return await this.request({ endpoint: `store`, method: `GET` });
   }
 
   //POST API calls
-  async listAllPosts(user) {
+  async listAllPosts() {
     return await this.request({
       endpoint: `posts`,
       method: `GET`,
-      data: user,
     });
   }
 
-  async createPost(data) {
+  async createPost(post) {
     return await this.request({
       endpoint: `posts`,
       method: `POST`,
-      data: data,
+      data: post,
+    });
+  }
+
+  async fetchPostById(postId) {
+    return await this.request({
+      endpoint: `posts/${postId}/`,
+      method: `GET`,
+    });
+  }
+
+  async createRatingForPost({ postId, rating }) {
+    return await this.request({
+      endpoint: `posts/${postId}/ratings`,
+      method: `POST`,
+      data: { rating },
+    });
+  }
+
+  async updatePost({ postId, postUpdate }) {
+    return await this.request({
+      endpoint: `posts/${postId}/`,
+      method: `PATCH`,
+      data: { postUpdate },
     });
   }
 }
-
 export default new ApiClient(
-  process.env.REACT_APP_REMOTE_HOST_URL ||
-    "http://localhost:3001"
+  process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001"
 );

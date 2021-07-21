@@ -20,6 +20,7 @@ import ComedyPage from "../ComedyPage/ComedyPage";
 import DramaPage from "../DramaPage/DramaPage";
 import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage";
 import RomancePage from "../RomancePage/RomancePage";
+import PostDetail from "../PostDetail/PostDetail";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -130,6 +131,7 @@ export default function App() {
             path="/genre/action/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
+          <Route path="/posts/:postId" element={<PostDetail user={user} updatePost={updatePost}/>} />
           <Route path="/store" element={<MerchStore />} />
         </Routes>
         <Footer />
