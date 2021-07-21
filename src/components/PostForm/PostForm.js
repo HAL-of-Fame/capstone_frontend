@@ -1,36 +1,38 @@
-import { useState } from "react"
-// import axios from "axios"
-import apiClient from "../Services/apiClient"
+import { useState } from "react";
+import apiClient from "../Services/apiClient";
 // import NotAllowed from "../NotAllowed/NotAllowed"
-import "./PostForm.css"
- 
- 
-export default function NewPost({ user, addPost }) {
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
+import "./PostForm.css";
+
+export default function NewPost({ user }) {
+  // console.log(user)
+  const [error, setError] = useState(null);
   const [form, setForm] = useState({
     title: "",
     text: "",
-  })
- 
+  });
+
   const handleOnInputChange = (event) => {
-    setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
-  }
- 
-  const handleOnSubmit = async () => {
-    setIsLoading(true)
- 
-    const { data, error } = await apiClient.createNewPost({ title: form.title, text: form.text })
+    setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
+  };
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    console.log(form.title)
+    console.log(form.text)
+
+    const { data, error } = await apiClient.createPost({
+      title: form.title,
+      text: form.text,
+    });
     if (data) {
-      addPost(data.post)
-      setForm({ title: "", text: "" })
+      console.log(data)
+      // addPost(data.post);
+      setForm({ title: "", text: "" });
     }
     if (error) {
-      setError(error)
+      setError(error);
     }
- 
-    setIsLoading(false)
-  }
+  };
   const renderForm = () => {
     // if (!user?.email) {
     //   return <NotAllowed />
@@ -47,7 +49,7 @@ export default function NewPost({ user, addPost }) {
             onChange={handleOnInputChange}
           />
         </div>
- 
+
         <div className="input-field">
           <label htmlFor="text">Text</label>
           <input
@@ -59,22 +61,21 @@ export default function NewPost({ user, addPost }) {
           />
         </div>
 
-        <button className="btn" disabled={isLoading} onClick={handleOnSubmit}>
-          {isLoading ? "Loading..." : "Submit"}
+        <button className="btn" onClick={handleOnSubmit}>
         </button>
       </div>
-    )
-  }
- 
+    );
+  };
+
   return (
     <div className="NewPostForm">
       <div className="card">
         <h2>Create a new post</h2>
- 
+
         {Boolean(error) && <span className="error">{error}</span>}
- 
+
         {renderForm()}
       </div>
     </div>
-  )
+  );
 }
