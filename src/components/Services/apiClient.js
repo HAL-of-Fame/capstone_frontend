@@ -33,8 +33,6 @@ class ApiClient {
     }
   }
 
-
-
   // LOGIN STUFF-----------------------------------
   //helps with keeping the token persistent
   async fetchUserFromToken() {
@@ -49,7 +47,7 @@ class ApiClient {
     });
   }
 
-  async signupUser(credentials) {
+  async signUpUser(credentials) {
     return await this.request({
       endpoint: `auth/register`,
       method: `POST`,
@@ -61,18 +59,42 @@ class ApiClient {
     this.setToken(null);
     localStorage.setItem(this.tokenName, "");
   }
-  async createNewPost(post){
-    return await this.request({endpoint: `genre/create`, method: 'POST', data: post}) 
+
+
+
+
+
+  async createNewPost(post) {
+    return await this.request({
+      endpoint: `genre/create`,
+      method: "POST",
+      data: post,
+    });
   }
 
   async listProducts() {
-    return await this.request({ endpoint: `store`, method: `GET` })
+    return await this.request({ endpoint: `store`, method: `GET` });
   }
 
-  //Movie API calls
+  //POST API calls
+  async listAllPosts(user) {
+    return await this.request({
+      endpoint: `posts`,
+      method: `GET`,
+      data: user,
+    });
+  }
+
+  async createPost(data) {
+    return await this.request({
+      endpoint: `posts`,
+      method: `POST`,
+      data: data,
+    });
+  }
 }
 
 export default new ApiClient(
   process.env.REACT_APP_REMOTE_HOST_URL ||
-    "process.env.REACT_APP_REMOTE_HOST_URL"
+    "http://localhost:3001"
 );
