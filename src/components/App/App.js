@@ -12,55 +12,6 @@ import Footer from "../Footer/Footer";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
 import SearchPage from "../SearchPage/SearchPage";
-<<<<<<< HEAD
-import MerchStore from "../MerchStore/MerchStore";
-import PostForm from "../PostForm/PostForm";
-import ActionPage from "../ActionPage/ActionPage";
-import HorrorPage from "../HorrorPage/HorrorPage";
-import ComedyPage from "../ComedyPage/ComedyPage";
-import DramaPage from "../DramaPage/DramaPage";
-import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage";
-import RomancePage from "../RomancePage/RomancePage";
-import PostDetail from "../PostDetail/PostDetail";
-
-export default function App() {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  const [cart, setCart] = useState({});
-  const [products, setProducts] = useState([]);
-  const [activeCategory, setActiveCategory] = useState("All Categories");
-  const [searchInputValue, setSearchInputValue] = useState("");
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [orders, setOrders] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-  const [posts, setPosts] = useState([]);
-
-  // const handleOnSearchInputChange = (event) => {
-  //   setSearchInputValue(event.target.value)
-  // }
-
-  // const handleOnCheckout = async () => {
-  //   setIsCheckingOut(true)
-  // }
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setIsFetching(true);
-
-      const { data, error } = await apiClient.listProducts();
-      if (data) {
-        setPosts(data.posts);
-      }
-      if (error) {
-        setError(error);
-      }
-
-      setIsFetching(false);
-    };
-
-    fetchPosts();
-  }, []);
-=======
 import MerchStore from "../MerchStore/MerchStore"
 import PostForm from "../PostForm/PostForm"
 import ActionPage from "../ActionPage/ActionPage"
@@ -77,7 +28,7 @@ export default function App() {
   const { products } = data;
   const [user, setUser] = useState(null)
   const [error, setError] = useState(null)
-  const [post, setPost] = useState([])
+  const [posts, setPosts] = useState([]);
   const [orders, setOrders] = useState([])
   const [isFetching, setIsFetching] = useState(false)
   const [activeCategory, setActiveCategory] = useState("All Categories")
@@ -112,7 +63,6 @@ export default function App() {
       );
     }
   };
->>>>>>> e162d19e7dc540d80f17edb8bfc0ba01bffe6140
 
   // handles the persistent user token
   useEffect(() => {
@@ -205,22 +155,16 @@ export default function App() {
           />
           <Route path="/genre/horror" element={<HorrorPage />} />
           <Route
-<<<<<<< HEAD
             path="/genre/action/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
           <Route path="/posts/:postId" element={<PostDetail user={user} updatePost={updatePost}/>} />
           <Route path="/store" element={<MerchStore />} />
-=======
-            path="/genre/horror"
-            element={<HorrorPage />}
-            />
-          <Route path="/genre/action/create" element={<PostForm user={user} post={post} addPost={addPost} />} />
             <Route
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd}/>}
             />
->>>>>>> e162d19e7dc540d80f17edb8bfc0ba01bffe6140
+
         </Routes>
         <Footer />
       </BrowserRouter>
