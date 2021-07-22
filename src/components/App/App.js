@@ -12,7 +12,6 @@ import Footer from "../Footer/Footer";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
 import SearchPage from "../SearchPage/SearchPage";
-<<<<<<< HEAD
 import MerchStore from "../MerchStore/MerchStore";
 import PostForm from "../PostForm/PostForm";
 import ActionPage from "../ActionPage/ActionPage";
@@ -25,7 +24,9 @@ import data from "../../data";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Orders from "../Orders/Orders";
 import axios from "axios";
-// import PostDetail from "../PostDetail/PostDetail";
+import PostDetail from "../PostDetail/PostDetail";
+import Threads from "../Threads/Threads"
+
 
 export default function App() {
   const { products } = data;
@@ -38,29 +39,6 @@ export default function App() {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-=======
-import MerchStore from "../MerchStore/MerchStore"
-import PostForm from "../PostForm/PostForm"
-import ActionPage from "../ActionPage/ActionPage"
-import HorrorPage from "../HorrorPage/HorrorPage"
-import ComedyPage from "../ComedyPage/ComedyPage"
-import DramaPage from "../DramaPage/DramaPage"
-import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage"
-import RomancePage from "../RomancePage/RomancePage"
-import data from '../../data'
-import ShoppingCart from "../ShoppingCart/ShoppingCart"
-import Orders from "../Orders/Orders"
-
-export default function App() {
-  const { products } = data;
-  const [user, setUser] = useState(null)
-  const [error, setError] = useState(null)
-  const [posts, setPosts] = useState([]);
-  const [orders, setOrders] = useState([])
-  const [isFetching, setIsFetching] = useState(false)
-  const [activeCategory, setActiveCategory] = useState("All Categories")
-  const [searchInputValue, setSearchInputValue] = useState("")
->>>>>>> cb119a1b9ab3f7a274b4087f2326d08697221ced
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
@@ -200,38 +178,30 @@ export default function App() {
           />
           <Route path="/search/:searchInputValue" element={<SearchPage />} />
           <Route path="/genre" element={<GenrePage />} />
-          <Route path="/genre/action" element={<ActionPage />} />
-          <Route path="/genre/comedy" element={<ComedyPage />} />
-          <Route path="/genre/romance" element={<RomancePage />} />
-          <Route path="/genre/drama" element={<DramaPage />} />
+          {/* <Route path="/genre/:category" element={<GenrePage element={category} />} /> */}
+          {/* <Route path="/genre/action" element={<ActionPage />} /> */}
+          <Route path="/genre/:genres" element={<Threads />} />
+          {/* {/* <Route path="/genre/romance" element={<RomancePage />} /> */}
+          {/* <Route path="/genre/drama" element={<Threads />} />
           <Route
             path="/genre/science-fiction"
-            element={<ScienceFictionPage />}
+            element={<ScienceFictionPage />} */}
           />
-          <Route path="/genre/horror" element={<HorrorPage />} />
+          {/* <Route path="/genre/horror" element={<HorrorPage />} /> */} */}
           <Route
-            path="/genre/action/create"
+            path="/genre/:genres/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
-<<<<<<< HEAD
-          {/* <Route
+          {/* path="/genre/:category/create" */}
+          <Route
             path="/posts/:postId"
             element={<PostDetail user={user} updatePost={updatePost} />}
-          /> */}
+          />
 
           <Route
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
           />
-=======
-          <Route path="/posts/:postId" element={<PostDetail user={user} updatePost={updatePost}/>} />
-          <Route path="/store" element={<MerchStore />} />
-            <Route
-            path="/store"
-            element={<MerchStore products={products} onAdd={onAdd}/>}
-            />
-
->>>>>>> cb119a1b9ab3f7a274b4087f2326d08697221ced
         </Routes>
         <Footer />
       </BrowserRouter>

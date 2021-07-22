@@ -1,11 +1,22 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import apiClient from "../Services/apiClient";
 // import NotAllowed from "../NotAllowed/NotAllowed"
 import "./PostForm.css";
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// console.log(capitalizeFirstLetter('foo')); // Foo
+
+
 export default function NewPost({ user }) {
-  // console.log(user)
+  
+  const { genres } = useParams();
+  const genre = capitalizeFirstLetter(genres);
+  console.log(genre)
+
   let Navigate = useNavigate();
   const [error, setError] = useState(null);
   const [form, setForm] = useState({
@@ -21,10 +32,11 @@ export default function NewPost({ user }) {
     e.preventDefault();
     // console.log(form.title);
     // console.log(form.text);
-
+    // console.log('this is the genre after submit', genre)
     const { data, error } = await apiClient.createPost({
       title: form.title,
       text: form.text,
+      genre: genre,
     });
     if (data) {
       console.log(data);
