@@ -38,7 +38,7 @@ export const SidebarData = [
   },
   {
     title: 'My Orders',
-    path: '/orders',
+    path: '/order',
     icon: <SiIcons.SiEventstore />,
     cName: 'nav-text'
   },

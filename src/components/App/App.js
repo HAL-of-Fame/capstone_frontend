@@ -182,7 +182,7 @@ export default function App() {
             }
           />
           <Route
-            path="/orders"
+            path="/order"
             element={
               <Orders
                 user={user}
