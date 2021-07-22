@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import apiClient from "../../services/apiClient";
+import apiClient from "../Services/apiClient";
 import "./PostDetail.css";
 
 const fetchPostById = async ({
@@ -29,21 +29,39 @@ export default function PostDetail({ user, updatePost }) {
   const [post, setPost] = useState(null);
   const [rating, setRating] = useState(null);
   const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isSavingRating, setIsSavingRating] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchPostById({ postId, setIsFetching, setError, setPost, setText });
+    fetchPostById({
+      postId,
+      setIsFetching,
+      setTitle,
+      setError,
+      setPost,
+      setText,
+    });
   }, [postId]);
+
+  const handleOnDelete = async () => {
+    console.log(postId)
+    const { data, error } = await apiClient.deletePostById({ postId });
+    if (error) setError(error);
+    else {
+      console.log("succeeded in deleting");
+    }
+  };
 
   const handleOnUpdate = async () => {
     setIsUpdating(true);
 
-    const postUpdate = { text };
-
+    const postUpdate = { text, title };
+    // console.log("postUpdate", postUpdate);
     const { data, error } = await apiClient.updatePost({ postId, postUpdate });
+    console.log("after api call data", data);
     if (data) {
       setPost({ ...post, text: data.post.text, title: data.post.title });
       updatePost({ postId, postUpdate });
@@ -69,6 +87,7 @@ export default function PostDetail({ user, updatePost }) {
         setError,
         setPost,
         setText,
+        setTitle,
       });
     }
     if (error) {
@@ -79,37 +98,21 @@ export default function PostDetail({ user, updatePost }) {
   };
 
   const userIsLoggedIn = Boolean(user?.email);
-  const userOwnsPost = user?.username && post?.username === user?.username;
-
+  const userOwnsPost = user?.username && post?.userName === user?.username;
+  // console.log("userOwnsPost is", userOwnsPost)
   if (!post && !isFetching) return null;
   if (!post) return <h1>Loading...</h1>;
 
   return (
     <div className="PostDetail">
-      {/* <div className="Post">
-        <div
-          className="media"
-          style={{
-            backgroundImage: `url(${post.imageUrl})`,
-          }}
-          to={`/posts/${post.id}`}
-        />
-
+      <div className="Post">
         <div className="body">
           <div className="info">
-            <p className="text">{post.text}</p>
-            <span className="rating">
-              <Stars rating={post.rating || 0} max={10} />
-              {formatRating(post.rating || 0)}
-            </span>
-          </div> */}
-      {/* 
-          <div className="meta">
-            <span className="date">{formatDate(post.createdAt)}</span>
-            <span className="user">@{post.username}</span>
+            <p className="text">Title: {post.title}</p>
+            <p className="text">Text: {post.text}</p>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {error && <span className="error">Error: {error}</span>}
 
@@ -118,12 +121,20 @@ export default function PostDetail({ user, updatePost }) {
           <div className="edit-post">
             <p>Edit your post</p>
             <textarea
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+              name="title"
+            ></textarea>
+            <textarea
               value={text}
               onChange={(event) => setText(event.target.value)}
               name="text"
             ></textarea>
             <button className="btn" onClick={handleOnUpdate}>
               {isUpdating ? "Loading..." : "Save Post"}
+            </button>
+            <button className="btn" onClick={handleOnDelete}>
+              {isUpdating ? "Loading..." : "Delete Post"}
             </button>
           </div>
         ) : (
