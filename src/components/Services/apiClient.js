@@ -96,6 +96,14 @@ class ApiClient {
     });
   }
 
+  async deletePostById({postId}) {
+    console.log('inside apiClient postId', postId)
+    return await this.request({
+      endpoint: `posts/${postId}/`,
+      method: `DELETE`,
+    });
+  }
+
   async createRatingForPost({ postId, rating }) {
     return await this.request({
       endpoint: `posts/${postId}/ratings`,
@@ -108,7 +116,7 @@ class ApiClient {
     return await this.request({
       endpoint: `posts/${postId}/`,
       method: `PATCH`,
-      data: { postUpdate },
+      data: postUpdate,
     });
   }
 }
