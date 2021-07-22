@@ -59,7 +59,7 @@ export default function IndividualMoviePage() {
   // console.log(video)
   const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
   const videolink = `https://www.youtube.com/embed/${video}`;
-  console.log(videolink);
+  // console.log(videolink);
 
   return (
     <div className="individualMoviePage">
