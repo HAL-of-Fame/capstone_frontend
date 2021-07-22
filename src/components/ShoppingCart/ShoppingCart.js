@@ -1,4 +1,6 @@
 import React from 'react';
+import apiClient from "../Services/apiClient"
+import { useState } from "react"
 
 export default function Basket(props) {
   const { cartItems, onAdd, onRemove } = props;
@@ -6,6 +8,30 @@ export default function Basket(props) {
   const taxPrice = itemsPrice * 0.14;
   const shippingPrice = itemsPrice > 2000 ? 0 : 20;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [addCart, setAddCart] = useState(null)
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    image: ""
+  })
+
+  const handleOnSubmit = async () => {
+    setIsLoading(true)
+ 
+    const { data, error } = await apiClient.createOrder({ name: form.name, price: form.price, image: form.image })
+    if (data) {
+      addCart(data.cart)
+      setForm({ name: "", price: "", image: "" })
+    }
+    if (error) {
+      setError(error)
+    }
+ 
+    setIsLoading(false)
+  }
+
   return (
     <aside className="block col-1">
       <h2>Cart Items</h2>
@@ -57,7 +83,7 @@ export default function Basket(props) {
             </div>
             <hr />
             <div className="row">
-              <button onClick={() => alert('Implement Checkout!')}>
+              <button onClick= {handleOnSubmit}>
                 Checkout
               </button>
             </div>

@@ -113,7 +113,7 @@ export default function App() {
             onRemove={onRemove} />}
           />
           <Route
-            path="/orders"
+            path="/order"
             element={
               <Orders
                 user={user}

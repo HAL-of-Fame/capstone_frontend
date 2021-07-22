@@ -69,10 +69,18 @@ class ApiClient {
     return await this.request({ endpoint: `store`, method: `GET` })
   }
 
+  async listOrdersForUser() {
+    return await this.request({ endpoint: `order`, method: `get` })
+  }
+
+  async createOrder() {
+    return await this.request({ endpoint: `order`, method: `post` })
+  }
+
   //Movie API calls
 }
 
 export default new ApiClient(
   process.env.REACT_APP_REMOTE_HOST_URL ||
-    "process.env.REACT_APP_REMOTE_HOST_URL"
+    "http://localhost:3000"
 );
