@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import apiClient from "../Services/apiClient";
 import "./PostDetail.css";
 
@@ -46,12 +46,26 @@ export default function PostDetail({ user, updatePost }) {
     });
   }, [postId]);
 
+
+  // function goHome() {
+  //   let history = useHistory();
+
+  //   function handleClick() {
+  //     history.push("/")
+  //   }
+    
+  //   handleClick();
+  // }
+  let Navigate = useNavigate();
+
   const handleOnDelete = async () => {
     console.log(postId)
     const { data, error } = await apiClient.deletePostById({ postId });
     if (error) setError(error);
     else {
       console.log("succeeded in deleting");
+      // goHome();
+      Navigate("/");
     }
   };
 
