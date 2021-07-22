@@ -19,7 +19,7 @@ import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Orders from "../Orders/Orders";
 import axios from "axios";
 import PostDetail from "../PostDetail/PostDetail";
-import Threads from "../Threads/Threads"
+import Genres from "../Genres/Genres"
 
 
 export default function App() {
@@ -174,7 +174,7 @@ export default function App() {
           <Route path="/genre" element={<GenrePage />} />
           {/* <Route path="/genre/:category" element={<GenrePage element={category} />} /> */}
           {/* <Route path="/genre/action" element={<ActionPage />} /> */}
-          <Route path="/genre/:genres" element={<Threads />} />
+          <Route path="/genre/:genres" element={<Genres />} />
           {/* {/* <Route path="/genre/romance" element={<RomancePage />} /> */}
           {/* <Route path="/genre/drama" element={<Threads />} />
           <Route

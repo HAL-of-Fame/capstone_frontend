@@ -1,10 +1,10 @@
 import Post from "../Post/Post";
 import { Link, useParams } from "react-router-dom";
 // import NewPostForm from "../NewExercise/NewExercise"
-import "./Threads.css";
+import "./Genres.css";
 // import apiClient from "../../services/apiClient"
 
-export default function Threads() {
+export default function Genres() {
   let { genres } = useParams();
   return (
     <div className="Genre">
