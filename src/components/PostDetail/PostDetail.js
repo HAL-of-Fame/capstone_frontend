@@ -47,15 +47,6 @@ export default function PostDetail({ user, updatePost }) {
   }, [postId]);
 
 
-  // function goHome() {
-  //   let history = useHistory();
-
-  //   function handleClick() {
-  //     history.push("/")
-  //   }
-    
-  //   handleClick();
-  // }
   let Navigate = useNavigate();
 
   const handleOnDelete = async () => {
@@ -64,7 +55,7 @@ export default function PostDetail({ user, updatePost }) {
     if (error) setError(error);
     else {
       console.log("succeeded in deleting");
-      // goHome();
+
       Navigate("/");
     }
   };
@@ -75,7 +66,7 @@ export default function PostDetail({ user, updatePost }) {
     const postUpdate = { text, title };
     // console.log("postUpdate", postUpdate);
     const { data, error } = await apiClient.updatePost({ postId, postUpdate });
-    console.log("after api call data", data);
+    // console.log("after api call data", data);
     if (data) {
       setPost({ ...post, text: data.post.text, title: data.post.title });
       updatePost({ postId, postUpdate });
