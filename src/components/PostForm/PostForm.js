@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import apiClient from "../Services/apiClient";
 // import NotAllowed from "../NotAllowed/NotAllowed"
 import "./PostForm.css";
 
 export default function NewPost({ user }) {
   // console.log(user)
+  let Navigate = useNavigate();
   const [error, setError] = useState(null);
   const [form, setForm] = useState({
     title: "",
@@ -17,8 +19,8 @@ export default function NewPost({ user }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form.title);
-    console.log(form.text);
+    // console.log(form.title);
+    // console.log(form.text);
 
     const { data, error } = await apiClient.createPost({
       title: form.title,
@@ -28,11 +30,13 @@ export default function NewPost({ user }) {
       console.log(data);
       // addPost(data.post);
       setForm({ title: "", text: "" });
+      Navigate("/")
     }
     if (error) {
       setError(error);
     }
   };
+
   const renderForm = () => {
     // if (!user?.email) {
     //   return <NotAllowed />
