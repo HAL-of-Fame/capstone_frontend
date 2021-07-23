@@ -39,6 +39,7 @@ export default function App() {
   const [trending, setTrending] = useState([]);
   
 
+
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
   };
@@ -48,11 +49,7 @@ export default function App() {
     console.log(cartItems);
     console.log(user);
     try {
-      const res = await axios.post("http://localhost:3001/orders", {
-        order: cartItems,
-        user: user,
-      });
-      console.log("orders", orders)
+      const res = await apiClient.createOrder(cartItems, user);
       console.log(res);
       if (res?.data?.order) {
         setOrders((o) => [...res.data.order, ...o]);
@@ -113,6 +110,7 @@ export default function App() {
   useEffect(() => {
     const fetchProducts = async () => {
       setIsFetching(true);
+
       try {
         const res = await axios.get("http://localhost:3001/store");
         console.log(res);
@@ -152,6 +150,7 @@ export default function App() {
     await apiClient.logoutUser();
     setUser(null);
     setError(null);
+    setOrders([]);
   };
 
   return (
@@ -184,7 +183,7 @@ export default function App() {
             }
           />
           <Route
-            path="/orders"
+            path="/order"
             element={
               <Orders
                 user={user}
@@ -215,11 +214,8 @@ export default function App() {
             path="/genre/action/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
-          {/* <Route
-            path="/posts/:postId"
-            element={<PostDetail user={user} updatePost={updatePost} />}
-          /> */}
 
+          {/* <Route path="/posts/:postId" element={<PostDetail user={user} updatePost={updatePost}/>} /> */}
           <Route
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
