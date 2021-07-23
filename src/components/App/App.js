@@ -23,7 +23,7 @@ import Genres from "../Genres/Genres"
 
 
 export default function App() {
-  const { products } = data;
+  const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -33,20 +33,21 @@ export default function App() {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [trending, setTrending] = useState([]);
+  
+
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
   };
+
   const handleOnCheckout = async () => {
     setIsCheckingOut(true);
     console.log(cartItems);
     console.log(user);
     try {
-      const res = await axios.post("http://localhost:3001/orders", {
-        order: cartItems,
-        user: user,
-      });
-      console.log(res.data.order);
+      const res = await apiClient.createOrder(cartItems, user);
+      console.log(res);
       if (res?.data?.order) {
         setOrders((o) => [...res.data.order, ...o]);
         setIsCheckingOut(false);
@@ -68,21 +69,21 @@ export default function App() {
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+          x.id === product.id ? { ...exist, quantity: exist.quantity + 1 } : x
         )
       );
     } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
   };
   const onRemove = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
-    if (exist.qty === 1) {
+    if (exist.quantity === 1) {
       setCartItems(cartItems.filter((x) => x.id !== product.id));
     } else {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+          x.id === product.id ? { ...exist, quantity: exist.quantity - 1 } : x
         )
       );
     }
@@ -102,6 +103,30 @@ export default function App() {
       fetchUser();
     }
   }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setIsFetching(true);
+
+      try {
+        const res = await axios.get("http://localhost:3001/store");
+        console.log(res);
+        if (res?.data?.products) {
+          setProducts(res.data.products);
+        } else {
+          setError("Error fetching products.");
+        }
+      } catch (err) {
+        console.log(err);
+        const message = err?.response?.data?.error?.message;
+        setError(message ?? String(err));
+      } finally {
+        setIsFetching(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   const addPost = (newPost) => {
     setPosts((oldPosts) => [...oldPosts, newPost]);
   };
@@ -122,6 +147,7 @@ export default function App() {
     await apiClient.logoutUser();
     setUser(null);
     setError(null);
+    setOrders([]);
   };
 
   return (
@@ -130,9 +156,9 @@ export default function App() {
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         <Sidebar />
         <Routes>
-          <Route path="/" element={<Home user={user} />} />
+          <Route path="/" element={<Home user={user} trending={trending} setTrending={setTrending}/>} />
           <GenrePage path="/genre" />
-          <Route path="/movie/:movie_id" element={<IndividualMoviePage />} />
+          <Route path="/movie/:movie_id" element={<IndividualMoviePage onAdd={onAdd}/>} />
           <Route path="*" element={<NotFound user={user} error={error} />} />
           <Route
             path="/login"
@@ -154,7 +180,7 @@ export default function App() {
             }
           />
           <Route
-            path="/orders"
+            path="/order"
             element={
               <Orders
                 user={user}
@@ -172,26 +198,15 @@ export default function App() {
           />
           <Route path="/search/:searchInputValue" element={<SearchPage />} />
           <Route path="/genre" element={<GenrePage />} />
-          {/* <Route path="/genre/:category" element={<GenrePage element={category} />} /> */}
-          {/* <Route path="/genre/action" element={<ActionPage />} /> */}
           <Route path="/genre/:genres" element={<Genres />} />
-          {/* {/* <Route path="/genre/romance" element={<RomancePage />} /> */}
-          {/* <Route path="/genre/drama" element={<Threads />} />
-          <Route
-            path="/genre/science-fiction"
-            element={<ScienceFictionPage />} */}
-          />
-          {/* <Route path="/genre/horror" element={<HorrorPage />} /> */} */}
           <Route
             path="/genre/:genres/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
-          {/* path="/genre/:category/create" */}
           <Route
             path="/posts/:postId"
             element={<PostDetail user={user} updatePost={updatePost} />}
           />
-
           <Route
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
