@@ -25,12 +25,11 @@ export default function SearchPage() {
     fetchSearched();
   }, []);
   return (
-    <div className="Search Page">
+    <div className="SearchPage">
       <div className="title">"{searchInputValue}" Movies</div>
       <div className="searched">
         {movies?.map((movie) => (
           <MovieCard movie={movie} key={movie.id} />
-          //   <Link to="/" >
         ))}
       </div>
     </div>
