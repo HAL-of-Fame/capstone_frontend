@@ -180,7 +180,7 @@ export default function App() {
             }
           />
           <Route
-            path="/order"
+            path="/orders"
             element={
               <Orders
                 user={user}
