@@ -11,6 +11,7 @@ export default function Basket(props) {
   const shippingPrice = itemsPrice > 2000 ? 0 : 20;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
   console.log(cartItems);
+
   const onCheckoutSubmit = async () => {
     const order = await handleOnCheckout();
     if (order) {
@@ -36,7 +37,7 @@ export default function Basket(props) {
             </div>
 
             <div className="col-2 text-right">
-              {console.log(typeof item.price)}
+
               {item.quantity} x ${item.price.toFixed(2)}
             </div>
           </div>

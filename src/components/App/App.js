@@ -20,7 +20,6 @@ import ComedyPage from "../ComedyPage/ComedyPage";
 import DramaPage from "../DramaPage/DramaPage";
 import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage";
 import RomancePage from "../RomancePage/RomancePage";
-import data from "../../data";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Orders from "../Orders/Orders";
 import axios from "axios";
@@ -37,10 +36,13 @@ export default function App() {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [trending, setTrending] = useState([]);
+
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
   };
+
   const handleOnCheckout = async () => {
     setIsCheckingOut(true);
     console.log(cartItems);
@@ -103,6 +105,7 @@ export default function App() {
       fetchUser();
     }
   }, []);
+
   useEffect(() => {
     const fetchProducts = async () => {
       setIsFetching(true);
@@ -123,7 +126,6 @@ export default function App() {
         setIsFetching(false);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -156,9 +158,9 @@ export default function App() {
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         <Sidebar />
         <Routes>
-          <Route path="/" element={<Home user={user} />} />
+          <Route path="/" element={<Home user={user} trending={trending} setTrending={setTrending}/>} />
           <GenrePage path="/genre" />
-          <Route path="/movie/:movie_id" element={<IndividualMoviePage />} />
+          <Route path="/movie/:movie_id" element={<IndividualMoviePage onAdd={onAdd}/>} />
           <Route path="*" element={<NotFound user={user} error={error} />} />
           <Route
             path="/login"
@@ -211,6 +213,7 @@ export default function App() {
             path="/genre/action/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
+
           {/* <Route path="/posts/:postId" element={<PostDetail user={user} updatePost={updatePost}/>} /> */}
           <Route
             path="/store"

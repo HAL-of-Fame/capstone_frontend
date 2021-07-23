@@ -15,3 +15,4 @@ export const formatPrice = (amount) => {
   const dollars = amount;
   return `$${formatter.format(dollars)}`;
 };
+

@@ -60,6 +60,7 @@ export default function Signup({ user, setUser }) {
       setErrors((e) => ({ ...e, passwordConfirm: null }));
     }
 
+
     const { data, error } = await apiClient.signUpUser({
       email: form.email,
       password: form.password,
@@ -68,6 +69,7 @@ export default function Signup({ user, setUser }) {
       username: form.username,
     });
     if (error) setErrors((e) => ({ ...e, form: error }));
+
     if (data?.user) {
       setUser(data.user);
       apiClient.setToken(data.token);

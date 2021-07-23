@@ -10,7 +10,6 @@ import "./Orders.css"
 const groupOrderDetailsByOrderId = (orderDetails) => {
   // get an array of unique order ids
   const orderIds = [...new Set(orderDetails.map((d) => d.orderId))]
-
   return orderIds.reduce((acc, orderId) => {
     acc[orderId] = orderDetails.filter((d) => d.orderId === orderId)
     return acc
