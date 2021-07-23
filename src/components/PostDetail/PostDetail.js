@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+// import Stars from "../Stars/Stars"
+// import StarsInput from "../StarsInput/StarsInput"
+// import { formatRating, formatDate } from "../../utils/format"
 import apiClient from "../Services/apiClient";
 import "./PostDetail.css";
 
@@ -56,7 +59,8 @@ export default function PostDetail({ user, updatePost }) {
     else {
       console.log("succeeded in deleting");
 
-      Navigate("/");
+      Navigate("/")
+      // Navigate(`/genre/${genre}`);
     }
   };
 
@@ -113,6 +117,10 @@ export default function PostDetail({ user, updatePost }) {
       <div className="Post">
         <div className="body">
           <div className="info">
+          {/* <span className="rating">
+              <Stars rating={post.rating || 0} max={5} />
+              {formatRating(post.rating || 0)}
+            </span> */}
             <p className="text">Title: {post.title}</p>
             <p className="text">Text: {post.text}</p>
           </div>
@@ -145,14 +153,14 @@ export default function PostDetail({ user, updatePost }) {
         ) : (
           <div className="rate-setup">
             <p>Rate this setup</p>
-            {/* <StarsInput value={rating} setValue={setRating} max={10} /> */}
-            <button
+            {/* <StarsInput value={rating} setValue={setRating} max={5} /> */}
+            {/* <button
               className="btn"
               onClick={handleOnSaveRating}
               disabled={!userIsLoggedIn}
-            >
-              {isSavingRating ? "Loading..." : "Save Rating"}
-            </button>
+            > */}
+              {/* {isSavingRating ? "Loading..." : "Save Rating"}
+            </button> */}
           </div>
         )}
       </div>
