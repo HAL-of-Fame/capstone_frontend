@@ -73,6 +73,16 @@ class ApiClient {
     return await this.request({ endpoint: `store`, method: `GET` });
   }
 
+
+  // GENRE API calls
+  async fetchAllPostsByGenre(genre) {
+    return await this.request({
+      endpoint: `genre/${genre}/`,
+      method: `GET`,
+    });
+  }
+
+
   //POST API calls
   async listAllPosts() {
     return await this.request({
