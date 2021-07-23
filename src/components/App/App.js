@@ -12,7 +12,6 @@ import Footer from "../Footer/Footer";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
 import SearchPage from "../SearchPage/SearchPage";
-<<<<<<< HEAD
 import MerchStore from "../MerchStore/MerchStore";
 import PostForm from "../PostForm/PostForm";
 import ActionPage from "../ActionPage/ActionPage";
@@ -21,14 +20,13 @@ import ComedyPage from "../ComedyPage/ComedyPage";
 import DramaPage from "../DramaPage/DramaPage";
 import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage";
 import RomancePage from "../RomancePage/RomancePage";
-import data from "../../data";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Orders from "../Orders/Orders";
 import axios from "axios";
 // import PostDetail from "../PostDetail/PostDetail";
 
 export default function App() {
-  const { products } = data;
+  const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -38,33 +36,12 @@ export default function App() {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-=======
-import MerchStore from "../MerchStore/MerchStore"
-import PostForm from "../PostForm/PostForm"
-import ActionPage from "../ActionPage/ActionPage"
-import HorrorPage from "../HorrorPage/HorrorPage"
-import ComedyPage from "../ComedyPage/ComedyPage"
-import DramaPage from "../DramaPage/DramaPage"
-import ScienceFictionPage from "../ScienceFictionPage/ScienceFictionPage"
-import RomancePage from "../RomancePage/RomancePage"
-import data from '../../data'
-import ShoppingCart from "../ShoppingCart/ShoppingCart"
-import Orders from "../Orders/Orders"
-
-export default function App() {
-  const { products } = data;
-  const [user, setUser] = useState(null)
-  const [error, setError] = useState(null)
-  const [posts, setPosts] = useState([]);
-  const [orders, setOrders] = useState([])
-  const [isFetching, setIsFetching] = useState(false)
-  const [activeCategory, setActiveCategory] = useState("All Categories")
-  const [searchInputValue, setSearchInputValue] = useState("")
->>>>>>> cb119a1b9ab3f7a274b4087f2326d08697221ced
+  const [trending, setTrending] = useState([]);
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
   };
+
   const handleOnCheckout = async () => {
     setIsCheckingOut(true);
     console.log(cartItems);
@@ -96,21 +73,21 @@ export default function App() {
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+          x.id === product.id ? { ...exist, quantity: exist.quantity + 1 } : x
         )
       );
     } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
   };
   const onRemove = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
-    if (exist.qty === 1) {
+    if (exist.quantity === 1) {
       setCartItems(cartItems.filter((x) => x.id !== product.id));
     } else {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+          x.id === product.id ? { ...exist, quantity: exist.quantity - 1 } : x
         )
       );
     }
@@ -130,6 +107,29 @@ export default function App() {
       fetchUser();
     }
   }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setIsFetching(true);
+      try {
+        const res = await axios.get("http://localhost:3001/store");
+        console.log(res);
+        if (res?.data?.products) {
+          setProducts(res.data.products);
+        } else {
+          setError("Error fetching products.");
+        }
+      } catch (err) {
+        console.log(err);
+        const message = err?.response?.data?.error?.message;
+        setError(message ?? String(err));
+      } finally {
+        setIsFetching(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   const addPost = (newPost) => {
     setPosts((oldPosts) => [...oldPosts, newPost]);
   };
@@ -158,9 +158,9 @@ export default function App() {
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         <Sidebar />
         <Routes>
-          <Route path="/" element={<Home user={user} />} />
+          <Route path="/" element={<Home user={user} trending={trending} setTrending={setTrending}/>} />
           <GenrePage path="/genre" />
-          <Route path="/movie/:movie_id" element={<IndividualMoviePage />} />
+          <Route path="/movie/:movie_id" element={<IndividualMoviePage onAdd={onAdd}/>} />
           <Route path="*" element={<NotFound user={user} error={error} />} />
           <Route
             path="/login"
@@ -213,7 +213,6 @@ export default function App() {
             path="/genre/action/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
-<<<<<<< HEAD
           {/* <Route
             path="/posts/:postId"
             element={<PostDetail user={user} updatePost={updatePost} />}
@@ -223,15 +222,6 @@ export default function App() {
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
           />
-=======
-          <Route path="/posts/:postId" element={<PostDetail user={user} updatePost={updatePost}/>} />
-          <Route path="/store" element={<MerchStore />} />
-            <Route
-            path="/store"
-            element={<MerchStore products={products} onAdd={onAdd}/>}
-            />
-
->>>>>>> cb119a1b9ab3f7a274b4087f2326d08697221ced
         </Routes>
         <Footer />
       </BrowserRouter>

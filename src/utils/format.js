@@ -12,6 +12,6 @@ const formatter = new Intl.NumberFormat("en-US", {
 })
 
 export const formatPrice = (amount) => {
-  const dollars = amount * 0.01
+  const dollars = amount 
   return `$${formatter.format(dollars)}`
 }
