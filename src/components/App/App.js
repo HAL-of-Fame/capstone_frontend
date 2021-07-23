@@ -37,6 +37,7 @@ export default function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [trending, setTrending] = useState([]);
+  
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
@@ -51,7 +52,8 @@ export default function App() {
         order: cartItems,
         user: user,
       });
-      console.log(res.data.order);
+      console.log("orders", orders)
+      console.log(res);
       if (res?.data?.order) {
         setOrders((o) => [...res.data.order, ...o]);
         setIsCheckingOut(false);
