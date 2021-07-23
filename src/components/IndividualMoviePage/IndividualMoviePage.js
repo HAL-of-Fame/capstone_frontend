@@ -60,7 +60,7 @@ export default function IndividualMoviePage(props) {
   // console.log(individual)
   // console.log(video)
   const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
-  const allData = {"name":individual.original_title, "image": {poster}, "id":  { movie_id }, "price": 20} 
+  const allData = {"name":individual.original_title, "image": `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`, "id": parseInt(movie_id) , "price": 20} 
   const videolink = `https://www.youtube.com/embed/${video}`;
   console.log(videolink);
 

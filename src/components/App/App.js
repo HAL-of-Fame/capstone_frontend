@@ -37,6 +37,7 @@ export default function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [trending, setTrending] = useState([]);
+  
 
 
   const handleOnSearchInputChange = (event) => {

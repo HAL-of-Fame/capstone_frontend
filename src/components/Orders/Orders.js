@@ -25,7 +25,8 @@ export default function Orders({
   searchInputValue,
 }) {
   const ordersMapping = groupOrderDetailsByOrderId(orders)
-
+console.log("order mapping", ordersMapping)
+console.log('order/ mapping', orders)
   const hasOrders = Boolean(Object.keys(ordersMapping)?.length)
 
   return (
@@ -45,7 +46,6 @@ export default function Orders({
             <span className="center">Unit Price</span>
             <span className="center">Cost</span>
           </div>
-
           {Object.keys(ordersMapping)?.map((orderId) => (
             <OrderItem key={orderId} orderId={orderId} orderItems={ordersMapping[orderId]} />
           ))}

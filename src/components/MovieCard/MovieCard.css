@@ -14,7 +14,9 @@ img {
   width: 200px;
   margin-left: -16px;
   border-radius: 10px;
+
 }
+
 .Card:hover {
   border: 3px solid #000000;
   border-radius: 10px;
