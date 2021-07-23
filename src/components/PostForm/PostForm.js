@@ -14,7 +14,8 @@ function capitalizeFirstLetter(string) {
 export default function NewPost({ user }) {
   
   const { genres } = useParams();
-  const genre = capitalizeFirstLetter(genres);
+  const genreCapitalized = capitalizeFirstLetter(genres);
+  let genre = genres
   console.log(genre)
 
   let Navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function NewPost({ user }) {
       console.log(data);
       // addPost(data.post);
       setForm({ title: "", text: "" });
-      Navigate("/")
+      Navigate(`/genre/${genre}`)
     }
     if (error) {
       setError(error);
@@ -86,6 +87,7 @@ export default function NewPost({ user }) {
     <div className="NewPostForm">
       <div className="card">
         <h2>Create a new post</h2>
+        <p>Genre: {genreCapitalized}</p>
 
         {Boolean(error) && <span className="error">{error}</span>}
 
