@@ -15,3 +15,7 @@ export const formatPrice = (amount) => {
   const dollars = amount * 0.01
   return `$${formatter.format(dollars)}`
 }
+
+export const formatRating = (rating) => {
+  return formatter.format(rating)
+}
