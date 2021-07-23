@@ -1,11 +1,17 @@
-import React from 'react';
+import React from "react";
 
 export default function Product(props) {
   const { product, onAdd } = props;
   console.log("product", product)
   return (
     <div>
-      <img className="small" src={product.image} height={200} width={200} alt={product.name} />
+      <img
+        className="small"
+        src={product.image}
+        height={200}
+        width={200}
+        alt={product.name}
+      />
       <h3>{product.name}</h3>
       <div>${product.price}</div>
       <div>

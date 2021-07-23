@@ -72,7 +72,14 @@ class ApiClient {
   async listProducts() {
     return await this.request({ endpoint: `store`, method: `GET` });
   }
-
+  //Create Order
+  async createOrder(order, user) {
+    return await this.request({
+      endpoint: `orders`,
+      method: `POST`,
+      data: { order, user },
+    });
+  }
   //POST API calls
   async listAllPosts() {
     return await this.request({
