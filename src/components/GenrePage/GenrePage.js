@@ -12,7 +12,7 @@ export default function GenrePage(){
         <Link to='/genre/romance' className='romance-btn'>Romance</Link>
         <Link to='/genre/drama' className='drama-btn'>Drama</Link>
         <Link to='/genre/horror' className='horror-btn'>Horror</Link>
-        <Link to='/genre/science-Fiction' className='science-fiction-btn'>Science Fiction</Link></div>
+        <Link to='/genre/science-fiction' className='science-fiction-btn'>Science Fiction</Link></div>
         </div>
 
     )
