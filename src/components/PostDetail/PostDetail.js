@@ -37,8 +37,18 @@ export default function PostDetail({ user, updatePost }) {
   const [isUpdating, setIsUpdating] = useState(false);
   const [isSavingRating, setIsSavingRating] = useState(false);
   const [error, setError] = useState(null);
+  const [comments, setComments] = useState([])
 
   useEffect(() => {
+    const listAllComments = async () => {
+      const { data, error} = await apiClient.listAllComments(postId)
+      console.log(data.comments)
+      if (data) {
+        setComments(data.comments)
+      }
+      if (error) setError(error)
+    }
+    
     fetchPostById({
       postId,
       setIsFetching,
@@ -46,7 +56,10 @@ export default function PostDetail({ user, updatePost }) {
       setError,
       setPost,
       setText,
-    });
+    })
+    
+    listAllComments();
+    ;
   }, [postId]);
 
 
@@ -125,6 +138,14 @@ export default function PostDetail({ user, updatePost }) {
             <p className="text">Text: {post.text}</p>
           </div>
         </div>
+        <div className="Comments">
+            <p>Comments:</p>
+            {comments.map((comment) => (
+              <div className="test">
+                {comment.text}
+              </div>
+            ))}
+        </div>
       </div>
 
       {error && <span className="error">Error: {error}</span>}
@@ -162,8 +183,9 @@ export default function PostDetail({ user, updatePost }) {
               {/* {isSavingRating ? "Loading..." : "Save Rating"}
             </button> */}
           </div>
-        )}
+        )
+        }
       </div>
     </div>
-  );
+  )
 }
