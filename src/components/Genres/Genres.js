@@ -6,7 +6,6 @@ import apiClient from "../Services/apiClient";
 
 export default function Genres() {
   let { genres } = useParams();
-  console.log(genres);
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
 
@@ -18,18 +17,12 @@ export default function Genres() {
     const fetchPosts = async () => {
       const { data, error } = await apiClient.fetchAllPostsByGenre(genres);
       if (data) {
-        // console.log('i am in data', data)
-        // console.log('this is data.threads', data.threads)
         setPosts(data.threads);
       }
       if (error) setError(error);
     };
     fetchPosts();
   }, [genres]);
-
-  // const listPosts = posts.map((post) =>  <li>{post}</li>);
-  // const numbers = [1, 2, 3, 4, 5];
-  // const listItems = numbers.map((number) =>  <li>{number}</li>);
 
   console.log("posts", posts);
   return (
@@ -55,8 +48,15 @@ export default function Genres() {
         {posts.map((post) => (
           <div className="info">
             <li>PostId: {post.id}</li>
-            <li>Title: {post.title}</li>
-            <li>Text: {post.text}</li>
+            <Link
+              to={{
+                pathname: "/posts",
+                search: `/${post.id}`,
+              }}
+            >
+              <li>Title: {post.title}</li>
+              <li>Text: {post.text}</li>
+            </Link>
           </div>
         ))}
       </div>
