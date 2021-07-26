@@ -1,26 +1,25 @@
 .individualMoviePage .column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .individualMoviePage .column .top {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .individualMoviePage .column .top .left {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-
 .individualMoviePage .column .top .right {
-    display: flex;
-    margin-left: 50%;
-    margin-top: 100%;
+  display: flex;
+  margin-left: 50%;
+  margin-top: 100%;
 }
 
 .individualMoviePage .column .top .left .moviePoster {
@@ -34,12 +33,10 @@
   margin-top: 3%; */
 }
 
-
-
 .individualMoviePage .column .top .left .moviePoster .poster {
   margin-top: 10%;
-  height: 500px;
-  width: 320px;
+  height: 480px;
+  width: 720px;
   margin-bottom: 3%;
 }
 .individualMoviePage .column .movieDescription {
@@ -61,7 +58,6 @@
 }
 
 .individualMoviePage .column .movieDescription p {
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,10 +81,9 @@
 }
 
 .individualMoviePage .column .discussionSection p {
-    display: flex;
-    margin: auto;
+  display: flex;
+  margin: auto;
 }
-
 
 .trailer {
   /* height: */

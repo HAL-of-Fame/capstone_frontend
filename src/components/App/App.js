@@ -19,8 +19,7 @@ import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Orders from "../Orders/Orders";
 import axios from "axios";
 import PostDetail from "../PostDetail/PostDetail";
-import Genres from "../Genres/Genres"
-
+import Genres from "../Genres/Genres";
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -34,8 +33,6 @@ export default function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [trending, setTrending] = useState([]);
-  
-
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
@@ -156,9 +153,17 @@ export default function App() {
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         <Sidebar />
         <Routes>
-          <Route path="/" element={<Home user={user} trending={trending} setTrending={setTrending}/>} />
+          <Route
+            path="/"
+            element={
+              <Home user={user} trending={trending} setTrending={setTrending} />
+            }
+          />
           <GenrePage path="/genre" />
-          <Route path="/movie/:movie_id" element={<IndividualMoviePage onAdd={onAdd}/>} />
+          <Route
+            path="/movie/:movie_id"
+            element={<IndividualMoviePage onAdd={onAdd} />}
+          />
           <Route path="*" element={<NotFound user={user} error={error} />} />
           <Route
             path="/login"

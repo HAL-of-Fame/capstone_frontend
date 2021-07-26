@@ -15,7 +15,7 @@ export default function Basket(props) {
   const onCheckoutSubmit = async () => {
     const order = await handleOnCheckout();
     if (order) {
-      navigate("/orders");
+      navigate("/order");
     }
   };
 
@@ -37,7 +37,6 @@ export default function Basket(props) {
             </div>
 
             <div className="col-2 text-right">
-
               {item.quantity} x ${item.price.toFixed(2)}
             </div>
           </div>
