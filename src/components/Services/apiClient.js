@@ -60,28 +60,11 @@ class ApiClient {
     localStorage.setItem(this.tokenName, "");
   }
 
-  // async createNewPost(post) {
-  //   return await this.request({
-  //     endpoint: `genre/create`,
-  //     method: "POST",
-  //     data: post,
-  //   });
-  // }
 
   // PRODUCT API CALLS
   async listProducts() {
     return await this.request({ endpoint: `store`, method: `GET` });
   }
-
-
-  // GENRE API calls
-  async fetchAllPostsByGenre(genre) {
-    return await this.request({
-      endpoint: `genre/${genre}/`,
-      method: `GET`,
-    });
-  }
-
 
   //Create Order
   async createOrder(order, user) {
@@ -91,6 +74,19 @@ class ApiClient {
       data: { order, user },
     });
   }
+
+  // GENRES
+  async fetchAllPostsByGenre(genre) {
+    return await this.request({
+      endpoint: `genre/${genre}/`,
+      method: `GET`,
+    });
+  }
+
+
+
+  
+
   //POST API calls
   async listAllPosts() {
     return await this.request({
@@ -122,6 +118,59 @@ class ApiClient {
     });
   }
 
+  async updatePost({ postId, postUpdate }) {
+    return await this.request({
+      endpoint: `posts/${postId}/`,
+      method: `PATCH`,
+      data: postUpdate,
+    });
+  }
+
+
+
+  // COMMENTS
+  //get all comments under that postID
+  async listAllComments(postId) {
+    return await this.request({
+      endpoint: `comments/${postId}/`,
+      method: `GET`,
+    });
+  }
+
+  async createComment(comment, postId) {
+    return await this.request({
+      endpoint: `comments/${postId}/`,
+      method: `POST`,
+      data: comment,
+    });
+  }
+
+  async fetchCommentById(commentId) {
+    return await this.request({
+      endpoint: `comments/${commentId}/detail`,
+      method: `GET`,
+    });
+  }
+
+  async deleteCommentById({commentId}) {
+    return await this.request({
+      endpoint: `comments/${commentId}/delete`,
+      method: `DELETE`,
+    });
+  }
+
+  async updateComment({ commentId, commentUpdate }) {
+    return await this.request({
+      endpoint: `comments/${commentId}/edit`,
+      method: `PATCH`,
+      data: commentUpdate,
+    });
+  }
+
+
+
+
+  // RATINGS
   async createRatingForPost({ postId, rating }) {
     return await this.request({
       endpoint: `posts/${postId}/ratings`,
@@ -130,13 +179,10 @@ class ApiClient {
     });
   }
 
-  async updatePost({ postId, postUpdate }) {
-    return await this.request({
-      endpoint: `posts/${postId}/`,
-      method: `PATCH`,
-      data: postUpdate,
-    });
-  }
+
+
+
+
 }
 export default new ApiClient(
   process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001"
