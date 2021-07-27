@@ -138,10 +138,12 @@ class ApiClient {
   }
 
   async createComment(comment, postId) {
+    // console.log('api client', comment)
+    // console.log('api client', postId)
     return await this.request({
       endpoint: `comments/${postId}/`,
       method: `POST`,
-      data: comment,
+      data: {comment},
     });
   }
 
