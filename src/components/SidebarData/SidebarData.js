@@ -19,18 +19,6 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Trending',
-    path: '/trending',
-    icon: <IoIcons.IoIosTrendingUp />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'New Releases',
-    path: '/newreleases',
-    icon: <MdIcons.MdFiberNew />,
-    cName: 'nav-text'
-  },
-  {
     title: 'Merch Store',
     path: '/store',
     icon: <MdIcons.MdStore />,

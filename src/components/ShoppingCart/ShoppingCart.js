@@ -27,6 +27,7 @@ export default function Basket(props) {
         {cartItems.map((item) => (
           <div key={item.id} className="row">
             <div className="col-2">{item.name}</div>
+            <img className="col-2" src={item.image} alt="product" />
             <div className="col-2">
               <button onClick={() => onRemove(item)} className="remove">
                 -
