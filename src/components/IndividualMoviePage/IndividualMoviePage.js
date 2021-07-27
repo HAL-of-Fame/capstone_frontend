@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import "./IndividualMoviePage.css";
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css"
-import axios from "axios";
+// import axios from "axios";
 
 const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
 
@@ -34,7 +34,7 @@ export default function IndividualMoviePage(props) {
         if (responseData) {
           setIndividual(responseData);
         }
-        console.log(individual);
+        console.log(responseData);
       };
       
       const fetchVideo = async () => {
@@ -46,7 +46,7 @@ export default function IndividualMoviePage(props) {
           `&language=en-US`
           );
       const responseVidData = await viddata.json();
-      console.log(responseVidData);
+      // console.log(responseVidData);
       if (responseVidData) {
         setVideo(responseVidData.results[0].key);
       }
@@ -57,7 +57,7 @@ export default function IndividualMoviePage(props) {
     fetchVideo();
   }, []);
   
-  // console.log(individual)
+  console.log(individual)
   // console.log(video)
   const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
   const allData = {"name":individual.original_title, "image": `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`, "id": parseInt(movie_id) , "price": 20} 
