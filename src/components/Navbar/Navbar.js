@@ -18,6 +18,10 @@ export default function Navbar({ user, handleLogout }) {
     setSearchInputValue(event.target.value);
   };
 
+  const clearInput = () =>
+{
+  setSearchInputValue("")
+}
   return (
     <nav className="Navbar">
       <div className="content">
@@ -41,10 +45,16 @@ export default function Navbar({ user, handleLogout }) {
             value={searchInputValue}
             onChange={handleOnInputChange}
           />
-          <Link to={`search/${searchInputValue}`}>
-            <img className="search-btn" src={search} alt="search button" />
+          <Link to={`search/${searchInputValue}`} className="search-btn">
+            <FaIcons.FaSearch size={45}/>
           </Link>
         </div>
+
+        <Link to={`/`}>
+          <button className="cart" onClick={clearInput}>
+  Clear
+</button>
+          </Link>
 
         <div className="links">
           <div className="auth">
@@ -53,9 +63,8 @@ export default function Navbar({ user, handleLogout }) {
                 <li>
                   <span>{user.email}</span>
                 </li>
-
                 <li>
-                  <span onClick={handleLogout}>Logout</span>
+                  <button onClick={handleLogout} className="logout">Logout</button>
                 </li>
               </>
             ) : (
