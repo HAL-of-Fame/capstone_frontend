@@ -20,6 +20,7 @@ import Orders from "../Orders/Orders";
 import axios from "axios";
 import PostDetail from "../PostDetail/PostDetail";
 import Genres from "../Genres/Genres";
+import MTT from "../MTT/MTT";
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -32,7 +33,6 @@ export default function App() {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [trending, setTrending] = useState([]);
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
@@ -153,12 +153,7 @@ export default function App() {
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         <Sidebar />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home user={user} trending={trending} setTrending={setTrending} />
-            }
-          />
+          <Route path="/" element={<Home user={user} />} />
           <GenrePage path="/genre" />
           <Route
             path="/movie/:movie_id"
@@ -216,6 +211,7 @@ export default function App() {
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
           />
+          <Route path="/meet-the-team" element={<MTT />} />
         </Routes>
         <Footer />
       </BrowserRouter>
