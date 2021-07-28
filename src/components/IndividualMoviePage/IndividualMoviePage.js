@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Router } from "react-router"
 import "./IndividualMoviePage.css";
 import Popup from "../Popup/Popup";
-import "../../components/Popup/Popup.css"
+import "../../components/Popup/Popup.css";
 // import axios from "axios";
+import MoviePost from "../MoviePostForm/MoviePostForm";
 
-const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
+// const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
+const api_key = "d8e8e9a8ed16ae9fd3ea37274ab553aa";
 
 export default function IndividualMoviePage(props) {
-  const { onAdd} = props;
+  const { onAdd, genre, setGenre, movieName, setMovieName } = props;
   const [individual, setIndividual] = useState([]);
   const [video, setVideo] = useState([]);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  // const [genre, setGenre] = useState("");
+  // const [movieName, setMovieName] = useState("");
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -20,51 +26,103 @@ export default function IndividualMoviePage(props) {
 
   // will strip the movie_id from the URL (holds movie ID)
   const { movie_id } = useParams();
-  
+
   useEffect(() => {
     const fetchIndividual = async () => {
+      // console.log("inside fetchIndividual");
       const data = await fetch(
         `https://api.themoviedb.org/3/movie/` +
-        movie_id +
-        `?api_key=` +
-        api_key +
-        `&language=en-US`
-        );
-        const responseData = await data.json();
-        if (responseData) {
-          setIndividual(responseData);
-        }
-        console.log(responseData);
-      };
-      
-      const fetchVideo = async () => {
-        const viddata = await fetch(
-          `https://api.themoviedb.org/3/movie/` +
+          movie_id +
+          `?api_key=` +
+          api_key +
+          `&language=en-US`
+      );
+      const responseData = await data.json();
+      if (responseData) {
+        setIndividual(responseData);
+        // console.log("done with fetchIndividual");
+      }
+      // console.log(responseData.genres);
+    };
+
+    const fetchVideo = async () => {
+      // console.log("inside fetchVideo");
+      const viddata = await fetch(
+        `https://api.themoviedb.org/3/movie/` +
           movie_id +
           `/videos?api_key=` +
           api_key +
           `&language=en-US`
-          );
+      );
       const responseVidData = await viddata.json();
       // console.log(responseVidData);
       if (responseVidData) {
         setVideo(responseVidData.results[0].key);
+        // console.log("done fetchVideo");
       }
-      // console.log(video)
     };
 
     fetchIndividual();
     fetchVideo();
   }, []);
-  
-  console.log(individual)
+
+
+  useEffect(() => {
+    console.log('individual', individual)
+    // console.log("inside setGenre - individual", individual);
+    const setGenreMovieName = async () => {
+      const genreOptions = [
+        "action",
+        "animation",
+        "comedy",
+        "family",
+        "romance",
+        "drama",
+        "science-fiction",
+        "horror",
+      ];
+      // console.log('genre', genre)
+      // const genres = individual.genres;
+      const movieName = individual.original_title;
+      setMovieName(movieName);
+      // console.log("movieName", movieName);
+      // console.log("genres", individual.genres);
+      if (individual?.genres?.length > 0) {
+        console.log('inside map')
+        individual.genres.map((genreobj) => {
+          console.log(genreobj)
+          // console.log(genreobj.name.toLowerCase())
+          if (genreOptions.includes(genreobj.name.toLowerCase()) === true) {
+            // console.log("success", genreobj.name.toLowerCase())
+            const genre = genreobj.name.toLowerCase();
+            console.log('made it inside the conditional, this is the genre matched', genre)
+            setGenre(genre);
+            console.log('final genre', genre)
+          }
+        });
+      }
+      // console.log('genres', genres)
+      // console.log('movieName', movieName)
+    };
+    setGenreMovieName();
+  }, [individual, video]);
+
+  // console.log("individual", individual);
+
+  // setGenre();
+  // console.log("outside of useeffect");
   // console.log(video)
   const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
-  const allData = {"name":individual.original_title, "image": `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`, "id": parseInt(movie_id) , "price": 20} 
+  const allData = {
+    name: individual.original_title,
+    image: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`,
+    id: parseInt(movie_id),
+    price: 20,
+  };
   const videolink = `https://www.youtube.com/embed/${video}`;
   // console.log(videolink);
-
-
+  // console.log("movieName", movieName);
+  // console.log("genre", genre);
   return (
     <div className="individualMoviePage">
       <div className="column">
@@ -81,26 +139,26 @@ export default function IndividualMoviePage(props) {
             <div className="duration">
               Duration: {individual.runtime} minutes
             </div>
-            <input
-              type="button"
-              value="Watch Trailer"
-              onClick={togglePopup}
-            />
+            <Link to="create/">
+              <button className="moviePost">Make a Post</button>              
+            </Link>
+
+            <input type="button" value="Watch Trailer" onClick={togglePopup} />
             {isOpen && (
               <Popup
                 content={
                   <>
-              <div className="trailer">
-              <iframe
-                title="movie trailer"
-                width="560"
-                height="315"
-                src={videolink}
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-              ></iframe>
-            </div>
+                    <div className="trailer">
+                      <iframe
+                        title="movie trailer"
+                        width="560"
+                        height="315"
+                        src={videolink}
+                        frameborder="0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen
+                      ></iframe>
+                    </div>
                   </>
                 }
                 handleClose={togglePopup}
@@ -108,10 +166,12 @@ export default function IndividualMoviePage(props) {
             )}
           </div>
           <div className="right">
-          <Link to="/shopping-cart/">
-              <button onClick={() => onAdd(allData)} className="add">Purchase</button>
+            <Link to="/shopping-cart/">
+              <button onClick={() => onAdd(allData)} className="add">
+                Purchase
+              </button>
             </Link>
-    </div>
+          </div>
         </div>
         <div className="movieDescription">
           <p>{individual.overview}</p>
