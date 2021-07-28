@@ -51,7 +51,7 @@
   }
   
   .nav-text a:hover {
-    background-color: #1a83ff;
+    background-color: #252c79;
   }
   
   .nav-menu-items {
@@ -59,7 +59,7 @@
   }
   
   .sidebar-toggle {
-    background-color: #060b26;
+    background-color: #202333;
     width: 100%;
     height: 80px;
     display: flex;

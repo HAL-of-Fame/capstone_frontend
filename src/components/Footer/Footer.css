@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 100vw;
     height: 300px;
-    background: grey;
+    background: #202333;
   }
   
   .Footer .content {
@@ -74,5 +74,5 @@
   }
   a{
     text-decoration: none;
-    color:hotpink;
+    color:white;
   }

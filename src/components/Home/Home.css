@@ -23,8 +23,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 75%;
+  color: white;
 }
 .title {
   font-size: xx-large;
+  color: white;
   margin: 25px;
 }

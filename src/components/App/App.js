@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
@@ -180,7 +180,7 @@ export default function App() {
             }
           />
           <Route
-            path="/order"
+            path="/orders"
             element={
               <Orders
                 user={user}

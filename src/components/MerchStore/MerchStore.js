@@ -1,10 +1,11 @@
 import React from "react";
 import Product from "../Product/Product";
+import "./MerchStore.css";
 
 export default function Main(props) {
   const { products, onAdd } = props;
   return (
-    <main className="block col-2">
+    <main className="store">
       <h2>Merch Store</h2>
       <div className="row">
         {products.map((product) => (
