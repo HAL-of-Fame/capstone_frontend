@@ -68,18 +68,21 @@ export default function IndividualMoviePage(props) {
 
 
   useEffect(() => {
-    console.log('individual', individual)
+    // console.log('individual', individual)
     // console.log("inside setGenre - individual", individual);
     const setGenreMovieName = async () => {
       const genreOptions = [
-        "action",
-        "animation",
-        "comedy",
-        "family",
-        "romance",
-        "drama",
-        "science-fiction",
-        "horror",
+        "Action",
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Family",
+        "Fantasy",
+        "Romance",
+        "Drama",
+        "Science-fiction",
+        "Horror",
+        "Thriller",
       ];
       // console.log('genre', genre)
       // const genres = individual.genres;
@@ -88,16 +91,11 @@ export default function IndividualMoviePage(props) {
       // console.log("movieName", movieName);
       // console.log("genres", individual.genres);
       if (individual?.genres?.length > 0) {
-        console.log('inside map')
+        // console.log(individual.genres)
         individual.genres.map((genreobj) => {
-          console.log(genreobj)
-          // console.log(genreobj.name.toLowerCase())
-          if (genreOptions.includes(genreobj.name.toLowerCase()) === true) {
-            // console.log("success", genreobj.name.toLowerCase())
-            const genre = genreobj.name.toLowerCase();
-            console.log('made it inside the conditional, this is the genre matched', genre)
+          if (genreOptions.includes(genreobj.name) === true) {
+            const genre = genreobj.name;
             setGenre(genre);
-            console.log('final genre', genre)
           }
         });
       }
