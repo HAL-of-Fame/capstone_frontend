@@ -32,8 +32,10 @@ export default function MoviePost({ user, genre, movieName  }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    // console.log(form.title);
-    // console.log(form.text);
+    console.log("title", form.title);
+    console.log("text", form.text);
+    console.log('genre', genre)
+    console.log('movie', movieName)
     // console.log('this is the genre after submit', genre)
     const { data, error } = await apiClient.createPost({
       title: form.title,
@@ -42,7 +44,7 @@ export default function MoviePost({ user, genre, movieName  }) {
       movieName: movieName,
     });
     if (data) {
-      console.log(data);
+      console.log("made it, data", data);
       // addPost(data.post);
       setForm({ title: "", text: "" });
       // Navigate(`/genre/${genre}`)
