@@ -16,7 +16,7 @@ export default function NewPost({ user }) {
   const { genres } = useParams();
   const genreCapitalized = capitalizeFirstLetter(genres);
   let genre = genres
-  console.log(genre)
+  
 
   let Navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -31,9 +31,6 @@ export default function NewPost({ user }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    // console.log(form.title);
-    // console.log(form.text);
-    // console.log('this is the genre after submit', genre)
     const { data, error } = await apiClient.createPost({
       title: form.title,
       text: form.text,
@@ -41,7 +38,7 @@ export default function NewPost({ user }) {
     });
     if (data) {
       console.log(data);
-      // addPost(data.post);
+      
       setForm({ title: "", text: "" });
       Navigate(`/genre/${genre}`)
     }
