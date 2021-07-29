@@ -4,11 +4,6 @@ import apiClient from "../Services/apiClient";
 // import NotAllowed from "../NotAllowed/NotAllowed"
 import "./MoviePostForm.css";
 
-// function capitalizeFirstLetter(string) {
-//   return string.charAt(0).toUpperCase() + string.slice(1);
-// }
-
-// console.log(capitalizeFirstLetter('foo')); // Foo
 
 
 export default function MoviePost({ user, genre, movieName  }) {
@@ -36,7 +31,7 @@ export default function MoviePost({ user, genre, movieName  }) {
     console.log("text", form.text);
     console.log('genre', genre)
     console.log('movie', movieName)
-    // console.log('this is the genre after submit', genre)
+    
     const { data, error } = await apiClient.createPost({
       title: form.title,
       text: form.text,
@@ -44,10 +39,8 @@ export default function MoviePost({ user, genre, movieName  }) {
       movieName: movieName,
     });
     if (data) {
-      console.log("made it, data", data);
-      // addPost(data.post);
       setForm({ title: "", text: "" });
-      // Navigate(`/genre/${genre}`)
+      Navigate(`/genre/${genre}`)
     }
     if (error) {
       setError(error);
@@ -90,7 +83,7 @@ export default function MoviePost({ user, genre, movieName  }) {
   return (
     <div className="NewPostForm">
       <div className="card">
-        <h2>Create a new post</h2>
+        <h2>Create a new post in {genre} forum</h2>
         {/* <p>Genre: {genreCapitalized}</p> */}
 
         {Boolean(error) && <span className="error">{error}</span>}
