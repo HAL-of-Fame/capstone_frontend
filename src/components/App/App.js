@@ -151,7 +151,7 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
-        <Sidebar />
+        {/* <Sidebar /> */}
         <Routes>
           <Route
             path="/"

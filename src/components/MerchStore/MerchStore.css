@@ -1,10 +1,14 @@
 .row{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 200px;
 }
+Product{
+    border: 25px solid white;
+}
 .store{
     text-align: center;
+    color: white
 }

@@ -15,19 +15,20 @@ export default function Basket(props) {
   const onCheckoutSubmit = async () => {
     const order = await handleOnCheckout();
     if (order) {
-      navigate("/order");
+      navigate("/orders");
     }
   };
 
   return (
-    <aside className="block col-1">
+    <aside className="all">
       <h2>Cart Items</h2>
       <div>
         {cartItems.length === 0 && <div>Cart is empty</div>}
         {cartItems.map((item) => (
           <div key={item.id} className="row">
             <div className="col-2">{item.name}</div>
-            <img className="col-2" src={item.image} alt="product" />
+            <img className="col-2" src={item.image} height={200}
+        width={200} alt="product" />
             <div className="col-2">
               <button onClick={() => onRemove(item)} className="remove">
                 -
