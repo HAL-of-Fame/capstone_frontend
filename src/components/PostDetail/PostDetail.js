@@ -20,8 +20,6 @@ const fetchPostById = async ({
 
   const { data, error } = await apiClient.fetchPostById(postId);
   if (data) {
-    // console.log("genre", data.post.genre)
-    // const genre = data.post.genre;
     setPost(data.post);
     setText(data.post.text);
     // setTitle(data.post.title);
@@ -48,18 +46,19 @@ export default function PostDetail({ user, updatePost }) {
   const [isOpen, setIsOpen] = useState(false);
 
 
+
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
+  const listAllComments = async () => {
+    const { data, error } = await apiClient.listAllComments(postId);
+    if (data) {
+      setComments(data.comments);
+    }
+    if (error) setError(error);
+  };
 
   useEffect(() => {
-    const listAllComments = async () => {
-      const { data, error } = await apiClient.listAllComments(postId);
-      if (data) {
-        setComments(data.comments);
-      }
-      if (error) setError(error);
-    };
 
     fetchPostById({
       postId,
@@ -78,30 +77,22 @@ export default function PostDetail({ user, updatePost }) {
   const handleOnDelete = async () => {
     
     const { data, error } = await apiClient.deletePostById({ postId });
-    // console.log("genre", data.post.genre)
-    // const genre = data.post.genre;
     if (data) {
-      // console.log("this is data from delete - genre", data.post.genre)
       const genre = data.post.genre
       Navigate(`/genre/${genre}`);
   } 
     if (error) setError(error);
     else {
       console.log("succeeded in deleting");
-      // console.log("genre inside delete", genre)
-      // Navigate("/");
     }
   };
-  // <Link to="" ></Link>
-  // <PostDetail user={user}></PostDetail>
+  
 
   const handleOnUpdate = async () => {
     setIsUpdating(true);
 
     const postUpdate = { text, title };
-    // console.log("postUpdate", postUpdate);
     const { data, error } = await apiClient.updatePost({ postId, postUpdate });
-    // console.log("after api call data", data);
     if (data) {
       setPost({ ...post, text: data.post.text, title: data.post.title });
       updatePost({ postId, postUpdate });
@@ -113,16 +104,14 @@ export default function PostDetail({ user, updatePost }) {
     setIsUpdating(false);
   };
 
+
+
+
   const handleOnSaveComment = async () => {
-    // console.log('i made it to handle on save')
-    // console.log("comment", comment) //trying
-    // console.log("postId", postId) // 2
-   
     setIsUpdating(true);
     const { data, error } = await apiClient.createComment(comment, postId);
     if (data) {
-      console.log("this is data", data.comments.text);
-      // setComments({...comment, ...data.comments.text})
+      listAllComments();
     }
     if (error) setError(error);
     setIsUpdating(false);
@@ -151,7 +140,7 @@ export default function PostDetail({ user, updatePost }) {
 
     setIsSavingRating(false);
   };
-
+  
   const userIsLoggedIn = Boolean(user?.email);
   const userOwnsPost = user?.username && post?.userName === user?.username;
   // console.log("userOwnsPost is", userOwnsPost)
