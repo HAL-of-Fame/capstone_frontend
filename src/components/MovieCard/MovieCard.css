@@ -14,11 +14,10 @@ img {
   width: 200px;
   margin-left: -16px;
   border-radius: 10px;
-
 }
 
 .Card:hover {
-  border: 3px solid #000000;
+  border: 3px solid #c4c4c4;
   border-radius: 10px;
 
   box-shadow: 0 24px 32px 0 rgba(0, 0, 0, 0.19),

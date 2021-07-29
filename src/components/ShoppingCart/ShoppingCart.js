@@ -15,7 +15,7 @@ export default function Basket(props) {
   const onCheckoutSubmit = async () => {
     const order = await handleOnCheckout();
     if (order) {
-      navigate("/order");
+      navigate("/orders");
     }
   };
 
