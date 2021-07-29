@@ -7,12 +7,6 @@ import "./MoviePostForm.css";
 
 
 export default function MoviePost({ user, genre, movieName  }) {
-  console.log("genre", genre)
-  console.log("moviename", movieName)
-//   const { genres } = useParams();
-//   const genreCapitalized = capitalizeFirstLetter(genres);
-//   let genre = genres
-//   console.log(genre)
 
   let Navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -27,10 +21,6 @@ export default function MoviePost({ user, genre, movieName  }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log("title", form.title);
-    console.log("text", form.text);
-    console.log('genre', genre)
-    console.log('movie', movieName)
     
     const { data, error } = await apiClient.createPost({
       title: form.title,
@@ -40,7 +30,8 @@ export default function MoviePost({ user, genre, movieName  }) {
     });
     if (data) {
       setForm({ title: "", text: "" });
-      Navigate(`/genre/${genre}`)
+      // Navigate(`/genre/${genre}`)
+      Navigate(-1) //goes back one to the movie detail page
     }
     if (error) {
       setError(error);
