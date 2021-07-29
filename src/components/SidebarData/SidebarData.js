@@ -21,34 +21,34 @@ export const SidebarData = [
     subNav: [
       {
         title: 'Action',
-        path: '/genre/action',
+        path: '/genre/Action',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
       {
         title: 'Comedy',
-        path: '/genre/comedy',
+        path: '/genre/Comedy',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
       {
         title: 'Romance',
-        path: '/genre/romance',
+        path: '/genre/Romance',
         icon: <IoIcons.IoIosPaper />
       },
       {
         title: 'Drama',
-        path: '/genre/drama',
+        path: '/genre/Drama',
         icon: <IoIcons.IoIosPaper />
       },
       {
         title: 'Horror',
-        path: '/genre/horror',
+        path: '/genre/Horror',
         icon: <IoIcons.IoIosPaper />
       },
       {
         title: 'Science Fiction',
-        path: '/genre/science-fiction',
+        path: '/genre/Science-fiction',
         icon: <IoIcons.IoIosPaper />
       }
     ]
