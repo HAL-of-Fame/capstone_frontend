@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Router } from "react-router"
 import "./IndividualMoviePage.css";
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
-// import axios from "axios";
-import MoviePost from "../MoviePostForm/MoviePostForm";
+import apiClient from "../Services/apiClient";
 
 // const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
 const api_key = "d8e8e9a8ed16ae9fd3ea37274ab553aa";
@@ -16,12 +14,19 @@ export default function IndividualMoviePage(props) {
   const [video, setVideo] = useState([]);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-
-  // const [genre, setGenre] = useState("");
-  // const [movieName, setMovieName] = useState("");
+  const [posts, setPosts] = useState([]);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
+  };
+
+  const fetchPosts = async () => {
+    const { data, error } = await apiClient.listMoviePosts(movieName);
+    if (data) {
+      console.log("this is listmovieposts", data.posts);
+      setPosts(data.posts);
+    }
+    if (error) setError(error);
   };
 
   // will strip the movie_id from the URL (holds movie ID)
@@ -29,7 +34,6 @@ export default function IndividualMoviePage(props) {
 
   useEffect(() => {
     const fetchIndividual = async () => {
-      // console.log("inside fetchIndividual");
       const data = await fetch(
         `https://api.themoviedb.org/3/movie/` +
           movie_id +
@@ -40,13 +44,10 @@ export default function IndividualMoviePage(props) {
       const responseData = await data.json();
       if (responseData) {
         setIndividual(responseData);
-        // console.log("done with fetchIndividual");
       }
-      // console.log(responseData.genres);
     };
 
     const fetchVideo = async () => {
-      // console.log("inside fetchVideo");
       const viddata = await fetch(
         `https://api.themoviedb.org/3/movie/` +
           movie_id +
@@ -55,21 +56,17 @@ export default function IndividualMoviePage(props) {
           `&language=en-US`
       );
       const responseVidData = await viddata.json();
-      // console.log(responseVidData);
       if (responseVidData) {
         setVideo(responseVidData.results[0].key);
-        // console.log("done fetchVideo");
       }
     };
 
     fetchIndividual();
     fetchVideo();
+    fetchPosts();
   }, []);
 
-
   useEffect(() => {
-    // console.log('individual', individual)
-    // console.log("inside setGenre - individual", individual);
     const setGenreMovieName = async () => {
       const genreOptions = [
         "Action",
@@ -84,14 +81,10 @@ export default function IndividualMoviePage(props) {
         "Horror",
         "Thriller",
       ];
-      // console.log('genre', genre)
-      // const genres = individual.genres;
       const movieName = individual.original_title;
       setMovieName(movieName);
-      // console.log("movieName", movieName);
-      // console.log("genres", individual.genres);
+      fetchPosts();
       if (individual?.genres?.length > 0) {
-        // console.log(individual.genres)
         individual.genres.map((genreobj) => {
           if (genreOptions.includes(genreobj.name) === true) {
             const genre = genreobj.name;
@@ -99,17 +92,12 @@ export default function IndividualMoviePage(props) {
           }
         });
       }
-      // console.log('genres', genres)
-      // console.log('movieName', movieName)
     };
+
     setGenreMovieName();
   }, [individual, video]);
 
-  // console.log("individual", individual);
-
-  // setGenre();
-  // console.log("outside of useeffect");
-  // console.log(video)
+  // console.log(individual.genres)
   const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
   const allData = {
     name: individual.original_title,
@@ -118,9 +106,7 @@ export default function IndividualMoviePage(props) {
     price: 20,
   };
   const videolink = `https://www.youtube.com/embed/${video}`;
-  // console.log(videolink);
-  // console.log("movieName", movieName);
-  // console.log("genre", genre);
+
   return (
     <div className="individualMoviePage">
       <div className="column">
@@ -138,7 +124,7 @@ export default function IndividualMoviePage(props) {
               Duration: {individual.runtime} minutes
             </div>
             <Link to="create/">
-              <button className="moviePost">Make a Post</button>              
+              <button className="moviePost">Make a Post</button>
             </Link>
 
             <input type="button" value="Watch Trailer" onClick={togglePopup} />
@@ -176,6 +162,18 @@ export default function IndividualMoviePage(props) {
         </div>
         <div className="discussionSection">
           <p>Discussion:</p>
+          {posts?.map((post) => (
+            <div className="test">
+              <Link
+                to={{
+                  pathname: "/posts",
+                  search: `/${post.id}`,
+                }}
+              >
+                id:{post.id}-{post.title}-{post.text}-{post.userName}
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </div>
