@@ -14,9 +14,44 @@ export const SidebarData = [
   },
   {
     title: 'Genre',
-    path: '/genre',
+    path: '',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'nav-text'
+    cName: 'nav-text',
+    
+    subNav: [
+      {
+        title: 'Action',
+        path: '/genre/action',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Comedy',
+        path: '/genre/comedy',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Romance',
+        path: '/genre/romance',
+        icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Drama',
+        path: '/genre/drama',
+        icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Horror',
+        path: '/genre/horror',
+        icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Science Fiction',
+        path: '/genre/science-fiction',
+        icon: <IoIcons.IoIosPaper />
+      }
+    ]
   },
   {
     title: 'Merch Store',
@@ -26,7 +61,7 @@ export const SidebarData = [
   },
   {
     title: 'My Orders',
-    path: '/order',
+    path: '/orders',
     icon: <SiIcons.SiEventstore />,
     cName: 'nav-text'
   },
