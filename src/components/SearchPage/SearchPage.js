@@ -7,6 +7,7 @@ const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
 
 export default function SearchPage() {
   const [movies, setMovies] = useState([]);
+  const [pageNum, setpageNum] = useState(1);
 
   const { searchInputValue } = useParams();
 
@@ -14,16 +15,27 @@ export default function SearchPage() {
     //function that calls all popular movies
     const fetchSearched = async () => {
       const data = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${searchInputValue}&page=1`
+        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${searchInputValue}&page=${pageNum}&include_adult=false`
       );
-      console.log(data);
       const responseData = await data.json();
       if (responseData) {
-        setMovies(responseData.results);
+        if (pageNum > 1) {
+          addMovies(responseData.results);
+        } else {
+          setMovies(responseData.results);
+        }
       }
     };
     fetchSearched();
-  }, []);
+  }, [pageNum]);
+
+  const addMovies = (newMovies) => {
+    setMovies((oldMovies) => [...oldMovies, ...newMovies]);
+  };
+
+  const handleLoad = (event) => {
+    setpageNum((pageNum) => pageNum + 1);
+  };
   return (
     <div className="SearchPage">
       <div className="title">"{searchInputValue}" Movies</div>
@@ -32,12 +44,9 @@ export default function SearchPage() {
           <MovieCard movie={movie} key={movie.id} />
         ))}
       </div>
+      <button className="load" onClick={handleLoad}>
+        Load More
+      </button>
     </div>
   );
-
-  //ideas:
-  //pass the search input to the teh SearchPage function
-  //use the input into the api call
-  //setMovies to the data from the api
-  //call map over the list and call MovieCard on each item
 }

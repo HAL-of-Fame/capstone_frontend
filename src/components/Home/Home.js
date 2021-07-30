@@ -4,25 +4,36 @@ import MovieCard from "../MovieCard/MovieCard";
 
 const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
 
-export default function Home({ user, trending, setTrending }) {
+export default function Home({ user }) {
   //   const [name, setName] = useState([]);
-
+  const [trending, setTrending] = useState([]);
+  const [pageNum, setpageNum] = useState(1);
   useEffect(() => {
     //function that calls all popular movies
     const fetchTrending = async () => {
       const data = await fetch(
         `https://api.themoviedb.org/3/movie/popular?api_key=` +
           api_key +
-          `&language=en-US&page=1`
+          `&language=en-US&page=${pageNum}`
       );
       const responseData = await data.json();
       if (responseData) {
-        setTrending(responseData.results);
+        if (pageNum > 1) {
+          addMovies(responseData.results);
+        } else {
+          setTrending(responseData.results);
+        }
       }
     };
     fetchTrending();
-  }, []);
-  console.log(trending);
+  }, [pageNum]);
+  const addMovies = (newMovies) => {
+    setTrending((oldMovies) => [...oldMovies, ...newMovies]);
+  };
+
+  const handleLoad = (event) => {
+    setpageNum((pageNum) => pageNum + 1);
+  };
   return (
     <div className="Home">
       <div className="Hero">
@@ -39,6 +50,9 @@ export default function Home({ user, trending, setTrending }) {
           <MovieCard movie={movie} key={movie.id} />
         ))}
       </div>
+      <button className="load" onClick={handleLoad}>
+        Load More
+      </button>
     </div>
   );
 }

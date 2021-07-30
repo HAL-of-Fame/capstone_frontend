@@ -1,7 +1,7 @@
 .Navbar {
   width: 100%;
   max-width: 100vw;
-  background: grey;
+  background-color: #202333;
   color: white;
   height: 70px;
   display: flex;
@@ -10,7 +10,7 @@
   padding: 0;
 }
 .Navbar a {
-  color: #feceab;
+  color: black;
   font-weight: 500;
   text-decoration: none;
 }
@@ -38,7 +38,7 @@
   max-width: 650px;
 }
 .Loginbut {
-  background-color: #99b898; /* Green */
+  background-color: white; /* Green */
   border: none;
   color: #feceab;
   padding: 20px;
@@ -53,7 +53,7 @@
   list-style-type: none;
 }
 .Register {
-  background-color: #99b898; /* Green */
+  background-color: white; /* Green */
   border: none;
   color: #feceab;
   padding: 20px;
@@ -68,9 +68,9 @@
   list-style-type: none;
 }
 .cart {
-  background-color: #99b898; /* Green */
+  background-color: white; /* Green */
   border: none;
-  color: #feceab;
+  color: black;
   padding: 20px;
   text-align: center;
   text-decoration: none;
@@ -85,7 +85,7 @@
 .search-bar {
   position: absolute;
   width: 600px;
-  height: 64px;
+  height: 55px;
   border: 1px solid #ffffff;
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -95,7 +95,7 @@
 .search-bar-btn input {
   position: absolute;
   width: 591px;
-  height: 66px;
+  height: 55px;
 
   font-family: Roboto;
   font-style: normal;
@@ -109,9 +109,51 @@
 }
 .search-btn {
   margin-left: 600px;
-  width: 93px;
-  height: 64px;
-  border: 1px solid #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  background-color: white; /* Green */
+  border: none;
+  color: #feceab;
+  width: 60px;
+  height: 55px;
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  /* margin: 4px 2px; */
+  cursor: pointer;
+  border-radius: 12px;
+  text-decoration: none;
+  /* list-style-type: none; */
+}
+
+.logout{
+    background-color: white; /* Green */
+    border: none;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+}
+.clear{
+  background-color: white; /* Green */
+  border: none;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  text-decoration: none;
+  list-style-type: none;
+
+}
+.buttons{
+  position:absolute;
+  top: 10px;
+  right:0;
 }

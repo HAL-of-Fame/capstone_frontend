@@ -20,13 +20,15 @@ export default function Basket(props) {
   };
 
   return (
-    <aside className="block col-1">
+    <aside className="all">
       <h2>Cart Items</h2>
       <div>
         {cartItems.length === 0 && <div>Cart is empty</div>}
         {cartItems.map((item) => (
           <div key={item.id} className="row">
             <div className="col-2">{item.name}</div>
+            <img className="col-2" src={item.image} height={200}
+        width={200} alt="product" />
             <div className="col-2">
               <button onClick={() => onRemove(item)} className="remove">
                 -
@@ -37,7 +39,6 @@ export default function Basket(props) {
             </div>
 
             <div className="col-2 text-right">
-
               {item.quantity} x ${item.price.toFixed(2)}
             </div>
           </div>
