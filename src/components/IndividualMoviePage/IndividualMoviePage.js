@@ -3,19 +3,30 @@ import { Link, useParams } from "react-router-dom";
 import "./IndividualMoviePage.css";
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
-import axios from "axios";
+import apiClient from "../Services/apiClient";
 
-const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
+// const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
+const api_key = "d8e8e9a8ed16ae9fd3ea37274ab553aa";
 
 export default function IndividualMoviePage(props) {
-  const { onAdd } = props;
+  const { onAdd, genre, setGenre, movieName, setMovieName } = props;
   const [individual, setIndividual] = useState([]);
   const [video, setVideo] = useState([]);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
+  };
+
+  const fetchPosts = async () => {
+    const { data, error } = await apiClient.listMoviePosts(movieName);
+    if (data) {
+      console.log("this is listmovieposts", data.posts);
+      setPosts(data.posts);
+    }
+    if (error) setError(error);
   };
 
   // will strip the movie_id from the URL (holds movie ID)
@@ -34,7 +45,6 @@ export default function IndividualMoviePage(props) {
       if (responseData) {
         setIndividual(responseData);
       }
-      console.log(individual);
     };
 
     const fetchVideo = async () => {
@@ -46,20 +56,49 @@ export default function IndividualMoviePage(props) {
           `&language=en-US`
       );
       const responseVidData = await viddata.json();
-      console.log(responseVidData);
       if (responseVidData) {
         setVideo(responseVidData.results[0].key);
       }
-      // console.log(video)
     };
 
     fetchIndividual();
     fetchVideo();
+    fetchPosts();
   }, []);
 
-  console.log(individual);
-  // console.log(video)
-  const poster = `https://www.themoviedb.org/t/p/original/${individual.backdrop_path}`;
+  useEffect(() => {
+    const setGenreMovieName = async () => {
+      const genreOptions = [
+        "Action",
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Family",
+        "Fantasy",
+        "Romance",
+        "Drama",
+        "Science-fiction",
+        "Horror",
+        "Thriller",
+      ];
+      const movieName = individual.original_title;
+      setMovieName(movieName);
+      fetchPosts();
+      if (individual?.genres?.length > 0) {
+        individual.genres.map((genreobj) => {
+          if (genreOptions.includes(genreobj.name) === true) {
+            const genre = genreobj.name;
+            setGenre(genre);
+          }
+        });
+      }
+    };
+
+    setGenreMovieName();
+  }, [individual, video]);
+
+  // console.log(individual.genres)
+  const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
   const allData = {
     name: individual.original_title,
     image: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`,
@@ -67,7 +106,6 @@ export default function IndividualMoviePage(props) {
     price: 20,
   };
   const videolink = `https://www.youtube.com/embed/${video}`;
-  // console.log(videolink);
 
   return (
     <div className="individualMoviePage">
@@ -85,6 +123,10 @@ export default function IndividualMoviePage(props) {
             <div className="duration">
               Duration: {individual.runtime} minutes
             </div>
+            <Link to="create/">
+              <button className="moviePost">Make a Post</button>
+            </Link>
+
             <input type="button" value="Watch Trailer" onClick={togglePopup} />
             {isOpen && (
               <Popup
@@ -120,6 +162,18 @@ export default function IndividualMoviePage(props) {
         </div>
         <div className="discussionSection">
           <p>Discussion:</p>
+          {posts?.map((post) => (
+            <div className="test">
+              <Link
+                to={{
+                  pathname: "/posts",
+                  search: `/${post.id}`,
+                }}
+              >
+                id:{post.id}-{post.title}-{post.text}-{post.userName}
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </div>

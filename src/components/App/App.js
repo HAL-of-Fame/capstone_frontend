@@ -21,6 +21,7 @@ import axios from "axios";
 import PostDetail from "../PostDetail/PostDetail";
 import Genres from "../Genres/Genres";
 import MTT from "../MTT/MTT";
+import MoviePost from "../MoviePostForm/MoviePostForm";
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -33,6 +34,8 @@ export default function App() {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [genre, setGenre] = useState("");
+  const [movieName, setMovieName] = useState("");
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
@@ -158,8 +161,18 @@ export default function App() {
           <GenrePage path="/genre" />
           <Route
             path="/movie/:movie_id"
-            element={<IndividualMoviePage onAdd={onAdd} />}
+            element={
+              <IndividualMoviePage
+                user={user}
+                genre={genre}
+                setGenre={setGenre}
+                movieName={movieName}
+                setMovieName={setMovieName}
+                onAdd={onAdd}
+              />
+            }
           />
+          {/* <Route path="/movie/:movie_id/create" element={<MoviePost/>} /> */}
           <Route path="*" element={<NotFound user={user} error={error} />} />
           <Route
             path="/login"
@@ -204,6 +217,11 @@ export default function App() {
             path="/genre/:genres/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
+          <Route
+            path="/movie/:postId/create"
+            element={<MoviePost genre={genre} movieName={movieName} />}
+          />
+
           <Route
             path="/posts/:postId"
             element={<PostDetail user={user} updatePost={updatePost} />}
