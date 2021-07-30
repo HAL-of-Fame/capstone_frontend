@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
@@ -47,6 +47,7 @@ export default function App() {
       console.log(res);
       if (res?.data?.order) {
         setOrders((o) => [...res.data.order, ...o]);
+        console.log("orders in app", orders);
         setIsCheckingOut(false);
         setCartItems([]);
         return res.data.order;

@@ -90,7 +90,7 @@
 //   );
 // }
 
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, alpha } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -161,7 +161,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar({ user, handleLogout }) {
   const classes = useStyles();
-
+  const [logged, setLogged] = useState("Login")
+  //if user is loggined 
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -188,7 +189,7 @@ export default function Navbar({ user, handleLogout }) {
             />
           </div>
 <div className="buttons">
-<Link to="/login"><Button color="inherit">Login</Button></Link>
+<Link to="/login"><Button color="inherit">{logged}</Button></Link>
           <Link to='/register'><Button color="inherit">Register</Button></Link>
           <Link to='/shopping-cart'><Button color="inherit"><FaIcons.FaCartPlus /></Button></Link></div>
         </Toolbar>
