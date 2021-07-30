@@ -71,10 +71,10 @@ const OrderItem = ({ orderItems, orderId }) => {
       <div className="order-details">
         {orderItems.map((item) => (
           <div key={`${orderId}-${item.name}`} className="line-item">
-            {/* <span className="flex-2">{item.name}</span> */}
+            <span className="flex-2">{item.name}</span>
             <span className="center">{item.quantity}</span>
-            {/* <span className="center">{formatPrice(item.price)}</span> */}
-            {/* <span className="center">{formatPrice(calculateItemSubtotal(item.price, item.quantity))}</span> */}
+            <span className="center">{formatPrice(item.price)}</span>
+            <span className="center">{formatPrice(calculateItemSubtotal(item.price, item.quantity))}</span>
           </div>
         ))}
         <div className="receipt">
