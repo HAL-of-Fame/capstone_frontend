@@ -98,7 +98,7 @@ export default function IndividualMoviePage(props) {
   }, [individual, video]);
 
   // console.log(individual.genres)
-  const poster = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`;
+  const poster = `https://www.themoviedb.org/t/p/original/${individual.backdrop_path}`;
   const allData = {
     name: individual.original_title,
     image: `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${individual.backdrop_path}`,

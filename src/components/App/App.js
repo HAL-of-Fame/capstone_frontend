@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
@@ -20,6 +20,7 @@ import Orders from "../Orders/Orders";
 import axios from "axios";
 import PostDetail from "../PostDetail/PostDetail";
 import Genres from "../Genres/Genres";
+import MTT from "../MTT/MTT";
 import MoviePost from "../MoviePostForm/MoviePostForm";
 
 export default function App() {
@@ -33,7 +34,6 @@ export default function App() {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [trending, setTrending] = useState([]);
   const [genre, setGenre] = useState("");
   const [movieName, setMovieName] = useState("");
 
@@ -50,6 +50,7 @@ export default function App() {
       console.log(res);
       if (res?.data?.order) {
         setOrders((o) => [...res.data.order, ...o]);
+        console.log("orders in app", orders);
         setIsCheckingOut(false);
         setCartItems([]);
         return res.data.order;
@@ -156,16 +157,20 @@ export default function App() {
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         {/* <Sidebar /> */}
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home user={user} trending={trending} setTrending={setTrending} />
-            }
-          />
+          <Route path="/" element={<Home user={user} />} />
           <GenrePage path="/genre" />
           <Route
             path="/movie/:movie_id"
-            element={<IndividualMoviePage user={user} genre={genre} setGenre={setGenre} movieName={movieName} setMovieName={setMovieName} onAdd={onAdd} />}
+            element={
+              <IndividualMoviePage
+                user={user}
+                genre={genre}
+                setGenre={setGenre}
+                movieName={movieName}
+                setMovieName={setMovieName}
+                onAdd={onAdd}
+              />
+            }
           />
           {/* <Route path="/movie/:movie_id/create" element={<MoviePost/>} /> */}
           <Route path="*" element={<NotFound user={user} error={error} />} />
@@ -212,7 +217,10 @@ export default function App() {
             path="/genre/:genres/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}
           />
-          <Route path="/movie/:postId/create" element={<MoviePost genre={genre} movieName={movieName} />} />
+          <Route
+            path="/movie/:postId/create"
+            element={<MoviePost genre={genre} movieName={movieName} />}
+          />
 
           <Route
             path="/posts/:postId"
@@ -222,6 +230,7 @@ export default function App() {
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
           />
+          <Route path="/meet-the-team" element={<MTT />} />
         </Routes>
         <Footer />
       </BrowserRouter>
