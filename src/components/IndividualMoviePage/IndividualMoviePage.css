@@ -64,28 +64,31 @@
   margin: auto;
   /* margin: 0 auto; */
 }
-
-.individualMoviePage .column .discussionSection {
-  width: 985px;
-  height: 220px;
-  background: #a8b8b6;
-  /* border: 1px solid #000000; */
-  box-sizing: border-box;
-  border-radius: 10px;
-  margin-top: 3%;
-  padding-top: 1%;
-  padding-left: 3%;
-  padding-right: 5%;
-  padding-bottom: 10%;
-  margin-bottom: 10%;
-}
-
-.individualMoviePage .column .discussionSection p {
+.individualMoviePage .column .discussionSection .posts {
   display: flex;
-  margin: auto;
+  margin: 5%;
 }
+/* .individualMoviePage .column .discussionSection { */
+  /* width: 985px; */
+  /* height: 220px; */
+  /* background: #a8b8b6; */
+  /* border: 1px solid #000000; */
+  /* box-sizing: border-box; */
+  /* border-radius: 10px; */
+  /* margin-top: 3%; */
+  /* padding-top: 1%; */
+  /* padding-left: 3%; */
+  /* padding-right: 5%; */
+  /* padding-bottom: 10%; */
+  /* margin-bottom: 10%; */
+/* } */
 
-.trailer {
+/* .individualMoviePage .column .discussionSection p { */
+  /* display: flex; */
+  /* margin: auto; */
+/* } */
+
+/* .trailer { */
   /* height: */
-  width: 315px;
-}
+  /* width: 315px; */
+/* } */
