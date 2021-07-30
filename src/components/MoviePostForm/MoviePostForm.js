@@ -2,21 +2,11 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import apiClient from "../Services/apiClient";
 // import NotAllowed from "../NotAllowed/NotAllowed"
-import "./PostForm.css";
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-// console.log(capitalizeFirstLetter('foo')); // Foo
+import "./MoviePostForm.css";
 
 
-export default function NewPost({ user }) {
-  
-  const { genres } = useParams();
-  const genreCapitalized = capitalizeFirstLetter(genres);
-  let genre = genres
-  
+
+export default function MoviePost({ user, genre, movieName  }) {
 
   let Navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -31,16 +21,17 @@ export default function NewPost({ user }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    
     const { data, error } = await apiClient.createPost({
       title: form.title,
       text: form.text,
       genre: genre,
+      movieName: movieName,
     });
     if (data) {
-      console.log(data);
-      
       setForm({ title: "", text: "" });
-      Navigate(`/genre/${genre}`)
+      // Navigate(`/genre/${genre}`)
+      Navigate(-1) //goes back one to the movie detail page
     }
     if (error) {
       setError(error);
@@ -83,8 +74,8 @@ export default function NewPost({ user }) {
   return (
     <div className="NewPostForm">
       <div className="card">
-        <h2>Create a new post</h2>
-        <p>Genre: {genreCapitalized}</p>
+        <h2>Create a new post in {genre} forum</h2>
+        {/* <p>Genre: {genreCapitalized}</p> */}
 
         {Boolean(error) && <span className="error">{error}</span>}
 
