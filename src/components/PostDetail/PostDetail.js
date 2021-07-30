@@ -5,7 +5,8 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 // import { formatRating, formatDate } from "../../utils/format"
 import apiClient from "../Services/apiClient";
 import "./PostDetail.css";
-
+import PostCard from "../PostCard/PostCard"
+import CommentCard from "../CommentCard/CommentCard"
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
 
@@ -156,15 +157,17 @@ export default function PostDetail({ user, updatePost }) {
               <Stars rating={post.rating || 0} max={5} />
               {formatRating(post.rating || 0)}
             </span> */}
-            <p className="text">Title: {post.title}</p>
-            <p className="text">Text: {post.text}</p>
+            <PostCard post={post}/>
+            {/* <p className="text">Title: {post.title}</p>
+            <p className="text">Text: {post.text}</p> */}
           </div>
         </div>
         <div className="Comments">
           <p>Comments:</p>
           {comments.map((comment) => (
             <div className="test">
-              {comment.text}-{comment.userName}
+              <CommentCard comment={comment}/>
+              {/* {comment.text}-{comment.userName} */}
             </div>
           ))}
           {/* <textarea
