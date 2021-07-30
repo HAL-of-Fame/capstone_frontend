@@ -5,7 +5,6 @@
 // import * as FaIcons from "react-icons/fa";
 // import { useState } from "react";
 
-
 // export default function Navbar({ user, handleLogout }) {
 
 //   const [searchInputValue, setSearchInputValue] = useState("");
@@ -90,20 +89,20 @@
 //   );
 // }
 
-import React, { useState } from 'react';
-import { makeStyles, alpha } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { makeStyles, alpha } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import { Link, useNavigate } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import Sidebar from "../Sidebar/Sidebar";
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
-
+import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
+import { TextField } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -113,85 +112,166 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
     },
   },
   search: {
-    position: 'relative',
+    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
+    "&:hover": {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: 'auto',
+      width: "auto",
     },
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   inputRoot: {
-    color: 'inherit',
+    color: "inherit",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
       },
     },
   },
 }));
 
 export default function Navbar({ user, handleLogout }) {
+  const navigate = useNavigate();
+
+  const [searchInputValue, setSearchInputValue] = useState("");
+  const clearInput = () => {
+    setSearchInputValue("");
+  };
+
+  const handleOnInputChange = (event) => {
+    console.log(event.target.value);
+    setSearchInputValue(event.target.value);
+  };
+
+  const handleOnSubmit = (event) => {
+    navigate(`search/${searchInputValue}`);
+    clearInput();
+  };
+
   const classes = useStyles();
-  const [logged, setLogged] = useState("Login")
-  //if user is loggined 
+  const [logged, setLogged] = useState("Login");
+  //if user is loggined
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <Sidebar/>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <Sidebar />
           </IconButton>
-          
-          <Link to={`/`}><Typography variant="h6" className={classes.title}>
-            Company Name
-          </Typography></Link>
+
+          <Link to={`/`}>
+            <Typography variant="h6" className={classes.title}>
+              Company Name
+            </Typography>
+          </Link>
 
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <form onSubmit={handleOnSubmit}>
+              <Button type="submit" className={classes.button}>
+                <SearchIcon />
+              </Button>
+              <TextField
+                value={searchInputValue}
+                onChange={handleOnInputChange}
+                placeholder="Search…"
+              />
+            </form>
           </div>
-<div className="buttons">
-<Link to="/login"><Button color="inherit">{logged}</Button></Link>
-          <Link to='/register'><Button color="inherit">Register</Button></Link>
-          <Link to='/shopping-cart'><Button color="inherit"><FaIcons.FaCartPlus /></Button></Link></div>
+
+          <div className="buttons">
+            {user?.email ? (
+              <>
+                <Button color="inherit">{user.email}</Button>
+
+                <Button
+                  color="inherit"
+                  onClick={handleLogout}
+                  className="logout"
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button color="inherit" href="/login">
+                  Login
+                </Button>
+
+                <Button href="/register" color="inherit">
+                  Register
+                </Button>
+              </>
+            )}
+
+            <Button href="/shopping-cart" color="inherit">
+              <FaIcons.FaCartPlus />
+            </Button>
+          </div>
+          {/* <div className="links">
+          <div className="auth">
+            {user?.email ? (
+              <>
+                <li>
+                  <span>{user.email}</span>
+                </li>
+                <li>
+                  <button onClick={handleLogout} className="logout">Logout</button>
+                </li>
+              </>
+            ) : (
+              <>
+                <div className="Loginbut">
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                </div>
+                <div className="Register">
+                  <li>
+                    <Link to="/register">Sign Up</Link>
+                  </li>
+                </div>
+              </>
+            )}
+          </div>
+          <div className="cart">
+            <Link to="/shopping-cart">
+              <FaIcons.FaCartPlus />
+            </Link>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>
