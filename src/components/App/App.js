@@ -20,7 +20,7 @@ import Orders from "../Orders/Orders";
 import axios from "axios";
 import PostDetail from "../PostDetail/PostDetail";
 import Genres from "../Genres/Genres";
-import MTT from "../MTT/MTT";
+// import MTT from "../MTT/MTT";
 import MoviePost from "../MoviePostForm/MoviePostForm";
 
 export default function App() {
@@ -230,7 +230,7 @@ export default function App() {
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
           />
-          <Route path="/meet-the-team" element={<MTT />} />
+          {/* <Route path="/meet-the-team" element={<MTT />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>
