@@ -3,6 +3,9 @@ import { Link, useParams } from "react-router-dom";
 // import NewPostForm from "../NewExercise/NewExercise"
 import "./Genres.css";
 import apiClient from "../Services/apiClient";
+import PostCard from "../PostCard/PostCard"
+import {formatDate} from "../../utils/format"
+
 
 export default function Genres() {
   let { genres } = useParams();
@@ -48,14 +51,16 @@ export default function Genres() {
         {posts.map((post) => (
           <div className="info">
             <li>PostId: {post.id}</li>
+            <li>Date: {formatDate(post.created_at)}</li>
             <Link
               to={{
                 pathname: "/posts",
                 search: `/${post.id}`,
               }}
             >
-              <li>Title: {post.title}</li>
-              <li>Text: {post.text}</li>
+              <PostCard post={post}/>
+              {/* <li>Title: {post.title}</li>
+              <li>Text: {post.text}</li> */}
             </Link>
           </div>
         ))}
