@@ -5,7 +5,8 @@ import "./Genres.css";
 import apiClient from "../Services/apiClient";
 import PostCard from "../PostCard/PostCard"
 import {formatDate} from "../../utils/format"
-
+import adventure from "../../assets/adventure.jpg"
+import action from "../../assets/action.jpg"
 
 export default function Genres() {
   let { genres } = useParams();
@@ -27,12 +28,32 @@ export default function Genres() {
     fetchPosts();
   }, [genres]);
 
+
+
+  const Switch = (str) => ({
+    "Adventure": adventure,
+    "Action": action,
+  })[str] || '';
+  
+  console.log('genres', genres)
+  console.log('switch', Switch(genres))
+  // console.log(Switch("Yes")); // 517
+  // console.log(Switch("No"));  // 518
+  // console.log(Switch("Non matching value")); // Empty
+
   console.log("posts", posts);
   return (
     <div className="Genre">
       <div className="subgenre">
         <div className="header">
           <h9>{genres}</h9>
+        </div>
+        <div className="hero">
+            <img src={Switch(genres)} alt={genres}></img>
+        {/* {genres === 'Adventure' ? <img src={adventure} alt="adventure" /> 
+        : 
+        {genres === 'Action' ? <img src={action} alt="action" />} */}
+
         </div>
         <div className="subheader">Threads</div>
       </div>
