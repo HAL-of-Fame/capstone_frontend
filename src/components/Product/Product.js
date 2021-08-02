@@ -22,6 +22,7 @@
 // }
 
 import React from 'react';
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -62,9 +63,11 @@ export default function Product(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
+      <Link to="/shopping-cart/">
         <Button size="small" color="primary" onClick={() => onAdd(product)}>
           Add To Cart
         </Button>
+      </Link>
         <Button size="small" color="primary">
           Learn More
         </Button>

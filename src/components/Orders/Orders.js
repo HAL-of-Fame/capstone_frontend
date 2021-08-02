@@ -4,6 +4,7 @@ import {
   calculateItemSubtotal,
   calculateTaxesAndFees,
   calculateTotal,
+  shipping
 } from "../../utils/calculations";
 import "./Orders.css";
 
@@ -96,6 +97,12 @@ const OrderItem = ({ orderItems, orderId }) => {
             <span />
             <span className="center">
               {formatPrice(calculateTaxesAndFees(subTotal))}
+            </span>
+            <span className="label">Shipping</span>
+            <span />
+            <span />
+            <span className="center">
+              {formatPrice(shipping())}
             </span>
           </div>
           <div className="receipt-total">
