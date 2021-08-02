@@ -1,10 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 export default function Basket(props) {
   const navigate = useNavigate();
 
-  const { cartItems, onAdd, onRemove, handleOnCheckout } = props;
+  const { cartItems, onAdd, onRemove, handleOnCheckout, user } = props;
   const itemsPrice = cartItems.reduce((a, c) => a + c.quantity * c.price, 0);
   console.log(typeof itemsPrice);
   const taxPrice = itemsPrice * 0.14;
@@ -27,8 +28,13 @@ export default function Basket(props) {
         {cartItems.map((item) => (
           <div key={item.id} className="row">
             <div className="col-2">{item.name}</div>
-            <img className="col-2" src={item.image} height={200}
-        width={200} alt="product" />
+            <img
+              className="col-2"
+              src={item.image}
+              height={200}
+              width={200}
+              alt="product"
+            />
             <div className="col-2">
               <button onClick={() => onRemove(item)} className="remove">
                 -
@@ -72,7 +78,22 @@ export default function Basket(props) {
             </div>
             <hr />
             <div className="row">
-              <button onClick={onCheckoutSubmit}>Checkout</button>
+              {user?.email ? (
+                <>
+                  <button onClick={onCheckoutSubmit}>Checkout</button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" color="inherit">
+                    {" "}
+                    Sign In{" "}
+                  </Link>
+                  <Link to="/register" color="inherit">
+                    {" "}
+                    Create an Account{" "}
+                  </Link>
+                </>
+              )}
             </div>
           </>
         )}
