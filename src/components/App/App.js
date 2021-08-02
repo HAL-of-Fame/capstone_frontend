@@ -67,14 +67,17 @@ export default function App() {
   };
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
+    console.log("exists", exist);
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
           x.id === product.id ? { ...exist, quantity: exist.quantity + 1 } : x
         )
       );
+      console.log("cart", cartItems);
     } else {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      console.log("cart", cartItems);
     }
   };
   const onRemove = (product) => {
