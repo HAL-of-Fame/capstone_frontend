@@ -6,7 +6,7 @@ import "./MoviePostForm.css";
 
 
 
-export default function MoviePost({ user, genre, movieName  }) {
+export default function MoviePost({ user, genre, movieName, moviePoster  }) {
 
   let Navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -27,6 +27,7 @@ export default function MoviePost({ user, genre, movieName  }) {
       text: form.text,
       genre: genre,
       movieName: movieName,
+      moviePoster: moviePoster,
     });
     if (data) {
       setForm({ title: "", text: "" });
