@@ -44,6 +44,7 @@ const useStyles = makeStyles({
 
 
 export default function Product(props) {
+  const classes = useStyles();
   const { product, onAdd } = props;
   // console.log("product", product);
   return (

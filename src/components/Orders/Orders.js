@@ -91,6 +91,7 @@ const OrderItem = ({ orderItems, orderId }) => {
             <span />
             <span className="center">{formatPrice(subTotal)}</span>
           </div>
+
           <div className="receipt-taxes">
             <span className="label">Taxes and Fees</span>
             <span />
@@ -98,13 +99,15 @@ const OrderItem = ({ orderItems, orderId }) => {
             <span className="center">
               {formatPrice(calculateTaxesAndFees(subTotal))}
             </span>
+          </div>
+
+          <div className="receipt-subtotal">
             <span className="label">Shipping</span>
             <span />
             <span />
-            <span className="center">
-              {formatPrice(shipping())}
-            </span>
+            <span className="center">{formatPrice(shipping())}</span>
           </div>
+
           <div className="receipt-total">
             <span className="label">Total</span>
             <span />
