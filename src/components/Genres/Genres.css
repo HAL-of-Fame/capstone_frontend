@@ -5,3 +5,11 @@
     align-items: center;
     margin-bottom: 5%;
 }
+
+
+.Genre .subgenre .hero img {
+    object-fit: cover;
+    height: 250px;
+    width:100%;
+    object-position: 10px center;
+}

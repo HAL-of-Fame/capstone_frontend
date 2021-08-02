@@ -3,10 +3,19 @@ import { Link, useParams } from "react-router-dom";
 // import NewPostForm from "../NewExercise/NewExercise"
 import "./Genres.css";
 import apiClient from "../Services/apiClient";
-import PostCard from "../PostCard/PostCard"
-import {formatDate} from "../../utils/format"
-import adventure from "../../assets/adventure.jpg"
-import action from "../../assets/action.jpg"
+import PostCard from "../PostCard/PostCard";
+import { formatDate } from "../../utils/format";
+import adventure from "../../assets/adventure.jpg";
+import action from "../../assets/action.jpg";
+import romance from "../../assets/romance.jpg";
+import drama from "../../assets/drama.jpg";
+import family from "../../assets/family.jpg";
+import thriller from "../../assets/thriller.jpg";
+import animation from "../../assets/animation.jpg";
+import fantasy from "../../assets/fantasy.jpg";
+import horror from "../../assets/horror.jpg";
+import comedy from "../../assets/comedy.jpg";
+import sciencefiction from "../../assets/sciencefiction.jpg";
 
 export default function Genres() {
   let { genres } = useParams();
@@ -28,20 +37,28 @@ export default function Genres() {
     fetchPosts();
   }, [genres]);
 
+  const Switch = (str) =>
+    ({
+      Adventure: adventure,
+      Action: action,
+      Romance: romance,
+      Drama: drama,
+      Comedy: comedy,
+      Family: family,
+      Horror: horror,
+      Fantasy: fantasy,
+      Animation: animation,
+      Thriller: thriller,
+      ScienceFiction: sciencefiction,
+    }[str] || "");
 
-
-  const Switch = (str) => ({
-    "Adventure": adventure,
-    "Action": action,
-  })[str] || '';
-  
-  console.log('genres', genres)
-  console.log('switch', Switch(genres))
+  console.log("genres", genres);
+  console.log("switch", Switch(genres));
   // console.log(Switch("Yes")); // 517
   // console.log(Switch("No"));  // 518
   // console.log(Switch("Non matching value")); // Empty
 
-  console.log("posts", posts);
+  // console.log("posts", posts);
   return (
     <div className="Genre">
       <div className="subgenre">
@@ -49,11 +66,10 @@ export default function Genres() {
           <h9>{genres}</h9>
         </div>
         <div className="hero">
-            <img src={Switch(genres)} alt={genres}></img>
-        {/* {genres === 'Adventure' ? <img src={adventure} alt="adventure" /> 
+          <img src={Switch(genres)} alt={genres}></img>
+          {/* {genres === 'Adventure' ? <img src={adventure} alt="adventure" /> 
         : 
         {genres === 'Action' ? <img src={action} alt="action" />} */}
-
         </div>
         <div className="subheader">Threads</div>
       </div>
@@ -79,9 +95,7 @@ export default function Genres() {
                 search: `/${post.id}`,
               }}
             >
-              <PostCard post={post}/>
-              {/* <li>Title: {post.title}</li>
-              <li>Text: {post.text}</li> */}
+              <PostCard post={post} />
             </Link>
           </div>
         ))}
