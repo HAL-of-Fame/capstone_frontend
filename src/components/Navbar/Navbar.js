@@ -103,6 +103,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import { TextField } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -112,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    marginRight: theme.spacing(2),
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
@@ -124,6 +126,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
+    marginRight: theme.spacing(5),
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
@@ -183,7 +186,7 @@ export default function Navbar({ user, handleLogout }) {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar disableGutters="true">
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -211,67 +214,40 @@ export default function Navbar({ user, handleLogout }) {
               />
             </form>
           </div>
+          <Box display="flex" justifyContent="space-between">
+            <div className="buttons">
+              {user?.email ? (
+                <>
+                  <Button color="inherit">
+                    {/* <Typography style={{ marginRight: 16 }}>{user.email}</Typography> */}
+                    {user.email}
+                  </Button>
 
-          <div className="buttons">
-            {user?.email ? (
-              <>
-                <Button color="inherit">{user.email}</Button>
+                  <Button
+                    color="inherit"
+                    onClick={handleLogout}
+                    className="logout"
+                  >
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button color="inherit" href="/login">
+                    Login
+                  </Button>
 
-                <Button
-                  color="inherit"
-                  onClick={handleLogout}
-                  className="logout"
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button color="inherit" href="/login">
-                  Login
-                </Button>
+                  <Button href="/register" color="inherit">
+                    Register
+                  </Button>
+                </>
+              )}
 
-                <Button href="/register" color="inherit">
-                  Register
-                </Button>
-              </>
-            )}
-
-            <Button href="/shopping-cart" color="inherit">
-              <FaIcons.FaCartPlus />
-            </Button>
-          </div>
-          {/* <div className="links">
-          <div className="auth">
-            {user?.email ? (
-              <>
-                <li>
-                  <span>{user.email}</span>
-                </li>
-                <li>
-                  <button onClick={handleLogout} className="logout">Logout</button>
-                </li>
-              </>
-            ) : (
-              <>
-                <div className="Loginbut">
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-                </div>
-                <div className="Register">
-                  <li>
-                    <Link to="/register">Sign Up</Link>
-                  </li>
-                </div>
-              </>
-            )}
-          </div>
-          <div className="cart">
-            <Link to="/shopping-cart">
-              <FaIcons.FaCartPlus />
-            </Link>
-          </div> */}
+              <Link to="/shopping-cart" color="inherit">
+                <FaIcons.FaCartPlus />
+              </Link>
+            </div>
+          </Box>
         </Toolbar>
       </AppBar>
     </div>
