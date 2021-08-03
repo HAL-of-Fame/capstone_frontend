@@ -26,8 +26,32 @@ export const SidebarData = [
         cName: 'sub-nav'
       },
       {
+        title: 'Animation',
+        path: '/genre/Animation',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Adventure',
+        path: '/genre/Adventure',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
         title: 'Comedy',
         path: '/genre/Comedy',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Family',
+        path: '/genre/Family',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Fantasy',
+        path: '/genre/Fantasy',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
@@ -50,6 +74,12 @@ export const SidebarData = [
         title: 'Science Fiction',
         path: '/genre/Science-fiction',
         icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Thriller',
+        path: '/genre/Thriller',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
       }
     ]
   },

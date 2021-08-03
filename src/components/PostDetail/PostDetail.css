@@ -1,0 +1,24 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.Comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-post {
+    display: flex;
+    flex-direction: column;
+}
