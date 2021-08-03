@@ -11,8 +11,9 @@ export default function PostList({ posts }) {
             search: `/${post.id}`,
           }}
         >
+            <div className='postCard'>
           <PostCard post={post} />
-          {/* id:{post.id}-{post.title}-{post.text}-{post.userName} */}
+          </div>
         </Link>
       ))}
     </div>

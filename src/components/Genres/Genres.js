@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-// import NewPostForm from "../NewExercise/NewExercise"
 import "./Genres.css";
 import apiClient from "../Services/apiClient";
 import PostCard from "../PostCard/PostCard";
@@ -52,13 +51,6 @@ export default function Genres() {
       ScienceFiction: sciencefiction,
     }[str] || "");
 
-  console.log("genres", genres);
-  console.log("switch", Switch(genres));
-  // console.log(Switch("Yes")); // 517
-  // console.log(Switch("No"));  // 518
-  // console.log(Switch("Non matching value")); // Empty
-
-  // console.log("posts", posts);
   return (
     <div className="Genre">
       <div className="subgenre">
@@ -67,9 +59,6 @@ export default function Genres() {
         </div>
         <div className="hero">
           <img src={Switch(genres)} alt={genres}></img>
-          {/* {genres === 'Adventure' ? <img src={adventure} alt="adventure" /> 
-        : 
-        {genres === 'Action' ? <img src={action} alt="action" />} */}
         </div>
         <div className="subheader">Threads</div>
       </div>
