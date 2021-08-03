@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-// import Stars from "../Stars/Stars"
-// import StarsInput from "../StarsInput/StarsInput"
-// import { formatRating, formatDate } from "../../utils/format"
 import apiClient from "../Services/apiClient";
 import "./PostDetail.css";
 import PostCard from "../PostCard/PostCard"
@@ -153,10 +150,6 @@ export default function PostDetail({ user, updatePost }) {
       <div className="Post">
         <div className="body">
           <div className="info">
-            {/* <span className="rating">
-              <Stars rating={post.rating || 0} max={5} />
-              {formatRating(post.rating || 0)}
-            </span> */}
             <PostCard post={post}/>
             {/* <p className="text">Title: {post.title}</p>
             <p className="text">Text: {post.text}</p> */}
@@ -164,6 +157,17 @@ export default function PostDetail({ user, updatePost }) {
         </div>
         <div className="Comments">
           <p>Comments:</p>
+          <div className="comment-section">
+            <textarea
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+              name="text"
+            ></textarea>
+            <button className="btn" onClick={handleOnSaveComment}>
+              Save Comment
+            </button>
+          </div>
+
           {comments.map((comment) => (
             <div className="test">
               <CommentCard comment={comment}/>
@@ -185,16 +189,6 @@ export default function PostDetail({ user, updatePost }) {
 
       <div className="actions">
         
-          <div className="comment-section">
-            <textarea
-              value={comment}
-              onChange={(event) => setComment(event.target.value)}
-              name="text"
-            ></textarea>
-            <button className="btn" onClick={handleOnSaveComment}>
-              Save Comment
-            </button>
-          </div>
   
         <input type="button" value="Edit post" onClick={togglePopup} />
         {isOpen && (
@@ -203,11 +197,13 @@ export default function PostDetail({ user, updatePost }) {
               <>
                 <div className="edit-post">
                   <p>Edit your post</p>
+                  <p>Title</p>
                   <textarea
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                     name="title"
                   ></textarea>
+                  <p>Text</p>
                   <textarea
                     value={text}
                     onChange={(event) => setText(event.target.value)}

@@ -12,3 +12,13 @@
     justify-content: center;
     align-items: center;
 }
+
+.comment-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-post {
+    display: flex;
+    flex-direction: column;
+}
