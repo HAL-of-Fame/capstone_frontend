@@ -11,6 +11,21 @@ import Typography from "@material-ui/core/Typography";
 import { positions } from "@material-ui/system";
 import { formatDate, formatTime } from "../../utils/format";
 import Box from "@material-ui/core/Box";
+import { DeleteOutlined } from '@material-ui/icons'
+
+import clsx from 'clsx';
+import CardHeader from '@material-ui/core/CardHeader';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+
+
 import adventure from "../../assets/adventure.jpg"
 import action from "../../assets/action.jpg"
 import romance from "../../assets/romance.jpg"
@@ -23,35 +38,6 @@ import horror from "../../assets/horror.jpg"
 import comedy from "../../assets/comedy.jpg"
 import sciencefiction from "../../assets/sciencefiction.jpg"
 
-
-// Switch(genre) {
-//   case 'Adventure': 
-//       setPoster(adventure);
-//       break;
-//   case 'Action':
-//     setPoster(action);
-//       break;
-//   case 'Romance':
-//       setPoster(romance);
-//       break;
-//   case 'Drama':
-//     setPoster(drama);
-//     break;
-//   case 'Family':
-//     setPoster(family);
-//     break;
-//   case 'Thriller':
-//     setPoster(thriller);
-//     break;
-//   case 'Animation':
-//     setPoster(animation);
-//     break;
-//   case 'Thriller':
-//     setPoster(thriller);
-//     break;
-//   default:
-//       break;
-// }
 
 
 const Switch = (str) => ({
@@ -72,42 +58,32 @@ const useStyles = makeStyles({
   root: {
     width: 750,
   },
-  box: {
-    height: 100,
-    display: "flex",
-    border: "1px solid black",
-    padding: 8,
+
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
   },
-  topRightBox: {
+  avatar: {
+    backgroundColor: red[500],
+  },
+
+  test: {
     justifyContent: "flex-end",
-    alignItems: "flex-start",
+    alignItems: "flex-start"
   },
+
 });
 
 
 export default function PostCard({ post }) {
   const [poster, setPoster] = useState("")
-  console.log("post", post);
-  console.log('post.movieposter', post.movieposter)
-  console.log('post.genre', post.genre
-  )
   const classes = useStyles();
-
-  // console.log("this is eval", eval("family"))
-  console.log('test', window["family"])
 
   useEffect(() => {
     if (post.movieposter) {
-      console.log(' i made it past the conditional', post.movieposter)
       setPoster(post.movieposter)
     } else {
       setPoster(Switch(post.genre))
-      // console.log('made it to the else')
-      // console.log('this is the assets thing', `../../assets/${post.genre.toLowerCase()}.jpg`)
-      // setPoster(import post.genre.toLowerCase() from `../../assets/${post.genre.toLowerCase()}.jpg`)
-      // import sciencefiction from "../../assets/sciencefiction.jpg"
-      // setPoster(eval(post.genre.toLowerCase()))
-      // setPoster(Switch(post.genre))
     }
   }, [post])
   console.log(poster)
@@ -116,35 +92,44 @@ export default function PostCard({ post }) {
 
   return (
     <Card className={classes.root}>
-      <Box
-        component="span"
-        m={1} //margin
-        className={`${classes.topRightBox} ${classes.box}`}
-      >
-        <Button variant="contained" color="primary" style={{ height: 40 }}>
-          Primary
-        </Button>
-      </Box>
-
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe" className={classes.avatar}>
+            R
+          </Avatar>
+        }
+        action={
+          <IconButton onClick={() => console.log('delete')}>
+            {/* <MoreVertIcon /> */}
+            <DeleteOutlined />
+          </IconButton>
+        }
+        title={post.title}
+        subheader="September 14, 2016"
+        // titleTypographyProps={
+          
+        // }
+        
+      />
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+          alt="Movie Poster"
           height="110"
           image={poster}
-          title="Contemplative Reptile"
+          title="Movie Poster"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          {/* <Typography gutterBottom variant="h5" component="h2">
             {post.title}
-          </Typography>
+          </Typography> */}
           <Typography variant="body2" color="textSecondary" component="p">
             Text: {post.text}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Posted by: {post.userName} @ {formatTime(post.created_at)}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography className={classes.test} variant="body2" color="textSecondary" component="p">
             Posted: {formatTime(post.created_at)}
           </Typography>
         </CardContent>
@@ -154,7 +139,7 @@ export default function PostCard({ post }) {
           Comment
         </Button>
         <Button size="small" color="primary">
-          Learn More
+          Edit
         </Button>
       </CardActions>
     </Card>

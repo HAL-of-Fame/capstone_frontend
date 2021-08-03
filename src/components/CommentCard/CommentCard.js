@@ -9,7 +9,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { positions } from '@material-ui/system';
 import { formatDate, formatTime } from "../../utils/format"
-
+import CardHeader from '@material-ui/core/CardHeader';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
 const useStyles = makeStyles({
   root: {
     width: 650,
@@ -22,6 +24,13 @@ export default function CommentCard( {comment}) {
     const classes = useStyles();
   return (
     <Card className={classes.root}>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe" className={classes.avatar}>
+            R
+          </Avatar>
+        }
+        />
       <CardActionArea>
         {/* <CardMedia
           component="img"
