@@ -36,6 +36,7 @@ export default function App() {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [genre, setGenre] = useState("");
   const [movieName, setMovieName] = useState("");
+  const [moviePoster, setMoviePoster] = useState("");
 
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
@@ -169,6 +170,8 @@ export default function App() {
                 movieName={movieName}
                 setMovieName={setMovieName}
                 onAdd={onAdd}
+                moviePoster={moviePoster}
+                setMoviePoster={setMoviePoster}
               />
             }
           />
@@ -219,7 +222,7 @@ export default function App() {
           />
           <Route
             path="/movie/:postId/create"
-            element={<MoviePost genre={genre} movieName={movieName} />}
+            element={<MoviePost genre={genre} movieName={movieName} moviePoster={moviePoster} />}
           />
 
           <Route

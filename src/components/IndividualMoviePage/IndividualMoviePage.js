@@ -170,19 +170,6 @@ export default function IndividualMoviePage(props) {
         <div className="discussionSection">
           <p>Discussion:</p>
           <PostList posts={posts}/>
-          {/* {posts?.map((post) => (
-            <div className="posts">
-              <Link
-                to={{
-                  pathname: "/posts",
-                  search: `/${post.id}`,
-                }}
-              >
-                <PostCard post={post}/>
-                {/* id:{post.id}-{post.title}-{post.text}-{post.userName} */}
-              {/* </Link>
-            </div> */}
-          {/* ))} */}
         </div>
       </div>
     </div>

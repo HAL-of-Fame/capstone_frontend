@@ -1,0 +1,5 @@
+.posts .postCard{
+    display: flex;
+    flex-direction: column;
+    /* margin: 50%; */
+}
