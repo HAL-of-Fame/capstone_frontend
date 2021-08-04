@@ -2,10 +2,15 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import apiClient from "../Services/apiClient";
 import "./PostDetail.css";
-import PostCard from "../PostCard/PostCard"
-import CommentCard from "../CommentCard/CommentCard"
+import PostCard from "../PostCard/PostCard";
+import CommentCard from "../CommentCard/CommentCard";
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
+import Button from "@material-ui/core/Button";
+import SaveIcon from "@material-ui/icons/Save";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/styles";
+import { Block } from "@material-ui/icons";
 
 const fetchPostById = async ({
   postId,
@@ -29,21 +34,28 @@ const fetchPostById = async ({
   setIsFetching(false);
 };
 
+const useStyles = makeStyles({
+  field: {
+    marginTop: 20,
+    marginBotttom: 20,
+    // display: Block,
+  },
+});
+
 export default function PostDetail({ user, updatePost }) {
+  const classes = useStyles();
   const { postId } = useParams();
   const [post, setPost] = useState(null);
-  const [rating, setRating] = useState(null);
+  // const [rating, setRating] = useState(null);
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [isSavingRating, setIsSavingRating] = useState(false);
+  // const [isSavingRating, setIsSavingRating] = useState(false);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
-
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -57,7 +69,6 @@ export default function PostDetail({ user, updatePost }) {
   };
 
   useEffect(() => {
-
     fetchPostById({
       postId,
       setIsFetching,
@@ -73,18 +84,16 @@ export default function PostDetail({ user, updatePost }) {
   let Navigate = useNavigate();
 
   const handleOnDelete = async () => {
-    
     const { data, error } = await apiClient.deletePostById({ postId });
     if (data) {
-      const genre = data.post.genre
+      const genre = data.post.genre;
       Navigate(`/genre/${genre}`);
-  } 
+    }
     if (error) setError(error);
     else {
       console.log("succeeded in deleting");
     }
   };
-  
 
   const handleOnUpdate = async () => {
     setIsUpdating(true);
@@ -102,9 +111,6 @@ export default function PostDetail({ user, updatePost }) {
     setIsUpdating(false);
   };
 
-
-
-
   const handleOnSaveComment = async () => {
     setIsUpdating(true);
     const { data, error } = await apiClient.createComment(comment, postId);
@@ -115,30 +121,30 @@ export default function PostDetail({ user, updatePost }) {
     setIsUpdating(false);
   };
 
-  const handleOnSaveRating = async () => {
-    setIsSavingRating(true);
+  // const handleOnSaveRating = async () => {
+  //   setIsSavingRating(true);
 
-    const { data, error } = await apiClient.createRatingForPost({
-      postId,
-      rating,
-    });
-    if (data) {
-      await fetchPostById({
-        postId,
-        setIsFetching,
-        setError,
-        setPost,
-        setText,
-        setTitle,
-      });
-    }
-    if (error) {
-      setError(error);
-    }
+  //   const { data, error } = await apiClient.createRatingForPost({
+  //     postId,
+  //     rating,
+  //   });
+  //   if (data) {
+  //     await fetchPostById({
+  //       postId,
+  //       setIsFetching,
+  //       setError,
+  //       setPost,
+  //       setText,
+  //       setTitle,
+  //     });
+  //   }
+  //   if (error) {
+  //     setError(error);
+  //   }
 
-    setIsSavingRating(false);
-  };
-  
+  //   setIsSavingRating(false);
+  // };
+
   const userIsLoggedIn = Boolean(user?.email);
   const userOwnsPost = user?.username && post?.userName === user?.username;
   // console.log("userOwnsPost is", userOwnsPost)
@@ -150,7 +156,7 @@ export default function PostDetail({ user, updatePost }) {
       <div className="Post">
         <div className="body">
           <div className="info">
-            <PostCard post={post}/>
+            <PostCard post={post} />
             {/* <p className="text">Title: {post.title}</p>
             <p className="text">Text: {post.text}</p> */}
           </div>
@@ -158,19 +164,41 @@ export default function PostDetail({ user, updatePost }) {
         <div className="Comments">
           <p>Comments:</p>
           <div className="comment-section">
-            <textarea
+            {/* <textarea
               value={comment}
               onChange={(event) => setComment(event.target.value)}
               name="text"
-            ></textarea>
-            <button className="btn" onClick={handleOnSaveComment}>
-              Save Comment
-            </button>
-          </div>
+            ></textarea> */}
 
+            <form noValidate autoComplete="off" onSubmit={handleOnSaveComment}>
+              <TextField
+                onChange={(e) => setComment(e.target.value)}
+                className={classes.field}
+                label="Comment"
+                variant="filled"
+                color="primary"
+                fullWidth
+                // size="large"
+              />
+
+              <Button
+                onClick={handleOnSaveComment}
+                startIcon={<SaveIcon />}
+                size="small"
+                variant="contained"
+                color="primary"
+              >
+                Save
+              </Button>
+              {/* <button className="btn" onClick={handleOnSaveComment}>
+              Save Comment
+            </button> */}
+              {/* </div> */}
+            </form>
+          </div>
           {comments.map((comment) => (
             <div className="test">
-              <CommentCard comment={comment}/>
+              <CommentCard comment={comment} />
               {/* {comment.text}-{comment.userName} */}
             </div>
           ))}
@@ -188,8 +216,6 @@ export default function PostDetail({ user, updatePost }) {
       {error && <span className="error">Error: {error}</span>}
 
       <div className="actions">
-        
-  
         <input type="button" value="Edit post" onClick={togglePopup} />
         {isOpen && (
           <Popup

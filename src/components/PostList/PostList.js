@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import PostCard from "../../components/PostCard/PostCard";
+import "./PostList.css";
+
 export default function PostList({ posts }) {
   return (
     <div className="posts">
@@ -11,8 +13,8 @@ export default function PostList({ posts }) {
             search: `/${post.id}`,
           }}
         >
-            <div className='postCard'>
-          <PostCard post={post} />
+          <div className="postCard">
+            <PostCard post={post} />
           </div>
         </Link>
       ))}
