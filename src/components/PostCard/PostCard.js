@@ -137,9 +137,9 @@ export default function PostCard({ post }) {
           <Button size="small" color="primary">
             Comment
           </Button>
-          <Button size="small" color="primary">
+          {/* <Button size="small" color="primary">
             Edit
-          </Button>
+          </Button> */}
         </CardActions>
       </Card>
     </div>
