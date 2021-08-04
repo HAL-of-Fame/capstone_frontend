@@ -35,6 +35,9 @@ const SidebarNav = styled.nav`
   left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
   transition: 350ms;
   z-index: 10;
+  overflow-y: scroll;
+  bottom: 0;
+  font-size: 5px;
 `;
 
 const SidebarWrap = styled.div`

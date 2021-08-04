@@ -5,9 +5,13 @@ export const calculateOrderSubtotal = (items) => {
 }
 
 export const calculateTaxesAndFees = (subTotal) => {
-  return subTotal * 0.0875
+  return subTotal * 0.14
+}
+
+export const shipping =() =>{
+  return 20
 }
 
 export const calculateTotal = (subTotal) => {
-  return subTotal + calculateTaxesAndFees(subTotal)
+  return subTotal + calculateTaxesAndFees(subTotal) + shipping()
 }

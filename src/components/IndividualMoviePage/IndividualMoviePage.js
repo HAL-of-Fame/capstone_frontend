@@ -7,8 +7,20 @@ import apiClient from "../Services/apiClient";
 import config from "../../config";
 const api_key = config.api_key;
 
+import PostCard from "../PostCard/PostCard";
+import PostList from "../PostList/PostList";
+
+
 export default function IndividualMoviePage(props) {
-  const { onAdd, genre, setGenre, movieName, setMovieName } = props;
+  const {
+    onAdd,
+    genre,
+    setGenre,
+    movieName,
+    setMovieName,
+    moviePoster,
+    setMoviePoster,
+  } = props;
   const [individual, setIndividual] = useState([]);
   const [video, setVideo] = useState([]);
   const [error, setError] = useState(null);
@@ -20,6 +32,8 @@ export default function IndividualMoviePage(props) {
   };
 
   const fetchPosts = async () => {
+    console.log("inside fetchpost");
+    console.log("movieName", movieName);
     const { data, error } = await apiClient.listMoviePosts(movieName);
     if (data) {
       console.log("this is listmovieposts", data.posts);
@@ -82,6 +96,9 @@ export default function IndividualMoviePage(props) {
       ];
       const movieName = individual.original_title;
       setMovieName(movieName);
+      setMoviePoster(
+        `https://www.themoviedb.org/t/p/original/${individual.backdrop_path}`
+      );
       fetchPosts();
       if (individual?.genres?.length > 0) {
         individual.genres.map((genreobj) => {
@@ -96,7 +113,9 @@ export default function IndividualMoviePage(props) {
     setGenreMovieName();
   }, [individual, video]);
 
-  // console.log(individual.genres)
+  // console.log('individual', individual)
+  // console.log('posts', posts)
+
   const poster = `https://www.themoviedb.org/t/p/original/${individual.backdrop_path}`;
   const allData = {
     name: individual.original_title,
@@ -105,7 +124,8 @@ export default function IndividualMoviePage(props) {
     price: 20,
   };
   const videolink = `https://www.youtube.com/embed/${video}`;
-
+  // setMoviePoster(poster)
+  // console.log('poster', poster)
   return (
     <div className="individualMoviePage">
       <div className="column">
@@ -122,9 +142,6 @@ export default function IndividualMoviePage(props) {
             <div className="duration">
               Duration: {individual.runtime} minutes
             </div>
-            <Link to="create/">
-              <button className="moviePost">Make a Post</button>
-            </Link>
 
             <input type="button" value="Watch Trailer" onClick={togglePopup} />
             {isOpen && (
@@ -161,18 +178,10 @@ export default function IndividualMoviePage(props) {
         </div>
         <div className="discussionSection">
           <p>Discussion:</p>
-          {posts?.map((post) => (
-            <div className="test">
-              <Link
-                to={{
-                  pathname: "/posts",
-                  search: `/${post.id}`,
-                }}
-              >
-                id:{post.id}-{post.title}-{post.text}-{post.userName}
-              </Link>
-            </div>
-          ))}
+          <Link to="create/">
+            <button className="moviePost">Make a Post</button>
+          </Link>
+          <PostList posts={posts} />
         </div>
       </div>
     </div>
