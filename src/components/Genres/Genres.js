@@ -15,6 +15,7 @@ import fantasy from "../../assets/fantasy.jpg";
 import horror from "../../assets/horror.jpg";
 import comedy from "../../assets/comedy.jpg";
 import sciencefiction from "../../assets/sciencefiction.jpg";
+import Button from "@material-ui/core/Button";
 
 export default function Genres() {
   let { genres } = useParams();
@@ -60,7 +61,7 @@ export default function Genres() {
         <div className="hero">
           <img src={Switch(genres)} alt={genres}></img>
         </div>
-        <div className="subheader">Threads</div>
+        {/* <div className="subheader">Threads</div> */}
       </div>
       <li className="button">
         <Link
@@ -70,14 +71,16 @@ export default function Genres() {
             hash: "/create",
           }}
         >
-          Create a Post
+          <Button size="small" color="primary" variant="contained">
+            Create a Post
+          </Button>
         </Link>
       </li>
       <div className="items">
         {posts.map((post) => (
           <div className="info">
-            <li>PostId: {post.id}</li>
-            <li>Date: {formatDate(post.created_at)}</li>
+            {/* <li>PostId: {post.id}</li>
+            <li>Date: {formatDate(post.created_at)}</li> */}
             <Link
               to={{
                 pathname: "/posts",
