@@ -5,11 +5,27 @@ import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
 import apiClient from "../Services/apiClient";
 import config from "../../config";
-const api_key = config.api_key;
-
 import PostCard from "../PostCard/PostCard";
 import PostList from "../PostList/PostList";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+const api_key = config.api_key;
 
+const useStyles = makeStyles({
+  root: {
+    width: 300,
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 export default function IndividualMoviePage(props) {
   const {
@@ -26,17 +42,18 @@ export default function IndividualMoviePage(props) {
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [posts, setPosts] = useState([]);
+  const classes = useStyles();
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
 
   const fetchPosts = async () => {
-    console.log("inside fetchpost");
-    console.log("movieName", movieName);
+    // console.log("inside fetchpost");
+    // console.log("movieName", movieName);
     const { data, error } = await apiClient.listMoviePosts(movieName);
     if (data) {
-      console.log("this is listmovieposts", data.posts);
+      // console.log("this is listmovieposts", data.posts);
       setPosts(data.posts);
     }
     if (error) setError(error);
@@ -164,23 +181,53 @@ export default function IndividualMoviePage(props) {
                 handleClose={togglePopup}
               />
             )}
-          </div>
-          <div className="right">
             <Link to="/shopping-cart/">
               <button onClick={() => onAdd(allData)} className="add">
                 Purchase
               </button>
             </Link>
           </div>
+          <div className="right">
+            {/* <Link to="/shopping-cart/">
+              <button onClick={() => onAdd(allData)} className="add">
+                Purchase
+              </button>
+            </Link> */}
+          </div>
         </div>
+        {/* <CardContent>
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            {individual.overview}
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {individual.overview}
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            {individual.overview}
+          </Typography>
+          <Typography variant="body2" component="p">
+            {individual.overview}
+          </Typography>
+        </CardContent> */}
         <div className="movieDescription">
           <p>{individual.overview}</p>
         </div>
         <div className="discussionSection">
           <p>Discussion:</p>
-          <Link to="create/">
+          <div className="PostButton">
+            <Link to="create/">
+              <Button size="small" color="primary" variant="contained">
+                Create a Post
+              </Button>
+            </Link>
+          </div>
+          {/* <Link to="create/">
             <button className="moviePost">Make a Post</button>
-          </Link>
+          </Link> */}
           <PostList posts={posts} />
         </div>
       </div>
