@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "./SearchPage.css";
 import MovieCard from "../MovieCard/MovieCard";
 import { useParams } from "react-router";
-
-const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
+import config from "../../config";
+const api_key = config.api_key;
 
 export default function SearchPage() {
   const [movies, setMovies] = useState([]);

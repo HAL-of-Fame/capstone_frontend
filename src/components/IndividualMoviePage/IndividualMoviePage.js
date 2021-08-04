@@ -4,11 +4,12 @@ import "./IndividualMoviePage.css";
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
 import apiClient from "../Services/apiClient";
+import config from "../../config";
+const api_key = config.api_key;
+
 import PostCard from "../PostCard/PostCard";
 import PostList from "../PostList/PostList";
-// const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
-const api_key = "d8e8e9a8ed16ae9fd3ea37274ab553aa";
-// import Button from "@material-ui/core/Button";
+
 
 export default function IndividualMoviePage(props) {
   const {

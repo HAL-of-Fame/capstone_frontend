@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 import MovieCard from "../MovieCard/MovieCard";
-
-const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
+import config from "../../config";
+const api_key = config.api_key;
 
 export default function Home({ user }) {
   //   const [name, setName] = useState([]);

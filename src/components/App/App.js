@@ -196,6 +196,7 @@ export default function App() {
                 handleOnCheckout={handleOnCheckout}
                 onAdd={onAdd}
                 onRemove={onRemove}
+                user={user}
               />
             }
           />
