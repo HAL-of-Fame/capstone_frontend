@@ -4,6 +4,7 @@ import MovieCard from "../MovieCard/MovieCard";
 import config from "../../config";
 const api_key = config.api_key;
 
+console.log("api key", api_key);
 export default function Home({ user }) {
   //   const [name, setName] = useState([]);
   const [trending, setTrending] = useState([]);

@@ -70,8 +70,8 @@ export default function MoviePost({ user, genre, movieName, moviePoster }) {
       setError(error);
     }
   };
-  let test = ["one", "two", "three", "four"];
-  console.log(test);
+  // let test = ["one", "two", "three", "four"];
+  // console.log(test);
   return (
     <div className="test">
       <Container>
@@ -149,7 +149,7 @@ export default function MoviePost({ user, genre, movieName, moviePoster }) {
       </Container>
       <div className="NewPostForm">
         <div className="card">
-          <h2>Create a new post in {genre} forum</h2>
+          {/* <h2>Create a new post in {genre} forum</h2> */}
 
           {Boolean(error) && <span className="error">{error}</span>}
 
