@@ -126,17 +126,17 @@
   /* list-style-type: none; */
 }
 
-.logout{
-    background-color: white; /* Green */
-    border: none;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 10px;
+.logout {
+  background-color: white; /* Green */
+  border: none;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 10px;
 }
-.clear{
+.clear {
   background-color: white; /* Green */
   border: none;
   color: black;
@@ -150,10 +150,4 @@
   border-radius: 12px;
   text-decoration: none;
   list-style-type: none;
-
-}
-.buttons{
-  position:absolute;
-  top: 10px;
-  right:0;
 }

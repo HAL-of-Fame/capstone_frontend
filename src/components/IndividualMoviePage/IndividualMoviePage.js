@@ -4,9 +4,8 @@ import "./IndividualMoviePage.css";
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
 import apiClient from "../Services/apiClient";
-
-// const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
-const api_key = "d8e8e9a8ed16ae9fd3ea37274ab553aa";
+import config from "../../config";
+const api_key = config.api_key;
 
 export default function IndividualMoviePage(props) {
   const { onAdd, genre, setGenre, movieName, setMovieName } = props;

@@ -1,94 +1,3 @@
-// import React from 'react';
-// import { Link } from "react-router-dom";
-// import search from "../../assets/search.svg";
-// import "./Navbar.css";
-// import * as FaIcons from "react-icons/fa";
-// import { useState } from "react";
-
-// export default function Navbar({ user, handleLogout }) {
-
-//   const [searchInputValue, setSearchInputValue] = useState("");
-
-//   const handleOnInputChange = (event) => {
-//     console.log(event.target.value);
-//     setSearchInputValue(event.target.value);
-//   };
-
-//   const clearInput = () =>
-// {
-//   setSearchInputValue("")
-// }
-//   return (
-//     <nav className="Navbar">
-//       <div className="content">
-//         <div className="logo">
-//           <Link to="/">
-//             <img
-//               src={require("../../assets/demoLogo.png").default}
-//               height={50}
-//               width={50}
-//               alt="Demo Logo"
-//             />
-//           </Link>
-//         </div>
-
-//         <div className="search-bar-btn">
-//           <input
-//             className="search-bar"
-//             type="text"
-//             name="search"
-//             placeholder="Search"
-//             value={searchInputValue}
-//             onChange={handleOnInputChange}
-//           />
-//           <Link to={`search/${searchInputValue}`} className="search-btn" onClick={clearInput} onChange={handleOnInputChange}>
-//             <FaIcons.FaSearch size={45}/>
-//           </Link>
-//         </div>
-
-//         <Link to={`/`}>
-//           <button className="clear" onClick={clearInput}>
-//   Clear
-// </button>
-//           </Link>
-
-//         <div className="links">
-//           <div className="auth">
-//             {user?.email ? (
-//               <>
-//                 <li>
-//                   <span>{user.email}</span>
-//                 </li>
-//                 <li>
-//                   <button onClick={handleLogout} className="logout">Logout</button>
-//                 </li>
-//               </>
-//             ) : (
-//               <>
-//                 <div className="Loginbut">
-//                   <li>
-//                     <Link to="/login">Login</Link>
-//                   </li>
-//                 </div>
-//                 <div className="Register">
-//                   <li>
-//                     <Link to="/register">Sign Up</Link>
-//                   </li>
-//                 </div>
-//               </>
-//             )}
-//           </div>
-//           <div className="cart">
-//             <Link to="/shopping-cart">
-//               <FaIcons.FaCartPlus />
-//             </Link>
-//           </div>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// }
-
 import React, { useState } from "react";
 import { makeStyles, alpha } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -105,6 +14,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import { TextField } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
+  buttons: {
+    display: "flex",
+    justifyContent: "space-evenly",
+  },
   root: {
     flexGrow: 1,
   },
@@ -179,6 +92,10 @@ export default function Navbar({ user, handleLogout }) {
     clearInput();
   };
 
+  const onClickHandler = (event) => {
+    event.preventDefault();
+  };
+
   const classes = useStyles();
   const [logged, setLogged] = useState("Login");
   //if user is loggined
@@ -204,50 +121,71 @@ export default function Navbar({ user, handleLogout }) {
 
           <div className={classes.search}>
             <form onSubmit={handleOnSubmit}>
-              <Button type="submit" className={classes.button}>
+              {/* <Button type="submit" className={classes.button}>
                 <SearchIcon />
-              </Button>
+              </Button> */}
               <TextField
+                size="small"
+                variant="outlined"
                 value={searchInputValue}
                 onChange={handleOnInputChange}
                 placeholder="Search…"
+                InputProps={{ endAdornment: <SearchIcon /> }}
               />
             </form>
           </div>
-          <Box display="flex" justifyContent="space-between">
-            <div className="buttons">
-              {user?.email ? (
-                <>
-                  <Button color="inherit">
+
+          <div className={classes.buttons}>
+            {user?.email ? (
+              <>
+                <Box>
+                  <Button variant="outlined" color="inherit" mx={30}>
                     {/* <Typography style={{ marginRight: 16 }}>{user.email}</Typography> */}
                     {user.email}
                   </Button>
 
                   <Button
                     color="inherit"
+                    variant="outlined"
                     onClick={handleLogout}
                     className="logout"
                   >
                     Logout
                   </Button>
-                </>
-              ) : (
-                <>
-                  <Button color="inherit" href="/login">
+                  <Link to="/shopping-cart">
+                    <Button variant="outlined" color="inherit" size="large">
+                      <FaIcons.FaCartPlus fontSize="larger" />
+                    </Button>
+                  </Link>
+                </Box>
+              </>
+            ) : (
+              <>
+                <Box width="500px" display="flex" justifyContent="space-around">
+                  <Button color="inherit" href="/login" variant="outlined">
                     Login
                   </Button>
 
-                  <Button href="/register" color="inherit">
+                  <Button href="/register" color="inherit" variant="outlined">
                     Register
                   </Button>
-                </>
-              )}
-
-              <Link to="/shopping-cart" color="inherit">
+                  <Link to="/shopping-cart">
+                    <Button variant="outlined" color="inherit" size="large">
+                      <FaIcons.FaCartPlus fontSize="larger" />
+                    </Button>
+                  </Link>
+                </Box>
+              </>
+            )}
+            {/* <Button
+                href="/shopping-cart"
+                color="inherit"
+                variant="outlined"
+                onClick={onClickHandler}
+              >
                 <FaIcons.FaCartPlus />
-              </Link>
-            </div>
-          </Box>
+              </Button> */}
+          </div>
         </Toolbar>
       </AppBar>
     </div>
