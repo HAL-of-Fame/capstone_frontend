@@ -114,7 +114,7 @@ export default function App() {
       setIsFetching(true);
 
       try {
-        const res = await axios.get("http://localhost:3001/store");
+        const res = await apiClient.listProducts();
         console.log(res);
         if (res?.data?.products) {
           setProducts(res.data.products);

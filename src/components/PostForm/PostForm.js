@@ -137,7 +137,7 @@ export default function NewPost({ user }) {
           component="h2"
           gutterBottom
         >
-          Create a new post{" "}
+          Create a new post in {genreCapitalized}
         </Typography>
 
         <form noValidate autoComplete="off" onSubmit={handleOnSubmit}>
@@ -178,8 +178,9 @@ export default function NewPost({ user }) {
       </Container>
       <div className="NewPostForm">
         <div className="card">
-          <h2>Create a new post</h2>
-          <p>Genre: {genreCapitalized}</p>
+          {/* <h2>Create a new post</h2> */}
+          {/* <p>Genre: {genreCapitalized}</p> */}
+          <p></p>
 
           {Boolean(error) && <span className="error">{error}</span>}
 

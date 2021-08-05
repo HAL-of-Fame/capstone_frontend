@@ -29,7 +29,7 @@ export default function CommentCard({ comment }) {
   )}`;
 
   let commenter = `${comment.userName} says:`;
-  console.log("comment", comment);
+  // console.log("comment", comment);
   const classes = useStyles();
   return (
     <Card className={classes.root}>

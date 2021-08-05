@@ -115,7 +115,7 @@ export default function Navbar({ user, handleLogout }) {
 
           <Button href="/">
             <Typography variant="h6" className={classes.title}>
-              Company Name
+              MovieCentral
             </Typography>
           </Button>
 
