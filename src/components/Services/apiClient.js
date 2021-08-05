@@ -60,7 +60,6 @@ class ApiClient {
     localStorage.setItem(this.tokenName, "");
   }
 
-
   // PRODUCT API CALLS
   async listProducts() {
     return await this.request({ endpoint: `store`, method: `GET` });
@@ -83,10 +82,6 @@ class ApiClient {
     });
   }
 
-
-
-  
-
   //POST API calls
   async listAllPosts() {
     return await this.request({
@@ -95,13 +90,12 @@ class ApiClient {
     });
   }
 
-
   async listMoviePosts(movieName) {
-    console.log('this is inside api client', {movieName})
+    console.log("this is inside api client", { movieName });
     return await this.request({
       endpoint: `posts/movieposts/${movieName}`,
       method: `GET`,
-    })
+    });
   }
 
   async createPost(post) {
@@ -119,8 +113,8 @@ class ApiClient {
     });
   }
 
-  async deletePostById({postId}) {
-    console.log('inside apiClient postId', postId)
+  async deletePostById({ postId }) {
+    console.log("inside apiClient postId", postId);
     return await this.request({
       endpoint: `posts/${postId}/`,
       method: `DELETE`,
@@ -135,8 +129,6 @@ class ApiClient {
     });
   }
 
-
-
   // COMMENTS
   //get all comments under that postID
   async listAllComments(postId) {
@@ -150,7 +142,7 @@ class ApiClient {
     return await this.request({
       endpoint: `comments/${postId}/`,
       method: `POST`,
-      data: {comment},
+      data: { comment },
     });
   }
 
@@ -161,7 +153,8 @@ class ApiClient {
     });
   }
 
-  async deleteCommentById({commentId}) {
+  async deleteCommentById({ commentId }) {
+    console.log("inside apiclient", commentId);
     return await this.request({
       endpoint: `comments/${commentId}/delete`,
       method: `DELETE`,
@@ -176,22 +169,14 @@ class ApiClient {
     });
   }
 
-
-
-
   // RATINGS
-  async createRatingForPost({ postId, rating }) {
-    return await this.request({
-      endpoint: `posts/${postId}/ratings`,
-      method: `POST`,
-      data: { rating },
-    });
-  }
-
-
-
-
-
+  // async createRatingForPost({ postId, rating }) {
+  //   return await this.request({
+  //     endpoint: `posts/${postId}/ratings`,
+  //     method: `POST`,
+  //     data: { rating },
+  //   });
+  // }
 }
 export default new ApiClient(
   process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001"

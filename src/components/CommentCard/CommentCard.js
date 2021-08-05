@@ -13,6 +13,8 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import { red } from "@material-ui/core/colors";
+import apiClient from "../Services/apiClient";
+// import { useNavigate } from "react-router";
 const useStyles = makeStyles({
   root: {
     width: 650,
@@ -22,8 +24,27 @@ const useStyles = makeStyles({
     backgroundColor: red[500],
   },
 });
+// let Navigate = useNavigate();
 
 export default function CommentCard({ comment, user }) {
+  console.log("comment", comment);
+
+  const handleOnDeleteComment = async () => {
+    console.log("commentid", comment.id);
+    let commentId = comment.id;
+    console.log("commentId", commentId);
+    const { data, error } = await apiClient.deleteCommentById({ commentId });
+    if (data) {
+      console.log("i deleted", data);
+      // const genre = data.post.genre;
+      // Navigate(`/genre/${genre}`);
+    }
+    // if (error) setError(error);
+    else {
+      console.log("succeeded in deleting");
+    }
+  };
+
   let timeinfo = `${formatDate(comment.created_at)} @ ${formatTime(
     comment.created_at
   )}`;
@@ -71,7 +92,11 @@ export default function CommentCard({ comment, user }) {
               <Button size="small" color="primary">
                 Edit
               </Button>
-              <Button size="small" color="primary">
+              <Button
+                size="small"
+                onClick={handleOnDeleteComment}
+                color="primary"
+              >
                 Delete
               </Button>
             </div>

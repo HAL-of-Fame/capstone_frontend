@@ -209,7 +209,7 @@ export default function PostDetail({ user, updatePost }) {
                 }}
                 // size="large"
               />
-              <div className="deleteButton">
+              <div className="saveButton">
                 <Button
                   onClick={handleOnSaveComment}
                   startIcon={<SaveIcon />}
