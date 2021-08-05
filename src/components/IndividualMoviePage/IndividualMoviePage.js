@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import "./IndividualMoviePage.css";
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
+
 import apiClient from "../Services/apiClient";
 import config from "../../config";
 import PostCard from "../PostCard/PostCard";
