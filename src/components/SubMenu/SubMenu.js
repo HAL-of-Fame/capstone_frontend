@@ -1,9 +1,8 @@
+import { Button } from "@material-ui/core";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-
 
 const SidebarLink = styled(Link)`
   display: flex;
@@ -41,8 +40,6 @@ const DropdownLink = styled(Link)`
   }
 `;
 
-
-
 const SubMenu = ({ item }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
@@ -50,6 +47,7 @@ const SubMenu = ({ item }) => {
   return (
     <>
       {/* <ClickAwayListener onClickAway={handleClickAway}> */}
+
       <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
         <div>
           {item.icon}

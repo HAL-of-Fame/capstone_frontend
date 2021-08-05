@@ -60,7 +60,6 @@ export default function Signup({ user, setUser }) {
       setErrors((e) => ({ ...e, passwordConfirm: null }));
     }
 
-
     const { data, error } = await apiClient.signUpUser({
       email: form.email,
       password: form.password,
@@ -75,29 +74,6 @@ export default function Signup({ user, setUser }) {
       apiClient.setToken(data.token);
     }
   };
-  //   try {
-  //     const res = await axios.post("http://localhost:3001/auth/register", {
-  //       first_name: form.first_name,
-  //       last_name: form.last_name,
-  //       username: form.username,
-  //       email: form.email,
-  //       password: form.password,
-
-  //     })
-  //     if (res?.data?.user) {
-  //       setUser(res.data.user)
-  //       // apiClient.setToken(res.data.token)
-  //     } else {
-  //       setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
-  //     }
-  //   } catch (err) {
-  //     console.log(err)
-  //     const message = err?.response?.data?.error?.message
-  //     setErrors((e) => ({ ...e, form: message ?? String(err) }))
-  //   } finally {
-  //     setIsProcessing(false)
-  //   }
-  // }
 
   return (
     <div className="Signup">
