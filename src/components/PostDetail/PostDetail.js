@@ -225,12 +225,14 @@ export default function PostDetail({ user, updatePost }) {
                   <p>Edit your post</p>
                   <p>Title</p>
                   <textarea
+                    className="titlearea"
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                     name="title"
                   ></textarea>
                   <p>Text</p>
                   <textarea
+                    className="textarea"
                     value={text}
                     onChange={(event) => setText(event.target.value)}
                     name="text"

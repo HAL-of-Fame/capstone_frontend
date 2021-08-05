@@ -26,3 +26,11 @@
 .test {
   margin: 1%;
 }
+.titlearea {
+  width: 300px;
+}
+.popup-content {
+  margin: auto;
+  width: 50%;
+  padding: 5px;
+}
