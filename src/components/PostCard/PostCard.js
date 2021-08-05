@@ -69,7 +69,7 @@ export default function PostCard({ post, user }) {
   )} @ ${formatTime(post.created_at)}`;
   const [poster, setPoster] = useState("");
   const classes = useStyles();
-
+  console.log("post.movieposter", post.movieposter);
   useEffect(() => {
     if (post.movieposter) {
       setPoster(post.movieposter);
@@ -124,6 +124,13 @@ export default function PostCard({ post, user }) {
             <Typography variant="body2" color="textSecondary" component="p">
               {post.text}
             </Typography>
+
+            {post.created_at !== post.updated_at && (
+              <Typography variant="body8" color="textSecondary" component="p">
+                [Updated: {formatDate(post.updated_at)} @
+                {formatTime(post.updated_at)}]
+              </Typography>
+            )}
             {/* {userOwnsPost ? (
               <Typography variant="body2" color="textSecondary" component="p">
                 {post.text}
