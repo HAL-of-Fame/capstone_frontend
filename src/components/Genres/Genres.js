@@ -18,7 +18,7 @@ import sciencefiction from "../../assets/sciencefiction.jpg";
 import Button from "@material-ui/core/Button";
 
 export default function Genres({ user }) {
-  console.log("user in genre", user);
+  // console.log("user in genre", user);
   let { genres } = useParams();
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
@@ -62,7 +62,6 @@ export default function Genres({ user }) {
         <div className="hero">
           <img src={Switch(genres)} alt={genres}></img>
         </div>
-        {/* <div className="subheader">Threads</div> */}
       </div>
       <li className="button">
         <Link
