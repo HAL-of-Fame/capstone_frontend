@@ -50,8 +50,8 @@ export default function App() {
       const res = await apiClient.createOrder(cartItems, user);
       console.log(res);
       if (res?.data?.order) {
-        setOrders((o) => [...res.data.order, ...o]);
-        console.log("orders in app", orders);
+        // setOrders((o) => [...res.data.order, ...o]);
+        // console.log("orders in app", orders);
         setIsCheckingOut(false);
         setCartItems([]);
         return res.data.order;
@@ -130,6 +130,18 @@ export default function App() {
       }
     };
     fetchProducts();
+  }, []);
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await apiClient.OrdersList();
+        console.log("order list", res);
+        setOrders(res.data.orders);
+      } catch (err) {
+        setOrders([]);
+      }
+    };
+    fetchOrders();
   }, []);
 
   const addPost = (newPost) => {
@@ -226,7 +238,13 @@ export default function App() {
           />
           <Route
             path="/movie/:postId/create"
-            element={<MoviePost genre={genre} movieName={movieName} moviePoster={moviePoster} />}
+            element={
+              <MoviePost
+                genre={genre}
+                movieName={movieName}
+                moviePoster={moviePoster}
+              />
+            }
           />
 
           <Route

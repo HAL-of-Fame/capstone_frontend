@@ -3,13 +3,12 @@ import { Link, useParams } from "react-router-dom";
 import "./IndividualMoviePage.css";
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
-import apiClient from "../Services/apiClient";
-import config from "../../config";
-const api_key = config.api_key;
 
 import PostCard from "../PostCard/PostCard";
 import PostList from "../PostList/PostList";
-
+import apiClient from "../Services/apiClient";
+import config from "../../config";
+const api_key = config.api_key;
 
 export default function IndividualMoviePage(props) {
   const {

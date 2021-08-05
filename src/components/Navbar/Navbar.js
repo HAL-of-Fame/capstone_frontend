@@ -113,11 +113,11 @@ export default function Navbar({ user, handleLogout }) {
             <Sidebar />
           </IconButton>
 
-          <Link to={`/`}>
+          <Button href="/">
             <Typography variant="h6" className={classes.title}>
               Company Name
             </Typography>
-          </Link>
+          </Button>
 
           <div className={classes.search}>
             <form onSubmit={handleOnSubmit}>

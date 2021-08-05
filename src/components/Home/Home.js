@@ -45,11 +45,13 @@ export default function Home({ user }) {
       </div>
 
       <div className="title">Trending Movies</div>
+      {/* <button> */}
       <div className="trending">
         {trending?.map((movie) => (
           <MovieCard movie={movie} key={movie.id} />
         ))}
       </div>
+      {/* </button> */}
       <button className="load" onClick={handleLoad}>
         Load More
       </button>
