@@ -17,7 +17,8 @@ import comedy from "../../assets/comedy.jpg";
 import sciencefiction from "../../assets/sciencefiction.jpg";
 import Button from "@material-ui/core/Button";
 
-export default function Genres() {
+export default function Genres({ user }) {
+  console.log("user in genre", user);
   let { genres } = useParams();
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
@@ -87,7 +88,7 @@ export default function Genres() {
                 search: `/${post.id}`,
               }}
             >
-              <PostCard post={post} />
+              <PostCard post={post} user={user} />
             </Link>
           </div>
         ))}

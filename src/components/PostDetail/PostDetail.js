@@ -156,7 +156,7 @@ export default function PostDetail({ user, updatePost }) {
       <div className="Post">
         <div className="body">
           <div className="info">
-            <PostCard post={post} />
+            <PostCard post={post} user={user} />
             {/* <p className="text">Title: {post.title}</p>
             <p className="text">Text: {post.text}</p> */}
           </div>
