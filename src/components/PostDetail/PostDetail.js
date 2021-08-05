@@ -10,7 +10,6 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/styles";
-import { Block } from "@material-ui/icons";
 
 const fetchPostById = async ({
   postId,
@@ -38,7 +37,6 @@ const useStyles = makeStyles({
   field: {
     marginTop: 20,
     marginBotttom: 20,
-    // display: Block,
   },
 });
 
@@ -46,12 +44,10 @@ export default function PostDetail({ user, updatePost }) {
   const classes = useStyles();
   const { postId } = useParams();
   const [post, setPost] = useState(null);
-  // const [rating, setRating] = useState(null);
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  // const [isSavingRating, setIsSavingRating] = useState(false);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
@@ -161,6 +157,26 @@ export default function PostDetail({ user, updatePost }) {
             <p className="text">Text: {post.text}</p> */}
           </div>
         </div>
+        {userOwnsPost === true && (
+          <div className="alter">
+            <Button
+              onClick={togglePopup}
+              size="small"
+              variant="contained"
+              color="secondary"
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={handleOnDelete}
+              size="small"
+              variant="contained"
+              color="secondary"
+            >
+              Delete
+            </Button>
+          </div>
+        )}
         <div className="Comments">
           <p>Comments:</p>
           <div className="comment-section">
@@ -199,7 +215,6 @@ export default function PostDetail({ user, updatePost }) {
           {comments.map((comment) => (
             <div className="test">
               <CommentCard comment={comment} />
-              {/* {comment.text}-{comment.userName} */}
             </div>
           ))}
           {/* <textarea
@@ -216,7 +231,7 @@ export default function PostDetail({ user, updatePost }) {
       {error && <span className="error">Error: {error}</span>}
 
       <div className="actions">
-        <input type="button" value="Edit post" onClick={togglePopup} />
+        {/* <input type="button" value="Edit post" onClick={togglePopup} /> */}
         {isOpen && (
           <Popup
             content={

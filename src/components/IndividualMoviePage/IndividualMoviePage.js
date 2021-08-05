@@ -50,11 +50,8 @@ export default function IndividualMoviePage(props) {
   };
 
   const fetchPosts = async () => {
-    // console.log("inside fetchpost");
-    // console.log("movieName", movieName);
     const { data, error } = await apiClient.listMoviePosts(movieName);
     if (data) {
-      // console.log("this is listmovieposts", data.posts);
       setPosts(data.posts);
     }
     if (error) setError(error);
@@ -92,7 +89,6 @@ export default function IndividualMoviePage(props) {
       } else {
         setVideo(null);
       }
-      // setVideo('notexist')
     };
 
     fetchIndividual();
@@ -145,9 +141,6 @@ export default function IndividualMoviePage(props) {
     price: 20,
   };
   const videolink = `https://www.youtube.com/embed/${video}`;
-  // setMoviePoster(poster)
-  // console.log('poster', poster)
-  console.log("user in individual movie page", user);
   return (
     <div className="individualMoviePage">
       <div className="column">
@@ -198,22 +191,12 @@ export default function IndividualMoviePage(props) {
                   handleClose={togglePopup}
                 />
               )}
-              {/* : 
-              <p>No Trailer</p> */}
-              {/* } */}
             </div>
             <Link to="/shopping-cart/">
               <button onClick={() => onAdd(allData)} className="add">
                 Purchase
               </button>
             </Link>
-          </div>
-          <div className="right">
-            {/* <Link to="/shopping-cart/">
-              <button onClick={() => onAdd(allData)} className="add">
-                Purchase
-              </button>
-            </Link> */}
           </div>
         </div>
         {/* <CardContent>
