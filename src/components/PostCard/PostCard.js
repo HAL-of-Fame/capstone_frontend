@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -8,21 +8,17 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { positions } from "@material-ui/system";
 import { formatDate, formatTime } from "../../utils/format";
-import Box from "@material-ui/core/Box";
-import { DeleteOutlined } from "@material-ui/icons";
 import "./PostCard.css";
-import clsx from "clsx";
 import CardHeader from "@material-ui/core/CardHeader";
-import Collapse from "@material-ui/core/Collapse";
+
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import { red, yellow } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+// import IconButton from "@material-ui/core/IconButton";
+import { yellow } from "@material-ui/core/colors";
+// import FavoriteIcon from "@material-ui/icons/Favorite";
+// import ShareIcon from "@material-ui/icons/Share";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import adventure from "../../assets/adventure.jpg";
 import action from "../../assets/action.jpg";
@@ -66,9 +62,8 @@ const useStyles = makeStyles({
 });
 
 export default function PostCard({ post, user }) {
-  console.log("user inside postcard", user);
   const userOwnsPost = user?.username && post?.userName === user?.username;
-  console.log("userownspost", userOwnsPost);
+
   let timeinfo = `by ${post.userName} - ${formatDate(
     post.created_at
   )} @ ${formatTime(post.created_at)}`;
