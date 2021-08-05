@@ -21,8 +21,20 @@
 .edit-post {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .test {
   margin: 1%;
+}
+
+.alter {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2%;
+}
+
+.deleteButton {
+  display: flex;
+  justify-content: center;
 }

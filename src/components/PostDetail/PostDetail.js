@@ -35,8 +35,16 @@ const fetchPostById = async ({
 
 const useStyles = makeStyles({
   field: {
-    marginTop: 20,
+    marginTop: 0,
     marginBotttom: 20,
+    width: "90%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingBottom: 0,
+    fontWeight: 500,
+  },
+  input: {
+    color: "white",
   },
 });
 
@@ -159,22 +167,24 @@ export default function PostDetail({ user, updatePost }) {
         </div>
         {userOwnsPost === true && (
           <div className="alter">
-            <Button
-              onClick={togglePopup}
-              size="small"
-              variant="contained"
-              color="secondary"
-            >
-              Edit
-            </Button>
-            <Button
-              onClick={handleOnDelete}
-              size="small"
-              variant="contained"
-              color="secondary"
-            >
-              Delete
-            </Button>
+            <div className="wrap">
+              <Button
+                onClick={togglePopup}
+                size="small"
+                variant="contained"
+                color="secondary"
+              >
+                Edit
+              </Button>
+              <Button
+                onClick={handleOnDelete}
+                size="small"
+                variant="contained"
+                color="secondary"
+              >
+                Delete
+              </Button>
+            </div>
           </div>
         )}
         <div className="Comments">
@@ -194,18 +204,22 @@ export default function PostDetail({ user, updatePost }) {
                 variant="filled"
                 color="primary"
                 fullWidth
+                InputProps={{
+                  className: classes.input,
+                }}
                 // size="large"
               />
-
-              <Button
-                onClick={handleOnSaveComment}
-                startIcon={<SaveIcon />}
-                size="small"
-                variant="contained"
-                color="primary"
-              >
-                Save
-              </Button>
+              <div className="deleteButton">
+                <Button
+                  onClick={handleOnSaveComment}
+                  startIcon={<SaveIcon />}
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                >
+                  Save
+                </Button>
+              </div>
               {/* <button className="btn" onClick={handleOnSaveComment}>
               Save Comment
             </button> */}
@@ -214,7 +228,7 @@ export default function PostDetail({ user, updatePost }) {
           </div>
           {comments.map((comment) => (
             <div className="test">
-              <CommentCard comment={comment} />
+              <CommentCard comment={comment} user={user} />
             </div>
           ))}
           {/* <textarea
