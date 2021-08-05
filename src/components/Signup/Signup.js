@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 import "./Signup.css";
 import apiClient from "../Services/apiClient";
 
@@ -59,7 +58,6 @@ export default function Signup({ user, setUser }) {
     } else {
       setErrors((e) => ({ ...e, passwordConfirm: null }));
     }
-
 
     const { data, error } = await apiClient.signUpUser({
       email: form.email,

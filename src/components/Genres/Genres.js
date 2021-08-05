@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import "./Genres.css";
 import apiClient from "../Services/apiClient";
 import PostCard from "../PostCard/PostCard";
-import { formatDate } from "../../utils/format";
+// import { formatDate } from "../../utils/format";
 import adventure from "../../assets/adventure.jpg";
 import action from "../../assets/action.jpg";
 import romance from "../../assets/romance.jpg";
@@ -23,14 +23,15 @@ export default function Genres({ user }) {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
 
-  const addPost = (newPost) => {
-    setPosts((oldPosts) => [...oldPosts, newPost]);
-  };
+  // const addPost = (newPost) => {
+  //   setPosts((oldPosts) => [...oldPosts, newPost]);
+  // };
 
   useEffect(() => {
     const fetchPosts = async () => {
       const { data, error } = await apiClient.fetchAllPostsByGenre(genres);
       if (data) {
+        console.log("inside genres, ", data.threads);
         setPosts(data.threads);
       }
       if (error) setError(error);

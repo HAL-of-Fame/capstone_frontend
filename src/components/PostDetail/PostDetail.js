@@ -17,11 +17,13 @@ const fetchPostById = async ({
   setError,
   setPost,
   setText,
+  setTitle,
 }) => {
   setIsFetching(true);
 
   const { data, error } = await apiClient.fetchPostById(postId);
   if (data) {
+    console.log("data. title.title", data.post.title);
     setPost(data.post);
     setText(data.post.text);
     // setTitle(data.post.title);
@@ -60,6 +62,7 @@ export default function PostDetail({ user, updatePost }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [edited, setEdited] = useState(false);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -107,6 +110,7 @@ export default function PostDetail({ user, updatePost }) {
     if (data) {
       setPost({ ...post, text: data.post.text, title: data.post.title });
       updatePost({ postId, postUpdate });
+      setEdited(true);
     }
     if (error) {
       setError(error);
