@@ -160,6 +160,7 @@ class ApiClient {
   }
 
   async deleteCommentById({ commentId }) {
+    console.log("inside apiclient", commentId);
     return await this.request({
       endpoint: `comments/${commentId}/delete`,
       method: `DELETE`,
@@ -175,13 +176,13 @@ class ApiClient {
   }
 
   // RATINGS
-  async createRatingForPost({ postId, rating }) {
-    return await this.request({
-      endpoint: `posts/${postId}/ratings`,
-      method: `POST`,
-      data: { rating },
-    });
-  }
+  // async createRatingForPost({ postId, rating }) {
+  //   return await this.request({
+  //     endpoint: `posts/${postId}/ratings`,
+  //     method: `POST`,
+  //     data: { rating },
+  //   });
+  // }
 }
 export default new ApiClient(
   process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001"

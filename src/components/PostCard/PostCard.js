@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -65,7 +65,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, user }) {
+  console.log("user inside postcard", user);
+  const userOwnsPost = user?.username && post?.userName === user?.username;
+  console.log("userownspost", userOwnsPost);
   let timeinfo = `by ${post.userName} - ${formatDate(
     post.created_at
   )} @ ${formatTime(post.created_at)}`;
@@ -79,7 +82,7 @@ export default function PostCard({ post }) {
       setPoster(Switch(post.genre));
     }
   }, [post]);
-  console.log(poster);
+  // console.log(poster);
 
   return (
     <div className="all">
@@ -90,12 +93,21 @@ export default function PostCard({ post }) {
               {post.userName[0].toUpperCase()}
             </Avatar>
           }
-          action={
-            <IconButton onClick={() => console.log("delete")}>
-              <MoreVertIcon />
-              {/* <DeleteOutlined /> */}
-            </IconButton>
-          }
+          // {userOwnsPost ? (
+          // action={
+          //   <IconButton onClick={() => console.log("delete")}>
+          //     <MoreVertIcon />
+          //     {/* <DeleteOutlined /> */}
+          //   </IconButton>
+          // }
+          // ):(
+          // action={
+          //   <IconButton onClick={() => console.log("delete")}>
+          //     <MoreVertIcon />
+          //     {/* <DeleteOutlined /> */}
+          //   </IconButton>
+          // }
+          // ) }
           title={post.title}
           subheader={timeinfo}
           // titleTypographyProps={
@@ -117,6 +129,15 @@ export default function PostCard({ post }) {
             <Typography variant="body2" color="textSecondary" component="p">
               {post.text}
             </Typography>
+            {/* {userOwnsPost ? (
+              <Typography variant="body2" color="textSecondary" component="p">
+                {post.text}
+              </Typography>
+            ) : (
+              <Typography variant="body2" color="textSecondary" component="p">
+                doesn't own post
+              </Typography>
+            )} */}
             {/* <Typography variant="body2" color="textSecondary" component="p">
             Date: {formatDate(post.created_at)}
           </Typography>
@@ -137,9 +158,32 @@ export default function PostCard({ post }) {
           <Button size="small" color="primary">
             Comment
           </Button>
-          {/* <Button size="small" color="primary">
-            Edit
-          </Button> */}
+          <div className="sadf">
+            {userOwnsPost === true && (
+              <div className="tea">
+                <Button size="small" color="primary">
+                  Edit
+                </Button>
+                <Button size="small" color="primary">
+                  Delete
+                </Button>
+              </div>
+            )}
+          </div>
+          {/* {userOwnsPost ? (
+            <div className="tea">
+              <Button size="small" color="primary">
+                Comment
+              </Button>
+              <Button size="small" color="primary">
+                Delete
+              </Button>
+            </div>
+          ) : (
+            <Button size="small" color="primary">
+              Edit
+            </Button>
+          )} */}
         </CardActions>
       </Card>
     </div>

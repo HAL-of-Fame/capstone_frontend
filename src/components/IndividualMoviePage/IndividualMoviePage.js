@@ -37,9 +37,10 @@ export default function IndividualMoviePage(props) {
     setMovieName,
     moviePoster,
     setMoviePoster,
+    user,
   } = props;
   const [individual, setIndividual] = useState([]);
-  const [video, setVideo] = useState([]);
+  const [video, setVideo] = useState("");
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -50,11 +51,8 @@ export default function IndividualMoviePage(props) {
   };
 
   const fetchPosts = async () => {
-    // console.log("inside fetchpost");
-    // console.log("movieName", movieName);
     const { data, error } = await apiClient.listMoviePosts(movieName);
     if (data) {
-      // console.log("this is listmovieposts", data.posts);
       setPosts(data.posts);
     }
     if (error) setError(error);
@@ -87,8 +85,10 @@ export default function IndividualMoviePage(props) {
           `&language=en-US`
       );
       const responseVidData = await viddata.json();
-      if (responseVidData) {
+      if (responseVidData.results.length > 0) {
         setVideo(responseVidData.results[0].key);
+      } else {
+        setVideo(null);
       }
     };
 
@@ -142,8 +142,6 @@ export default function IndividualMoviePage(props) {
     price: 20,
   };
   const videolink = `https://www.youtube.com/embed/${video}`;
-  // setMoviePoster(poster)
-  // console.log('poster', poster)
   return (
     <div className="individualMoviePage">
       <div className="column">
@@ -161,39 +159,45 @@ export default function IndividualMoviePage(props) {
               Duration: {individual.runtime} minutes
             </div>
 
-            <input type="button" value="Watch Trailer" onClick={togglePopup} />
-            {isOpen && (
-              <Popup
-                content={
-                  <>
-                    <div className="trailer">
-                      <iframe
-                        title="movie trailer"
-                        width="560"
-                        height="315"
-                        src={videolink}
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                      ></iframe>
-                    </div>
-                  </>
-                }
-                handleClose={togglePopup}
-              />
-            )}
+            <div className="trailer">
+              {video ? (
+                <input
+                  type="button"
+                  value="Watch Trailer"
+                  onClick={togglePopup}
+                />
+              ) : (
+                <div className="teste">
+                  <p>No trailer available</p>
+                </div>
+              )}
+
+              {isOpen && (
+                <Popup
+                  content={
+                    <>
+                      <div className="trailer">
+                        <iframe
+                          title="movie trailer"
+                          width="560"
+                          height="315"
+                          src={videolink}
+                          frameborder="0"
+                          allow="autoplay; encrypted-media"
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+                    </>
+                  }
+                  handleClose={togglePopup}
+                />
+              )}
+            </div>
             <Link to="/shopping-cart/">
               <button onClick={() => onAdd(allData)} className="add">
                 Purchase
               </button>
             </Link>
-          </div>
-          <div className="right">
-            {/* <Link to="/shopping-cart/">
-              <button onClick={() => onAdd(allData)} className="add">
-                Purchase
-              </button>
-            </Link> */}
           </div>
         </div>
         {/* <CardContent>
@@ -226,10 +230,7 @@ export default function IndividualMoviePage(props) {
               </Button>
             </Link>
           </div>
-          {/* <Link to="create/">
-            <button className="moviePost">Make a Post</button>
-          </Link> */}
-          <PostList posts={posts} />
+          <PostList posts={posts} user={user} />
         </div>
       </div>
     </div>

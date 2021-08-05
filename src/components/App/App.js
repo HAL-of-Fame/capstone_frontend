@@ -229,8 +229,8 @@ export default function App() {
             }
           />
           <Route path="/search/:searchInputValue" element={<SearchPage />} />
-          <Route path="/genre" element={<GenrePage />} />
-          <Route path="/genre/:genres" element={<Genres />} />
+          <Route path="/genre" element={<GenrePage user={user} />} />
+          <Route path="/genre/:genres" element={<Genres user={user} />} />
           <Route
             path="/genre/:genres/create"
             element={<PostForm user={user} posts={posts} addPost={addPost} />}

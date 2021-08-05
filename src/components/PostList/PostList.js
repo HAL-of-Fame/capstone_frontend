@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import PostCard from "../../components/PostCard/PostCard";
 import "./PostList.css";
 
-export default function PostList({ posts }) {
+export default function PostList({ posts, user }) {
   return (
     <div className="posts">
       {posts?.map((post) => (
@@ -14,7 +14,7 @@ export default function PostList({ posts }) {
           }}
         >
           <div className="postCard">
-            <PostCard post={post} />
+            <PostCard post={post} user={user} />
           </div>
         </Link>
       ))}

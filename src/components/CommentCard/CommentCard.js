@@ -13,6 +13,8 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import { red } from "@material-ui/core/colors";
+import apiClient from "../Services/apiClient";
+// import { useNavigate } from "react-router";
 const useStyles = makeStyles({
   root: {
     width: 650,
@@ -22,12 +24,33 @@ const useStyles = makeStyles({
     backgroundColor: red[500],
   },
 });
+// let Navigate = useNavigate();
 
-export default function CommentCard({ comment }) {
+export default function CommentCard({ comment, user }) {
+  console.log("comment", comment);
+
+  const handleOnDeleteComment = async () => {
+    console.log("commentid", comment.id);
+    let commentId = comment.id;
+    console.log("commentId", commentId);
+    const { data, error } = await apiClient.deleteCommentById({ commentId });
+    if (data) {
+      console.log("i deleted", data);
+      // const genre = data.post.genre;
+      // Navigate(`/genre/${genre}`);
+    }
+    // if (error) setError(error);
+    else {
+      console.log("succeeded in deleting");
+    }
+  };
+
   let timeinfo = `${formatDate(comment.created_at)} @ ${formatTime(
     comment.created_at
   )}`;
-
+  const userOwnsComment =
+    user?.username && comment?.userName === user?.username;
+  console.log("userOwnsComment", userOwnsComment);
   let commenter = `${comment.userName} says:`;
   // console.log("comment", comment);
   const classes = useStyles();
@@ -41,7 +64,6 @@ export default function CommentCard({ comment }) {
         }
         title={commenter}
         subheader={timeinfo}
-        component="div"
       />
       <CardActionArea>
         {/* <CardMedia
@@ -53,7 +75,7 @@ export default function CommentCard({ comment }) {
         /> */}
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {comment.text}
+            {comment.text} - {userOwnsComment}
           </Typography>
           {/* <Typography variant="body2" color="textSecondary" component="p">
             Posted @ {formatTime(comment.created_at)}
@@ -64,12 +86,22 @@ export default function CommentCard({ comment }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+        <div className="testing">
+          {userOwnsComment === true && (
+            <div className="altering">
+              <Button size="small" color="primary">
+                Edit
+              </Button>
+              <Button
+                size="small"
+                onClick={handleOnDeleteComment}
+                color="primary"
+              >
+                Delete
+              </Button>
+            </div>
+          )}
+        </div>
       </CardActions>
     </Card>
   );

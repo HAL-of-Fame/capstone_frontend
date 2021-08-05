@@ -21,16 +21,20 @@
 .edit-post {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .test {
   margin: 1%;
 }
-.titlearea {
-  width: 300px;
+
+.alter {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2%;
 }
-.popup-content {
-  margin: auto;
-  width: 50%;
-  padding: 5px;
+
+.deleteButton {
+  display: flex;
+  justify-content: center;
 }
