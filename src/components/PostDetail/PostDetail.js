@@ -117,6 +117,7 @@ export default function PostDetail({ user, updatePost }) {
       setPost({ ...post, text: data.post.text, title: data.post.title });
       updatePost({ postId, postUpdate });
       setEdited(true);
+      window.location.reload();
     }
     if (error) {
       setError(error);
@@ -164,7 +165,7 @@ export default function PostDetail({ user, updatePost }) {
   // console.log("userOwnsPost is", userOwnsPost)
   if (!post && !isFetching) return null;
   if (!post) return <h1>Loading...</h1>;
-
+  console.log("post inside postdetail", post);
   return (
     <div className="PostDetail">
       <div className="Post">

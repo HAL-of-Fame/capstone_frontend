@@ -69,7 +69,9 @@ export default function PostCard({ post, user }) {
   )} @ ${formatTime(post.created_at)}`;
   const [poster, setPoster] = useState("");
   const classes = useStyles();
-  console.log("post.movieposter", post.movieposter);
+  console.log("post inside postcard", post);
+  // console.log("post.movieposter", post.movieposter);
+
   useEffect(() => {
     if (post.movieposter) {
       setPoster(post.movieposter);
@@ -160,7 +162,7 @@ export default function PostCard({ post, user }) {
           <Button size="small" color="primary">
             Comment
           </Button>
-          <div className="sadf">
+          {/* <div className="sadf">
             {userOwnsPost === true && (
               <div className="tea">
                 <Button size="small" color="primary">
@@ -171,7 +173,7 @@ export default function PostCard({ post, user }) {
                 </Button>
               </div>
             )}
-          </div>
+          </div> */}
           {/* {userOwnsPost ? (
             <div className="tea">
               <Button size="small" color="primary">

@@ -28,22 +28,38 @@ const useStyles = makeStyles({
 export default function CommentCard({ comment, user }) {
   console.log("comment", comment);
   let Navigate = useNavigate();
+  let commentId = comment.id;
 
   const handleOnDeleteComment = async () => {
-    let commentId = comment.id;
     const { data, error } = await apiClient.deleteCommentById({ commentId });
     if (data) {
       console.log("i deleted", data);
       console.log("commentId", commentId);
 
       // Navigate(`/posts/${comment.post_id}`); //will return an error not found
-      // Navigate(`/`);
       window.location.reload();
-      // Navigate(-1);
     }
     // if (error) setError(error);
     else {
       console.log("did not succeeded in deleting");
+    }
+  };
+
+  const handleOnUpdateComment = async () => {
+    // const commentUpdate = { text };
+    const { data, error } = await apiClient.updateComment({
+      commentId,
+      // commentUpdate,
+    });
+    if (data) {
+      console.log("commentcard after the api call", data);
+      // setPost({ ...post, text: data.post.text, title: data.post.title });
+      // updatePost({ postId, postUpdate });
+      // setEdited(true);
+      // window.location.reload();
+    }
+    if (error) {
+      console.log("error in commentcard", error);
     }
   };
 
@@ -52,7 +68,7 @@ export default function CommentCard({ comment, user }) {
   )}`;
   const userOwnsComment =
     user?.username && comment?.userName === user?.username;
-  console.log("userOwnsComment", userOwnsComment);
+  // console.log("userOwnsComment", userOwnsComment);
   let commenter = `${comment.userName} says:`;
   // console.log("comment", comment);
   const classes = useStyles();
@@ -68,30 +84,21 @@ export default function CommentCard({ comment, user }) {
         subheader={timeinfo}
       />
       <CardActionArea>
-        {/* <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="100"
-          image="/static/images/cards/contemplative-reptile.jpg"
-        title="Contemplative Reptile"
-        /> */}
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             {comment.text} - {userOwnsComment}
           </Typography>
-          {/* <Typography variant="body2" color="textSecondary" component="p">
-            Posted @ {formatTime(comment.created_at)}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Edited: {formatTime(comment.updated_at)}
-          </Typography> */}
         </CardContent>
       </CardActionArea>
       <CardActions>
         <div className="testing">
           {userOwnsComment === true && (
             <div className="altering">
-              <Button size="small" color="primary">
+              <Button
+                onClick={handleOnUpdateComment}
+                size="small"
+                color="primary"
+              >
                 Edit
               </Button>
               <Button
