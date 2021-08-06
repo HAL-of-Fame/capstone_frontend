@@ -84,7 +84,6 @@ export default function Basket(props) {
                   <Button
                     color="inherit"
                     variant="outlined"
-                    href="/orders"
                     onClick={handleOnCheckout}
                   >
                     Checkout
