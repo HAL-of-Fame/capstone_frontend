@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/styles";
+import { Box } from "@material-ui/core";
 
 const fetchPostById = async ({
   postId,
@@ -51,6 +52,9 @@ const useStyles = makeStyles({
     marginTop: "10px",
     borderColor: "white",
     borderRadius: "5px",
+  },
+  editor: {
+    margin: "20px",
   },
 });
 
@@ -173,8 +177,9 @@ export default function PostDetail({ user, updatePost }) {
         </div>
         {userOwnsPost === true && (
           <div className="alter">
-            <div className="wrap">
+            <Box display="flex" justifyContent="center">
               <Button
+                className={classes.editor}
                 onClick={togglePopup}
                 size="small"
                 variant="contained"
@@ -182,7 +187,9 @@ export default function PostDetail({ user, updatePost }) {
               >
                 Edit
               </Button>
+
               <Button
+                className={classes.editor}
                 onClick={handleOnDelete}
                 size="small"
                 variant="contained"
@@ -190,7 +197,7 @@ export default function PostDetail({ user, updatePost }) {
               >
                 Delete
               </Button>
-            </div>
+            </Box>
           </div>
         )}
         <div className="Comments">
