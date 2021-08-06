@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
@@ -24,6 +24,7 @@ import Genres from "../Genres/Genres";
 import MoviePost from "../MoviePostForm/MoviePostForm";
 
 export default function App() {
+  const navigate = useNavigate()
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
@@ -54,6 +55,7 @@ export default function App() {
         // console.log("orders in app", orders);
         setIsCheckingOut(false);
         setCartItems([]);
+        navigate("/orders")
         return res.data.order;
       } else {
         setError("Error checking out.");
@@ -168,7 +170,6 @@ export default function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         {/* <Sidebar /> */}
         <Routes>
@@ -257,7 +258,6 @@ export default function App() {
           {/* <Route path="/meet-the-team" element={<MTT />} /> */}
         </Routes>
         <Footer />
-      </BrowserRouter>
     </div>
   );
 }
