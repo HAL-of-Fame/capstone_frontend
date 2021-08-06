@@ -10,7 +10,6 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/styles";
-import { Block } from "@material-ui/icons";
 
 const fetchPostById = async ({
   postId,
@@ -36,9 +35,22 @@ const fetchPostById = async ({
 
 const useStyles = makeStyles({
   field: {
-    marginTop: 20,
+    marginTop: 0,
     marginBotttom: 20,
-    // display: Block,
+    width: "90%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingBottom: 0,
+    fontWeight: 500,
+  },
+  input: {
+    color: "white",
+  },
+  button: {
+    color: "white",
+    marginTop: "10px",
+    borderColor: "white",
+    borderRadius: "5px",
   },
 });
 
@@ -46,12 +58,10 @@ export default function PostDetail({ user, updatePost }) {
   const classes = useStyles();
   const { postId } = useParams();
   const [post, setPost] = useState(null);
-  // const [rating, setRating] = useState(null);
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  // const [isSavingRating, setIsSavingRating] = useState(false);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
@@ -156,11 +166,33 @@ export default function PostDetail({ user, updatePost }) {
       <div className="Post">
         <div className="body">
           <div className="info">
-            <PostCard post={post} />
+            <PostCard post={post} user={user} />
             {/* <p className="text">Title: {post.title}</p>
             <p className="text">Text: {post.text}</p> */}
           </div>
         </div>
+        {userOwnsPost === true && (
+          <div className="alter">
+            <div className="wrap">
+              <Button
+                onClick={togglePopup}
+                size="small"
+                variant="contained"
+                color="secondary"
+              >
+                Edit
+              </Button>
+              <Button
+                onClick={handleOnDelete}
+                size="small"
+                variant="contained"
+                color="secondary"
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
+        )}
         <div className="Comments">
           <p>Comments:</p>
           <div className="comment-section">
@@ -177,19 +209,24 @@ export default function PostDetail({ user, updatePost }) {
                 label="Comment"
                 variant="filled"
                 color="primary"
+                required
                 fullWidth
+                InputProps={{
+                  className: classes.input,
+                }}
                 // size="large"
               />
-
-              <Button
-                onClick={handleOnSaveComment}
-                startIcon={<SaveIcon />}
-                size="small"
-                variant="contained"
-                color="primary"
-              >
-                Save
-              </Button>
+              <div className="saveButton">
+                <Button
+                  onClick={handleOnSaveComment}
+                  startIcon={<SaveIcon />}
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                >
+                  Save
+                </Button>
+              </div>
               {/* <button className="btn" onClick={handleOnSaveComment}>
               Save Comment
             </button> */}
@@ -198,8 +235,7 @@ export default function PostDetail({ user, updatePost }) {
           </div>
           {comments.map((comment) => (
             <div className="test">
-              <CommentCard comment={comment} />
-              {/* {comment.text}-{comment.userName} */}
+              <CommentCard comment={comment} user={user} />
             </div>
           ))}
           {/* <textarea
@@ -216,7 +252,7 @@ export default function PostDetail({ user, updatePost }) {
       {error && <span className="error">Error: {error}</span>}
 
       <div className="actions">
-        <input type="button" value="Edit post" onClick={togglePopup} />
+        {/* <input type="button" value="Edit post" onClick={togglePopup} /> */}
         {isOpen && (
           <Popup
             content={
@@ -224,25 +260,33 @@ export default function PostDetail({ user, updatePost }) {
                 <div className="edit-post">
                   <p>Edit your post</p>
                   <p>Title</p>
-                  <textarea
-                    className="titlearea"
+                  <TextField
+                    required
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                     name="title"
-                  ></textarea>
+                  ></TextField>
                   <p>Text</p>
-                  <textarea
-                    className="textarea"
+                  <TextField
                     value={text}
                     onChange={(event) => setText(event.target.value)}
                     name="text"
-                  ></textarea>
-                  <button className="btn" onClick={handleOnUpdate}>
+                    required
+                  ></TextField>
+                  <Button
+                    className={classes.button}
+                    onClick={handleOnUpdate}
+                    variant="outlined"
+                  >
                     {isUpdating ? "Loading..." : "Save Post"}
-                  </button>
-                  <button className="btn" onClick={handleOnDelete}>
+                  </Button>
+                  <Button
+                    className={classes.button}
+                    onClick={handleOnDelete}
+                    variant="outlined"
+                  >
                     {isUpdating ? "Loading..." : "Delete Post"}
-                  </button>
+                  </Button>
                 </div>
               </>
             }

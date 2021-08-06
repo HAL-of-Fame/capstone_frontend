@@ -1,12 +1,12 @@
-/* .popup-box {
+.popup-box {
   position: fixed;
-  background-color: black;
-  width: 400px;
-  height: 180px;
+  background-color: #3f51b5;
+  width: 720px;
+  height: 400px;
 
-  top: 50%;
-  left: 45%;
-} */
+  top: 20%;
+  left: 30%;
+}
 
 .box {
   position: relative;
@@ -30,9 +30,9 @@
   content: "x";
   cursor: pointer;
   position: fixed;
-  right: calc(30% - 10px);
+  right: calc(16% - 10px);
   /* right: calc(15% - 30px); */
-  top: calc(100vh - 85vh - 33px);
+  top: calc(105vh - 83vh - 32px);
   background: #ededed;
   width: 25px;
   height: 25px;
