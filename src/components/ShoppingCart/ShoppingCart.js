@@ -14,14 +14,15 @@ export default function Basket(props) {
   console.log(cartItems);
 
   const onCheckoutSubmit = async () => {
-    const order = await handleOnCheckout();
-    if (order) {
-      navigate("/orders");
-    }
+    const order = handleOnCheckout();
+    // if (order) {
+    //   navigate("/orders");
+    // }
   };
 
   return (
     <aside className="all">
+      <Link to="/">Back to Home</Link>
       <h2>Cart Items</h2>
       <div>
         {cartItems.length === 0 && <div>Cart is empty</div>}
@@ -80,17 +81,26 @@ export default function Basket(props) {
             <div className="row">
               {user?.email ? (
                 <>
-                  <button onClick={onCheckoutSubmit}>Checkout</button>
+                  <Button
+                    color="inherit"
+                    variant="outlined"
+                    href="/orders"
+                    onClick={onCheckoutSubmit}
+                  >
+                    Checkout
+                  </Button>
                 </>
               ) : (
                 <>
-                  <Link to="/login" color="inherit">
-                    {" "}
-                    Sign In{" "}
+                  <Link to="/login">
+                    <Button color="inherit" variant="outlined">
+                      Sign In
+                    </Button>
                   </Link>
-                  <Link to="/register" color="inherit">
-                    {" "}
-                    Create an Account{" "}
+                  <Link to="/register" color="inherit" variant="outlined">
+                    <Button color="inherit" variant="outlined">
+                      Create an Account
+                    </Button>
                   </Link>
                 </>
               )}

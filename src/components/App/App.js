@@ -112,7 +112,6 @@ export default function App() {
   useEffect(() => {
     const fetchProducts = async () => {
       setIsFetching(true);
-
       try {
         const res = await apiClient.listProducts();
         console.log(res);
@@ -142,7 +141,7 @@ export default function App() {
       }
     };
     fetchOrders();
-  }, []);
+  }, [user]);
 
   const addPost = (newPost) => {
     setPosts((oldPosts) => [...oldPosts, newPost]);

@@ -48,6 +48,12 @@ const useStyles = makeStyles({
   input: {
     color: "white",
   },
+  button: {
+    color: "white",
+    marginTop: "10px",
+    borderColor: "white",
+    borderRadius: "5px",
+  },
 });
 
 export default function PostDetail({ user, updatePost }) {
@@ -207,6 +213,7 @@ export default function PostDetail({ user, updatePost }) {
                 label="Comment"
                 variant="filled"
                 color="primary"
+                required
                 fullWidth
                 InputProps={{
                   className: classes.input,
@@ -257,23 +264,33 @@ export default function PostDetail({ user, updatePost }) {
                 <div className="edit-post">
                   <p>Edit your post</p>
                   <p>Title</p>
-                  <textarea
+                  <TextField
+                    required
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                     name="title"
-                  ></textarea>
+                  ></TextField>
                   <p>Text</p>
-                  <textarea
+                  <TextField
                     value={text}
                     onChange={(event) => setText(event.target.value)}
                     name="text"
-                  ></textarea>
-                  <button className="btn" onClick={handleOnUpdate}>
+                    required
+                  ></TextField>
+                  <Button
+                    className={classes.button}
+                    onClick={handleOnUpdate}
+                    variant="outlined"
+                  >
                     {isUpdating ? "Loading..." : "Save Post"}
-                  </button>
-                  <button className="btn" onClick={handleOnDelete}>
+                  </Button>
+                  <Button
+                    className={classes.button}
+                    onClick={handleOnDelete}
+                    variant="outlined"
+                  >
                     {isUpdating ? "Loading..." : "Delete Post"}
-                  </button>
+                  </Button>
                 </div>
               </>
             }

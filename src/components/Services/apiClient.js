@@ -73,6 +73,12 @@ class ApiClient {
       data: { order, user },
     });
   }
+  async OrdersList() {
+    return await this.request({
+      endpoint: `orders`,
+      method: `GET`,
+    });
+  }
 
   // GENRES
   async fetchAllPostsByGenre(genre) {

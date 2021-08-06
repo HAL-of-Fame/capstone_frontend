@@ -38,3 +38,12 @@
   display: flex;
   justify-content: center;
 }
+.edit-post textarea {
+  border-radius: 5px;
+  width: 40%;
+  height: 50px;
+}
+
+/* content .btn {
+  background-color: white;
+} */

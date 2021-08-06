@@ -4,7 +4,7 @@ import {
   calculateItemSubtotal,
   calculateTaxesAndFees,
   calculateTotal,
-  shipping
+  shipping,
 } from "../../utils/calculations";
 import "./Orders.css";
 
@@ -26,6 +26,7 @@ export default function Orders({
   handleOnSearchInputChange,
   searchInputValue,
 }) {
+  console.log(orders);
   const ordersMapping = groupOrderDetailsByOrderId(orders);
   console.log("order mapping", ordersMapping);
   console.log("order/ mapping", orders);
