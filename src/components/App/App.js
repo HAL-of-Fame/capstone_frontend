@@ -239,6 +239,7 @@ export default function App() {
             path="/movie/:postId/create"
             element={
               <MoviePost
+                user={user}
                 genre={genre}
                 movieName={movieName}
                 moviePoster={moviePoster}
