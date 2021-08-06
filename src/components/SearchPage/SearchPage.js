@@ -3,14 +3,24 @@ import "./SearchPage.css";
 import MovieCard from "../MovieCard/MovieCard";
 import { useParams } from "react-router";
 import config from "../../config";
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 const api_key = config.api_key;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 export default function SearchPage() {
   const [movies, setMovies] = useState([]);
   const [pageNum, setpageNum] = useState(1);
 
   const { searchInputValue } = useParams();
-
+  const classes = useStyles();
   useEffect(() => {
     //function that calls all popular movies
     const fetchSearched = async () => {
@@ -44,9 +54,7 @@ export default function SearchPage() {
           <MovieCard movie={movie} key={movie.id} />
         ))}
       </div>
-      <button className="load" onClick={handleLoad}>
-        Load More
-      </button>
+      <Button variant="contained" color="primary" onClick={handleLoad}>Load More</Button>
     </div>
   );
 }

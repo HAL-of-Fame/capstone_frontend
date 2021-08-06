@@ -1,7 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import Button from '@material-ui/core/Button';
+import { useNavigate, Link } from "react-router-dom";
 export default function Basket(props) {
   const navigate = useNavigate();
 
@@ -22,7 +21,8 @@ export default function Basket(props) {
 
   return (
     <aside className="all">
-      <Link to="/">Back to Home</Link>
+      <Button><Link to="/">Buy More Movies</Link></Button>
+      <Button><Link to="/store">Buy More Merch</Link></Button>
       <h2>Cart Items</h2>
       <div>
         {cartItems.length === 0 && <div>Cart is empty</div>}
