@@ -28,6 +28,7 @@ const useStyles = makeStyles({
 export default function CommentCard({ comment, user }) {
   console.log("comment", comment);
   let Navigate = useNavigate();
+
   const handleOnDeleteComment = async () => {
     let commentId = comment.id;
     const { data, error } = await apiClient.deleteCommentById({ commentId });
@@ -35,8 +36,10 @@ export default function CommentCard({ comment, user }) {
       console.log("i deleted", data);
       console.log("commentId", commentId);
 
-      //Navigate(`/posts/${commentId}`); //will return an error not found
-      Navigate(`/`);
+      // Navigate(`/posts/${comment.post_id}`); //will return an error not found
+      // Navigate(`/`);
+      window.location.reload();
+      // Navigate(-1);
     }
     // if (error) setError(error);
     else {
