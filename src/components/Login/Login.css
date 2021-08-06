@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color:black
   }
   .Login .card {
     min-height: 600px;
@@ -44,7 +45,7 @@
     height: 60px;
     padding: 0 15px;
     font-size: 16px;
-    border: solid 1px var gray;
+    border: solid 1px grey;
     width: 90%;
     border-radius: 12px;
   }

@@ -1,13 +1,25 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 import MovieCard from "../MovieCard/MovieCard";
+import config from "../../config";
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+const api_key = config.api_key;
 
-const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
+console.log("api key", api_key);
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 export default function Home({ user }) {
   //   const [name, setName] = useState([]);
   const [trending, setTrending] = useState([]);
   const [pageNum, setpageNum] = useState(1);
+  const classes = useStyles();
   useEffect(() => {
     //function that calls all popular movies
     const fetchTrending = async () => {
@@ -50,9 +62,8 @@ export default function Home({ user }) {
           <MovieCard movie={movie} key={movie.id} />
         ))}
       </div>
-      <button className="load" onClick={handleLoad}>
-        Load More
-      </button>
+      {/* </button> */}
+      <Button variant="contained" color="primary" onClick={handleLoad}>Load More</Button>
     </div>
   );
 }
