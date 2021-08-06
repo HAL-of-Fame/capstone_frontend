@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Login({ user, setUser }) {
   const navigate = useNavigate()
   const classes = useStyles();
@@ -56,22 +57,7 @@ export default function Login({ user, setUser }) {
 
     setIsProcessing(false)
   }
-  //   try {
-  //     const res = await axios.post("http://localhost:3001/auth/login", form)
-  //     if (res?.data?.user) {
-  //       setUser(res.data.user)
-  //       // apiClient.setToken(res.data.token)
-  //     } else {
-  //       setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
-  //     }
-  //   } catch (err) {
-  //     console.log(err)
-  //     setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
-  //   } finally {
-  //     setIsProcessing(false)
-  //   }
-  // }
-
+  
   return (
     <div className="Login">
       <div className="card">

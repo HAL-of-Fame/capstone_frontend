@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
 export default function Home({ user }) {
   //   const [name, setName] = useState([]);
   const [trending, setTrending] = useState([]);
@@ -57,6 +56,7 @@ export default function Home({ user }) {
       </div>
 
       <div className="title">Trending Movies</div>
+      {/* <button> */}
       <div className="trending">
         {trending?.map((movie) => (
           <MovieCard movie={movie} key={movie.id} />

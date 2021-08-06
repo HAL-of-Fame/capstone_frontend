@@ -1,11 +1,10 @@
 import React from "react";
 import Button from '@material-ui/core/Button';
 import { useNavigate, Link } from "react-router-dom";
-
 export default function Basket(props) {
   const navigate = useNavigate();
 
-  const { cartItems, onAdd, onRemove, handleOnCheckout } = props;
+  const { cartItems, onAdd, onRemove, handleOnCheckout, user } = props;
   const itemsPrice = cartItems.reduce((a, c) => a + c.quantity * c.price, 0);
   console.log(typeof itemsPrice);
   const taxPrice = itemsPrice * 0.14;
@@ -14,10 +13,10 @@ export default function Basket(props) {
   console.log(cartItems);
 
   const onCheckoutSubmit = async () => {
-    const order = await handleOnCheckout();
-    if (order) {
-      navigate("/order");
-    }
+    const order = handleOnCheckout();
+    // if (order) {
+    //   navigate("/orders");
+    // }
   };
 
   return (
@@ -30,7 +29,13 @@ export default function Basket(props) {
         {cartItems.map((item) => (
           <div key={item.id} className="row">
             <div className="col-2">{item.name}</div>
-            <img className="col-2" src={item.image} alt="product" />
+            <img
+              className="col-2"
+              src={item.image}
+              height={200}
+              width={200}
+              alt="product"
+            />
             <div className="col-2">
               <button onClick={() => onRemove(item)} className="remove">
                 -
@@ -74,7 +79,31 @@ export default function Basket(props) {
             </div>
             <hr />
             <div className="row">
-              <button onClick={onCheckoutSubmit}>Checkout</button>
+              {user?.email ? (
+                <>
+                  <Button
+                    color="inherit"
+                    variant="outlined"
+                    href="/orders"
+                    onClick={onCheckoutSubmit}
+                  >
+                    Checkout
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <Button color="inherit" variant="outlined">
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link to="/register" color="inherit" variant="outlined">
+                    <Button color="inherit" variant="outlined">
+                      Create an Account
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </>
         )}

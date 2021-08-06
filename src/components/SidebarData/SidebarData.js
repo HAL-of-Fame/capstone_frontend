@@ -14,9 +14,74 @@ export const SidebarData = [
   },
   {
     title: 'Genre',
-    path: '/genre',
+    path: '',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'nav-text'
+    cName: 'nav-text',
+    
+    subNav: [
+      {
+        title: 'Action',
+        path: '/genre/Action',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Animation',
+        path: '/genre/Animation',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Adventure',
+        path: '/genre/Adventure',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Comedy',
+        path: '/genre/Comedy',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Family',
+        path: '/genre/Family',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Fantasy',
+        path: '/genre/Fantasy',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Romance',
+        path: '/genre/Romance',
+        icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Drama',
+        path: '/genre/Drama',
+        icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Horror',
+        path: '/genre/Horror',
+        icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Science Fiction',
+        path: '/genre/Science-fiction',
+        icon: <IoIcons.IoIosPaper />
+      },
+      {
+        title: 'Thriller',
+        path: '/genre/Thriller',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      }
+    ]
   },
   {
     title: 'Merch Store',
@@ -26,7 +91,7 @@ export const SidebarData = [
   },
   {
     title: 'My Orders',
-    path: '/order',
+    path: '/orders',
     icon: <SiIcons.SiEventstore />,
     cName: 'nav-text'
   },

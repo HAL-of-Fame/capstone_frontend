@@ -3,19 +3,59 @@ import { Link, useParams } from "react-router-dom";
 import "./IndividualMoviePage.css";
 import Popup from "../Popup/Popup";
 import "../../components/Popup/Popup.css";
-import axios from "axios";
 
-const api_key = "765ece2c111fb5c30abfeb28d365ac2c";
+import apiClient from "../Services/apiClient";
+import config from "../../config";
+import PostCard from "../PostCard/PostCard";
+import PostList from "../PostList/PostList";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+const api_key = config.api_key;
+
+const useStyles = makeStyles({
+  root: {
+    width: 300,
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 export default function IndividualMoviePage(props) {
-  const { onAdd } = props;
+  const {
+    onAdd,
+    genre,
+    setGenre,
+    movieName,
+    setMovieName,
+    moviePoster,
+    setMoviePoster,
+    user,
+  } = props;
   const [individual, setIndividual] = useState([]);
-  const [video, setVideo] = useState([]);
+  const [video, setVideo] = useState("");
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const classes = useStyles();
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
+  };
+
+  const fetchPosts = async () => {
+    const { data, error } = await apiClient.listMoviePosts(movieName);
+    if (data) {
+      setPosts(data.posts);
+    }
+    if (error) setError(error);
   };
 
   // will strip the movie_id from the URL (holds movie ID)
@@ -34,7 +74,6 @@ export default function IndividualMoviePage(props) {
       if (responseData) {
         setIndividual(responseData);
       }
-      console.log(individual);
     };
 
     const fetchVideo = async () => {
@@ -46,19 +85,55 @@ export default function IndividualMoviePage(props) {
           `&language=en-US`
       );
       const responseVidData = await viddata.json();
-      console.log(responseVidData);
-      if (responseVidData) {
+      if (responseVidData.results.length > 0) {
         setVideo(responseVidData.results[0].key);
+      } else {
+        setVideo(null);
       }
-      // console.log(video)
     };
 
     fetchIndividual();
     fetchVideo();
+    fetchPosts();
   }, []);
 
-  console.log(individual);
-  // console.log(video)
+  useEffect(() => {
+    const setGenreMovieName = async () => {
+      const genreOptions = [
+        "Action",
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Family",
+        "Fantasy",
+        "Romance",
+        "Drama",
+        "Science-fiction",
+        "Horror",
+        "Thriller",
+      ];
+      const movieName = individual.original_title;
+      setMovieName(movieName);
+      setMoviePoster(
+        `https://www.themoviedb.org/t/p/original/${individual.backdrop_path}`
+      );
+      fetchPosts();
+      if (individual?.genres?.length > 0) {
+        individual.genres.map((genreobj) => {
+          if (genreOptions.includes(genreobj.name) === true) {
+            const genre = genreobj.name;
+            setGenre(genre);
+          }
+        });
+      }
+    };
+
+    setGenreMovieName();
+  }, [individual, video]);
+
+  // console.log('individual', individual)
+  // console.log('posts', posts)
+
   const poster = `https://www.themoviedb.org/t/p/original/${individual.backdrop_path}`;
   const allData = {
     name: individual.original_title,
@@ -67,8 +142,6 @@ export default function IndividualMoviePage(props) {
     price: 20,
   };
   const videolink = `https://www.youtube.com/embed/${video}`;
-  // console.log(videolink);
-
   return (
     <div className="individualMoviePage">
       <div className="column">
@@ -85,29 +158,41 @@ export default function IndividualMoviePage(props) {
             <div className="duration">
               Duration: {individual.runtime} minutes
             </div>
-            <input type="button" value="Watch Trailer" onClick={togglePopup} />
-            {isOpen && (
-              <Popup
-                content={
-                  <>
-                    <div className="trailer">
-                      <iframe
-                        title="movie trailer"
-                        width="560"
-                        height="315"
-                        src={videolink}
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                      ></iframe>
-                    </div>
-                  </>
-                }
-                handleClose={togglePopup}
-              />
-            )}
-          </div>
-          <div className="right">
+
+            <div className="trailer">
+              {video ? (
+                <input
+                  type="button"
+                  value="Watch Trailer"
+                  onClick={togglePopup}
+                />
+              ) : (
+                <div className="teste">
+                  <p>No trailer available</p>
+                </div>
+              )}
+
+              {isOpen && (
+                <Popup
+                  content={
+                    <>
+                      <div className="trailer">
+                        <iframe
+                          title="movie trailer"
+                          width="560"
+                          height="315"
+                          src={videolink}
+                          frameborder="0"
+                          allow="autoplay; encrypted-media"
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+                    </>
+                  }
+                  handleClose={togglePopup}
+                />
+              )}
+            </div>
             <Link to="/shopping-cart/">
               <button onClick={() => onAdd(allData)} className="add">
                 Purchase
@@ -115,11 +200,37 @@ export default function IndividualMoviePage(props) {
             </Link>
           </div>
         </div>
+        {/* <CardContent>
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            {individual.overview}
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {individual.overview}
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            {individual.overview}
+          </Typography>
+          <Typography variant="body2" component="p">
+            {individual.overview}
+          </Typography>
+        </CardContent> */}
         <div className="movieDescription">
           <p>{individual.overview}</p>
         </div>
         <div className="discussionSection">
           <p>Discussion:</p>
+          <div className="PostButton">
+            <Link to="create/">
+              <Button size="small" color="primary" variant="contained">
+                Create a Post
+              </Button>
+            </Link>
+          </div>
+          <PostList posts={posts} user={user} />
         </div>
       </div>
     </div>
