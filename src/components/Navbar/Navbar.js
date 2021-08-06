@@ -16,7 +16,8 @@ import { Box } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   buttons: {
     display: "flex",
-    justifyContent: "space-evenly",
+    justifyContent: "flex-end",
+    width: "100vh",
   },
   root: {
     flexGrow: 1,
@@ -138,7 +139,7 @@ export default function Navbar({ user, handleLogout }) {
           <div className={classes.buttons}>
             {user?.email ? (
               <>
-                <Box>
+                <Box width="300px" display="flex" justifyContent="space-around">
                   <Button variant="outlined" color="inherit" mx={30}>
                     {/* <Typography style={{ marginRight: 16 }}>{user.email}</Typography> */}
                     {user.email}
@@ -161,7 +162,7 @@ export default function Navbar({ user, handleLogout }) {
               </>
             ) : (
               <>
-                <Box width="500px" display="flex" justifyContent="space-around">
+                <Box width="300px" display="flex" justifyContent="space-around">
                   <Button color="inherit" href="/login" variant="outlined">
                     Login
                   </Button>
