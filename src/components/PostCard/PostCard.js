@@ -69,8 +69,6 @@ export default function PostCard({ post, user }) {
   )} @ ${formatTime(post.created_at)}`;
   const [poster, setPoster] = useState("");
   const classes = useStyles();
-  // console.log("post inside postcard", post);
-  // console.log("post.movieposter", post.movieposter);
 
   useEffect(() => {
     if (post.movieposter) {
@@ -79,7 +77,6 @@ export default function PostCard({ post, user }) {
       setPoster(Switch(post.genre));
     }
   }, [post]);
-  // console.log(poster);
 
   return (
     <div className="all">
@@ -107,9 +104,6 @@ export default function PostCard({ post, user }) {
           // ) }
           title={post.title}
           subheader={timeinfo}
-          // titleTypographyProps={
-
-          // }
         />
         <CardActionArea>
           <CardMedia

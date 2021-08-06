@@ -24,7 +24,6 @@ const useStyles = makeStyles({
 });
 
 export default function MoviePost({ user, genre, movieName, moviePoster }) {
-  console.log("inside moviepost form, user", user);
   const classes = useStyles();
   let Navigate = useNavigate();
   const [category, setCategory] = useState("todos");

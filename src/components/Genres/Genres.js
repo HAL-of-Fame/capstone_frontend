@@ -18,20 +18,14 @@ import sciencefiction from "../../assets/sciencefiction.jpg";
 import Button from "@material-ui/core/Button";
 
 export default function Genres({ user }) {
-  // console.log("user in genre", user);
   let { genres } = useParams();
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
-
-  // const addPost = (newPost) => {
-  //   setPosts((oldPosts) => [...oldPosts, newPost]);
-  // };
 
   useEffect(() => {
     const fetchPosts = async () => {
       const { data, error } = await apiClient.fetchAllPostsByGenre(genres);
       if (data) {
-        console.log("inside genres, ", data.threads);
         setPosts(data.threads);
       }
       if (error) setError(error);
