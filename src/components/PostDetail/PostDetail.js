@@ -24,7 +24,7 @@ const fetchPostById = async ({
 
   const { data, error } = await apiClient.fetchPostById(postId);
   if (data) {
-    console.log("data. title.title", data.post.title);
+    // console.log("data. title.title", data.post.title);
     setPost(data.post);
     setText(data.post.text);
     // setTitle(data.post.title);
@@ -140,33 +140,9 @@ export default function PostDetail({ user, updatePost }) {
     setIsUpdating(false);
   };
 
-  // const handleOnSaveRating = async () => {
-  //   setIsSavingRating(true);
-
-  //   const { data, error } = await apiClient.createRatingForPost({
-  //     postId,
-  //     rating,
-  //   });
-  //   if (data) {
-  //     await fetchPostById({
-  //       postId,
-  //       setIsFetching,
-  //       setError,
-  //       setPost,
-  //       setText,
-  //       setTitle,
-  //     });
-  //   }
-  //   if (error) {
-  //     setError(error);
-  //   }
-
-  //   setIsSavingRating(false);
-  // };
-
   const userIsLoggedIn = Boolean(user?.email);
   const userOwnsPost = user?.username && post?.userName === user?.username;
-  // console.log("userOwnsPost is", userOwnsPost)
+
   if (!post && !isFetching) return null;
   if (!post) return <h1>Loading...</h1>;
   console.log("post inside postdetail", post);
@@ -214,36 +190,79 @@ export default function PostDetail({ user, updatePost }) {
               name="text"
             ></textarea> */}
 
-            <form noValidate autoComplete="off" onSubmit={handleOnSaveComment}>
-              <TextField
-                onChange={(e) => setComment(e.target.value)}
-                className={classes.field}
-                label="Comment"
-                variant="filled"
-                color="primary"
-                required
-                fullWidth
-                InputProps={{
-                  className: classes.input,
-                }}
-                // size="large"
-              />
-              <div className="saveButton">
-                <Button
-                  onClick={handleOnSaveComment}
-                  startIcon={<SaveIcon />}
-                  size="small"
-                  variant="contained"
+            {/* <Link to="/login">here</Link> */}
+
+            {/* 
+{userIsLoggedIn === true && (
+              <form
+                noValidate
+                autoComplete="off"
+                onSubmit={handleOnSaveComment}
+              >
+                <TextField
+                  onChange={(e) => setComment(e.target.value)}
+                  className={classes.field}
+                  label="Comment"
+                  variant="filled"
                   color="primary"
-                >
-                  Save
-                </Button>
-              </div>
-              {/* <button className="btn" onClick={handleOnSaveComment}>
+                  required
+                  fullWidth
+                  InputProps={{
+                    className: classes.input,
+                  }}
+                  // size="large"
+                />
+                <div className="saveButton">
+                  <Button
+                    onClick={handleOnSaveComment}
+                    startIcon={<SaveIcon />}
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Save
+                  </Button>
+                </div>
+                {/* <button className="btn" onClick={handleOnSaveComment}>
               Save Comment
             </button> */}
-              {/* </div> */}
-            </form>
+            {/* </div> */}
+            {/* </form> */}
+
+            {userIsLoggedIn ? (
+              <form
+                noValidate
+                autoComplete="off"
+                onSubmit={handleOnSaveComment}
+              >
+                <TextField
+                  onChange={(e) => setComment(e.target.value)}
+                  className={classes.field}
+                  label="Comment"
+                  variant="filled"
+                  color="primary"
+                  required
+                  fullWidth
+                  InputProps={{
+                    className: classes.input,
+                  }}
+                  // size="large"
+                />
+                <div className="saveButton">
+                  <Button
+                    onClick={handleOnSaveComment}
+                    startIcon={<SaveIcon />}
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Save
+                  </Button>
+                </div>
+              </form>
+            ) : (
+              <Link to="/login">Login to comment</Link>
+            )}
           </div>
           {comments.map((comment) => (
             <div className="test">

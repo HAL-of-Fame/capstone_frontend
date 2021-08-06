@@ -62,14 +62,14 @@ const useStyles = makeStyles({
 });
 
 export default function PostCard({ post, user }) {
-  const userOwnsPost = user?.username && post?.userName === user?.username;
+  // const userOwnsPost = user?.username && post?.userName === user?.username;
 
   let timeinfo = `by ${post.userName} - ${formatDate(
     post.created_at
   )} @ ${formatTime(post.created_at)}`;
   const [poster, setPoster] = useState("");
   const classes = useStyles();
-  console.log("post inside postcard", post);
+  // console.log("post inside postcard", post);
   // console.log("post.movieposter", post.movieposter);
 
   useEffect(() => {
