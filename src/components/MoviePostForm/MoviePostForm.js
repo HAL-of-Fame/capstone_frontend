@@ -12,7 +12,7 @@ import Radio from "@material-ui/core/Radio";
 import { RadioGroup } from "@material-ui/core";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
-// import NotAllowed from "../NotAllowed/NotAllowed"
+import NotAllowed from "../NotAllowed/NotAllowed";
 import "./MoviePostForm.css";
 
 const useStyles = makeStyles({
@@ -72,6 +72,9 @@ export default function MoviePost({ user, genre, movieName, moviePoster }) {
   };
   // let test = ["one", "two", "three", "four"];
   // console.log(test);
+  if (!user) {
+    return <NotAllowed />;
+  }
   return (
     <div className="test">
       <Container>
