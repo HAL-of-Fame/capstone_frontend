@@ -2,9 +2,21 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import apiClient from "../Services/apiClient"
 import "./Login.css"
+import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
 
 export default function Login({ user, setUser }) {
   const navigate = useNavigate()
+  const classes = useStyles();
   const [isProcessing, setIsProcessing] = useState(false)
   const [errors, setErrors] = useState({})
   const [form, setForm] = useState({
@@ -72,10 +84,7 @@ export default function Login({ user, setUser }) {
             />
             {errors.password && <span className="error">{errors.password}</span>}
           </div>
-
-          <button className="btn" disabled={isProcessing} onClick={handleOnSubmit}>
-            {isProcessing ? "Loading..." : "Login"}
-          </button>
+          <Button variant="contained" color="primary" disabled={isProcessing} onClick={handleOnSubmit}>{isProcessing ? "Loading..." : "Login"}</Button>
         </div>
 
         <div className="footer">
