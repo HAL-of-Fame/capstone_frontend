@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -63,7 +64,7 @@ const useStyles = makeStyles({
 
 export default function PostCard({ post, user }) {
   // const userOwnsPost = user?.username && post?.userName === user?.username;
-
+  console.log("postcard", post);
   let timeinfo = `by ${post.userName} - ${formatDate(
     post.created_at
   )} @ ${formatTime(post.created_at)}`;
@@ -106,17 +107,25 @@ export default function PostCard({ post, user }) {
           subheader={timeinfo}
         />
         <CardActionArea>
-          <CardMedia
-            component="img"
-            alt="Movie Poster"
-            height="110"
-            image={poster}
-            title="Movie Poster"
-          />
+          <Link to="/etest">
+            <CardMedia
+              component="img"
+              alt="Movie Poster"
+              height="100"
+              // width="400"
+              image={poster}
+              title="Movie Poster"
+            />
+          </Link>
           <CardContent>
             {/* <Typography gutterBottom variant="h5" component="h2">
             {post.title}
           </Typography> */}
+            <Link to="/">
+              <div className="testss">
+                <img src={poster} alt="dsaf"></img>
+              </div>
+            </Link>
             <Typography variant="body2" color="textSecondary" component="p">
               {post.text}
             </Typography>

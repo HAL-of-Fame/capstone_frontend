@@ -23,7 +23,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MoviePost({ user, genre, movieName, moviePoster }) {
+export default function MoviePost({
+  user,
+  genre,
+  movieName,
+  moviePoster,
+  movieId,
+}) {
   const classes = useStyles();
   let Navigate = useNavigate();
   const [category, setCategory] = useState("todos");
@@ -60,6 +66,7 @@ export default function MoviePost({ user, genre, movieName, moviePoster }) {
       genre: genre,
       movieName: movieName,
       moviePoster: moviePoster,
+      movieId: movieId,
     });
     if (data) {
       // setForm({ title: "", text: "" });

@@ -38,6 +38,8 @@ export default function IndividualMoviePage(props) {
     moviePoster,
     setMoviePoster,
     user,
+    movieId,
+    setMovieId,
   } = props;
   const [individual, setIndividual] = useState([]);
   const [video, setVideo] = useState("");
@@ -60,7 +62,7 @@ export default function IndividualMoviePage(props) {
 
   // will strip the movie_id from the URL (holds movie ID)
   const { movie_id } = useParams();
-
+  setMovieId(movie_id);
   useEffect(() => {
     const fetchIndividual = async () => {
       const data = await fetch(
