@@ -11,7 +11,8 @@ import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/styles";
 import { Box } from "@material-ui/core";
-
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 const fetchPostById = async ({
   postId,
   setIsFetching,
@@ -41,9 +42,9 @@ const useStyles = makeStyles({
     marginTop: 0,
     marginBotttom: 20,
     width: "90%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingBottom: 0,
+    // marginLeft: "auto",
+    // marginRight: "auto",
+    paddingBottom: `30px, 30px`,
     fontWeight: 500,
   },
   input: {
@@ -145,7 +146,7 @@ export default function PostDetail({ user, updatePost }) {
 
   if (!post && !isFetching) return null;
   if (!post) return <h1>Loading...</h1>;
-  console.log("post inside postdetail", post);
+  // console.log("post inside postdetail", post);
   return (
     <div className="PostDetail">
       <div className="Post">
@@ -162,6 +163,7 @@ export default function PostDetail({ user, updatePost }) {
               <Button
                 className={classes.editor}
                 onClick={togglePopup}
+                startIcon={<EditIcon />}
                 size="small"
                 variant="contained"
                 color="secondary"
@@ -172,6 +174,7 @@ export default function PostDetail({ user, updatePost }) {
               <Button
                 className={classes.editor}
                 onClick={handleOnDelete}
+                startIcon={<DeleteIcon />}
                 size="small"
                 variant="contained"
                 color="secondary"
@@ -238,7 +241,7 @@ export default function PostDetail({ user, updatePost }) {
                 <TextField
                   onChange={(e) => setComment(e.target.value)}
                   className={classes.field}
-                  label="Comment"
+                  // label="Comment"
                   variant="filled"
                   color="primary"
                   required
@@ -246,7 +249,6 @@ export default function PostDetail({ user, updatePost }) {
                   InputProps={{
                     className: classes.input,
                   }}
-                  // size="large"
                 />
                 <div className="saveButton">
                   <Button
@@ -255,6 +257,7 @@ export default function PostDetail({ user, updatePost }) {
                     size="small"
                     variant="contained"
                     color="primary"
+                    // marginLeft="20px"
                   >
                     Save
                   </Button>
