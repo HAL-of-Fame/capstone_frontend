@@ -48,18 +48,20 @@ export default function NewPost({ user }) {
   // };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(title);
-    console.log(text);
+    // console.log(title);
+    // console.log(text);
     setTitleError(false);
     setTextError(false);
 
-    if (title === "") {
-      setTitleError(true);
-    }
+    // if (title === "") {
+    //   console.log("title is blank");
+    //   setTitleError(true);
+    // }
 
-    if (text === "") {
-      setTextError(true);
-    }
+    // if (text === "") {
+    //   setTextError(true);
+    //   console.log("text is blank");
+    // }
 
     const { data, error } = await apiClient.createPost({
       // title: form.title,

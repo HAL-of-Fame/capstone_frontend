@@ -17,8 +17,9 @@ import apiClient from "../Services/apiClient";
 import { useNavigate } from "react-router";
 const useStyles = makeStyles({
   root: {
-    width: 650,
+    width: 450,
     margin: 5,
+    // height: 100,
   },
   avatar: {
     backgroundColor: red[500],
@@ -86,7 +87,7 @@ export default function CommentCard({ comment, user }) {
       <CardActionArea>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {comment.text} - {userOwnsComment}
+            {comment.text}
           </Typography>
         </CardContent>
       </CardActionArea>

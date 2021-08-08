@@ -11,12 +11,12 @@ import drama from "../../assets/drama.jpg";
 import family from "../../assets/family.jpg";
 import thriller from "../../assets/thriller.jpg";
 import animation from "../../assets/animation.jpg";
-import fantasy from "../../assets/fantasy.jpg";
+import fantasy from "../../assets/fantasy2.jpg";
 import horror from "../../assets/horror.jpg";
-import comedy from "../../assets/comedy.jpg";
+import comedy from "../../assets/comedy2.jpg";
 import sciencefiction from "../../assets/sciencefiction.jpg";
 import Button from "@material-ui/core/Button";
-
+import Typography from "@material-ui/core/Typography";
 export default function Genres({ user }) {
   let { genres } = useParams();
   const [posts, setPosts] = useState([]);
@@ -52,7 +52,8 @@ export default function Genres({ user }) {
     <div className="Genre">
       <div className="subgenre">
         <div className="header">
-          <h9>{genres}</h9>
+          <Typography variant="h2">{genres}</Typography>
+          {/* <h9>{genres}</h9> */}
         </div>
         <div className="hero">
           <img src={Switch(genres)} alt={genres}></img>

@@ -28,10 +28,11 @@ import drama from "../../assets/drama.jpg";
 import family from "../../assets/family.jpg";
 import thriller from "../../assets/thriller.jpg";
 import animation from "../../assets/animation.jpg";
-import fantasy from "../../assets/fantasy.jpg";
+import fantasy from "../../assets/fantasy2.jpg";
 import horror from "../../assets/horror.jpg";
-import comedy from "../../assets/comedy.jpg";
+import comedy from "../../assets/comedy2.jpg";
 import sciencefiction from "../../assets/sciencefiction.jpg";
+import { relativeTimeRounding } from "moment";
 
 const Switch = (str) =>
   ({
@@ -50,7 +51,8 @@ const Switch = (str) =>
 
 const useStyles = makeStyles({
   root: {
-    width: 750,
+    width: 550,
+    position: `relative`,
   },
 
   media: {
@@ -60,11 +62,26 @@ const useStyles = makeStyles({
   avatar: {
     backgroundColor: yellow[700],
   },
+  poster: {
+    height: 280,
+    // maxHeight: 200,
+    // maxWidth: 200,
+  },
+  overlay: {
+    position: "absolute",
+    // top: "30%",
+    top: "70px",
+    // bottom: "30%",
+    left: "5px",
+    // left: "80%",
+    color: "black",
+    backgroundColor: "white(255, 255, 255, 1.0)",
+  },
 });
 
 export default function PostCard({ post, user }) {
   // const userOwnsPost = user?.username && post?.userName === user?.username;
-  console.log("postcard", post);
+  // console.log("postcard", post);
   let timeinfo = `by ${post.userName} - ${formatDate(
     post.created_at
   )} @ ${formatTime(post.created_at)}`;
@@ -107,58 +124,58 @@ export default function PostCard({ post, user }) {
           subheader={timeinfo}
         />
         <CardActionArea>
-          <Link to="/etest">
-            <CardMedia
-              component="img"
-              alt="Movie Poster"
-              height="100"
-              // width="400"
-              image={poster}
-              title="Movie Poster"
-            />
-          </Link>
+          <Typography variant="body1" color="textSecondary" component="p">
+            {post.text}
+          </Typography>
+
+          {post.movieid ? (
+            <Link
+              to={{
+                pathname: "/movie",
+                search: `/${post.movieid}`,
+              }}
+            >
+              <CardMedia
+                component="img"
+                className={classes.poster}
+                alt={post.moviename}
+                image={poster}
+                title={post.moviename}
+              />
+              {/* <div className={classes.overlay}>
+                <p>{post.moviename}</p>
+              </div> */}
+            </Link>
+          ) : (
+            <Link
+              to={{
+                pathname: "/genre",
+                search: `/${post.genre}`,
+              }}
+            >
+              <CardMedia
+                component="img"
+                alt="Movie Poster"
+                // height="100"
+                className={classes.poster}
+                image={poster}
+                title="Movie Poster"
+              />
+            </Link>
+          )}
           <CardContent>
-            {/* <Typography gutterBottom variant="h5" component="h2">
-            {post.title}
-          </Typography> */}
-            <Link to="/">
+            {/* <Link to="/">
               <div className="testss">
                 <img src={poster} alt="dsaf"></img>
               </div>
-            </Link>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {post.text}
-            </Typography>
+            </Link> */}
 
             {post.created_at !== post.updated_at && (
-              <Typography variant="body8" color="textSecondary" component="p">
+              <Typography variant="caption" color="textSecondary" component="p">
                 [Updated: {formatDate(post.updated_at)} @
                 {formatTime(post.updated_at)}]
               </Typography>
             )}
-            {/* {userOwnsPost ? (
-              <Typography variant="body2" color="textSecondary" component="p">
-                {post.text}
-              </Typography>
-            ) : (
-              <Typography variant="body2" color="textSecondary" component="p">
-                doesn't own post
-              </Typography>
-            )} */}
-            {/* <Typography variant="body2" color="textSecondary" component="p">
-            Date: {formatDate(post.created_at)}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Posted by: {post.userName} @ {formatTime(post.created_at)}
-          </Typography>
-          <Typography
-            className={classes.test}
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            Posted: {formatTime(post.created_at)}
-          </Typography> */}
           </CardContent>
         </CardActionArea>
         <CardActions>
