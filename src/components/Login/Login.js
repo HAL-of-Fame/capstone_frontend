@@ -1,63 +1,66 @@
-import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import apiClient from "../Services/apiClient"
-import "./Login.css"
-import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import apiClient from "../Services/apiClient";
+import "./Login.css";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
 }));
 
-
 export default function Login({ user, setUser }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const classes = useStyles();
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [errors, setErrors] = useState({})
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [errors, setErrors] = useState({});
   const [form, setForm] = useState({
     email: "",
     password: "",
-  })
+  });
 
   useEffect(() => {
     // if user is already logged in,
     // redirect them to the home page
     if (user?.email) {
-      navigate("/")
+      navigate("/");
     }
-  }, [user, navigate])
+  }, [user, navigate]);
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
       if (event.target.value.indexOf("@") === -1) {
-        setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
+        setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
       } else {
-        setErrors((e) => ({ ...e, email: null }))
+        setErrors((e) => ({ ...e, email: null }));
       }
     }
 
-    setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
-  }
+    setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
+  };
 
   const handleOnSubmit = async () => {
-    setIsProcessing(true)
-    setErrors((e) => ({ ...e, form: null }))
+    setIsProcessing(true);
+    setErrors((e) => ({ ...e, form: null }));
 
-    const { data, error } = await apiClient.loginUser({email: form.email, password: form.password})
-    if (error) setErrors((e) => ({ ...e, form:error}))
+    const { data, error } = await apiClient.loginUser({
+      email: form.email,
+      password: form.password,
+    });
+    if (error) setErrors((e) => ({ ...e, form: error }));
     if (data?.user) {
-      setUser(data.user)
-      apiClient.setToken(data.token)
+      setUser(data.user);
+      apiClient.setToken(data.token);
     }
 
-    setIsProcessing(false)
-  }
-  
+
+    setIsProcessing(false);
+  };
+
   return (
     <div className="Login">
       <div className="card">
@@ -69,7 +72,13 @@ export default function Login({ user, setUser }) {
         <div className="form">
           <div className="input-field">
             <label htmlFor="email">Email</label>
-            <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleOnInputChange} />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={handleOnInputChange}
+            />
             {errors.email && <span className="error">{errors.email}</span>}
           </div>
 
@@ -82,9 +91,21 @@ export default function Login({ user, setUser }) {
               value={form.password}
               onChange={handleOnInputChange}
             />
-            {errors.password && <span className="error">{errors.password}</span>}
+            {errors.password && (
+              <span className="error">{errors.password}</span>
+            )}
+
           </div>
-          <Button variant="contained" color="primary" disabled={isProcessing} onClick={handleOnSubmit}>{isProcessing ? "Loading..." : "Login"}</Button>
+          <div className="footer">
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={isProcessing}
+              onClick={handleOnSubmit}
+            >
+              {isProcessing ? "Loading..." : "Login"}
+            </Button>
+          </div>
         </div>
 
         <div className="footer">
@@ -94,5 +115,5 @@ export default function Login({ user, setUser }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

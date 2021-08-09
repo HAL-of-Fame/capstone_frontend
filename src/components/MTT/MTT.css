@@ -1,0 +1,24 @@
+.people {
+  display: flex;
+  justify-content: space-around;
+}
+.greeting {
+  display: flex;
+  justify-content: center;
+}
+.person1,
+.person2,
+.person3 {
+  border: 3px solid white;
+  border-radius: 10px;
+  width: 250px;
+}
+
+.name {
+  display: flex;
+  justify-content: center;
+  font-size: large;
+}
+.person1 img {
+  width: 250px;
+}

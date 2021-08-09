@@ -166,7 +166,10 @@ export default function IndividualMoviePage(props) {
             {video ? (
               <Button
                 variant="contained"
-                onClick={togglePopup}
+                onClick={() => {
+                  window.scrollTo({ top: 0 });
+                  togglePopup();
+                }}
                 size="small"
                 color="primary"
               >
