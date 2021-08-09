@@ -12,7 +12,7 @@ import Radio from "@material-ui/core/Radio";
 import { RadioGroup } from "@material-ui/core";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
-// import NotAllowed from "../NotAllowed/NotAllowed"
+import NotAllowed from "../NotAllowed/NotAllowed";
 import "./MoviePostForm.css";
 
 const useStyles = makeStyles({
@@ -23,7 +23,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MoviePost({ user, genre, movieName, moviePoster }) {
+export default function MoviePost({
+  user,
+  genre,
+  movieName,
+  moviePoster,
+  movieId,
+}) {
   const classes = useStyles();
   let Navigate = useNavigate();
   const [category, setCategory] = useState("todos");
@@ -60,6 +66,7 @@ export default function MoviePost({ user, genre, movieName, moviePoster }) {
       genre: genre,
       movieName: movieName,
       moviePoster: moviePoster,
+      movieId: movieId,
     });
     if (data) {
       // setForm({ title: "", text: "" });
@@ -72,6 +79,9 @@ export default function MoviePost({ user, genre, movieName, moviePoster }) {
   };
   // let test = ["one", "two", "three", "four"];
   // console.log(test);
+  if (!user) {
+    return <NotAllowed />;
+  }
   return (
     <div className="test">
       <Container>

@@ -38,6 +38,8 @@ export default function IndividualMoviePage(props) {
     moviePoster,
     setMoviePoster,
     user,
+    movieId,
+    setMovieId,
   } = props;
   const [individual, setIndividual] = useState([]);
   const [video, setVideo] = useState("");
@@ -60,7 +62,7 @@ export default function IndividualMoviePage(props) {
 
   // will strip the movie_id from the URL (holds movie ID)
   const { movie_id } = useParams();
-
+  setMovieId(movie_id);
   useEffect(() => {
     const fetchIndividual = async () => {
       const data = await fetch(
@@ -200,7 +202,7 @@ export default function IndividualMoviePage(props) {
             </Link>
           </div>
         </div>
-        {/* <CardContent>
+        <CardContent>
           <Typography
             className={classes.title}
             color="textSecondary"
@@ -217,12 +219,12 @@ export default function IndividualMoviePage(props) {
           <Typography variant="body2" component="p">
             {individual.overview}
           </Typography>
-        </CardContent> */}
+        </CardContent>
         <div className="movieDescription">
           <p>{individual.overview}</p>
         </div>
         <div className="discussionSection">
-          <p>Discussion:</p>
+          {/* <p>Discussion:</p> */}
           <div className="PostButton">
             <Link to="create/">
               <Button size="small" color="primary" variant="contained">

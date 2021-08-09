@@ -10,7 +10,8 @@
   object-fit: cover;
   height: 250px;
   width: 100%;
-  object-position: 10px center;
+  /* object-position: 10px center; */
+  object-position: 50% 50%;
 }
 
 .button {

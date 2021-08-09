@@ -47,3 +47,8 @@
 /* content .btn {
   background-color: white;
 } */
+
+.saveButton {
+  display: flex;
+  justify-content: center;
+}

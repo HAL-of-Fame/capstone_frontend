@@ -11,18 +11,21 @@ import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/styles";
 import { Box } from "@material-ui/core";
-
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 const fetchPostById = async ({
   postId,
   setIsFetching,
   setError,
   setPost,
   setText,
+  setTitle,
 }) => {
   setIsFetching(true);
 
   const { data, error } = await apiClient.fetchPostById(postId);
   if (data) {
+    // console.log("data. title.title", data.post.title);
     setPost(data.post);
     setText(data.post.text);
     // setTitle(data.post.title);
@@ -39,9 +42,9 @@ const useStyles = makeStyles({
     marginTop: 0,
     marginBotttom: 20,
     width: "90%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingBottom: 0,
+    // marginLeft: "auto",
+    // marginRight: "auto",
+    paddingBottom: `30px, 30px`,
     fontWeight: 500,
   },
   input: {
@@ -70,6 +73,7 @@ export default function PostDetail({ user, updatePost }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [edited, setEdited] = useState(false);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -117,6 +121,8 @@ export default function PostDetail({ user, updatePost }) {
     if (data) {
       setPost({ ...post, text: data.post.text, title: data.post.title });
       updatePost({ postId, postUpdate });
+      setEdited(true);
+      window.location.reload();
     }
     if (error) {
       setError(error);
@@ -135,36 +141,12 @@ export default function PostDetail({ user, updatePost }) {
     setIsUpdating(false);
   };
 
-  // const handleOnSaveRating = async () => {
-  //   setIsSavingRating(true);
-
-  //   const { data, error } = await apiClient.createRatingForPost({
-  //     postId,
-  //     rating,
-  //   });
-  //   if (data) {
-  //     await fetchPostById({
-  //       postId,
-  //       setIsFetching,
-  //       setError,
-  //       setPost,
-  //       setText,
-  //       setTitle,
-  //     });
-  //   }
-  //   if (error) {
-  //     setError(error);
-  //   }
-
-  //   setIsSavingRating(false);
-  // };
-
   const userIsLoggedIn = Boolean(user?.email);
   const userOwnsPost = user?.username && post?.userName === user?.username;
-  // console.log("userOwnsPost is", userOwnsPost)
+
   if (!post && !isFetching) return null;
   if (!post) return <h1>Loading...</h1>;
-
+  // console.log("post inside postdetail", post);
   return (
     <div className="PostDetail">
       <div className="Post">
@@ -181,6 +163,7 @@ export default function PostDetail({ user, updatePost }) {
               <Button
                 className={classes.editor}
                 onClick={togglePopup}
+                startIcon={<EditIcon />}
                 size="small"
                 variant="contained"
                 color="secondary"
@@ -191,6 +174,7 @@ export default function PostDetail({ user, updatePost }) {
               <Button
                 className={classes.editor}
                 onClick={handleOnDelete}
+                startIcon={<DeleteIcon />}
                 size="small"
                 variant="contained"
                 color="secondary"
@@ -209,36 +193,79 @@ export default function PostDetail({ user, updatePost }) {
               name="text"
             ></textarea> */}
 
-            <form noValidate autoComplete="off" onSubmit={handleOnSaveComment}>
-              <TextField
-                onChange={(e) => setComment(e.target.value)}
-                className={classes.field}
-                label="Comment"
-                variant="filled"
-                color="primary"
-                required
-                fullWidth
-                InputProps={{
-                  className: classes.input,
-                }}
-                // size="large"
-              />
-              <div className="saveButton">
-                <Button
-                  onClick={handleOnSaveComment}
-                  startIcon={<SaveIcon />}
-                  size="small"
-                  variant="contained"
+            {/* <Link to="/login">here</Link> */}
+
+            {/* 
+{userIsLoggedIn === true && (
+              <form
+                noValidate
+                autoComplete="off"
+                onSubmit={handleOnSaveComment}
+              >
+                <TextField
+                  onChange={(e) => setComment(e.target.value)}
+                  className={classes.field}
+                  label="Comment"
+                  variant="filled"
                   color="primary"
-                >
-                  Save
-                </Button>
-              </div>
-              {/* <button className="btn" onClick={handleOnSaveComment}>
+                  required
+                  fullWidth
+                  InputProps={{
+                    className: classes.input,
+                  }}
+                  // size="large"
+                />
+                <div className="saveButton">
+                  <Button
+                    onClick={handleOnSaveComment}
+                    startIcon={<SaveIcon />}
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Save
+                  </Button>
+                </div>
+                {/* <button className="btn" onClick={handleOnSaveComment}>
               Save Comment
             </button> */}
-              {/* </div> */}
-            </form>
+            {/* </div> */}
+            {/* </form> */}
+
+            {userIsLoggedIn ? (
+              <form
+                noValidate
+                autoComplete="off"
+                onSubmit={handleOnSaveComment}
+              >
+                <TextField
+                  onChange={(e) => setComment(e.target.value)}
+                  className={classes.field}
+                  // label="Comment"
+                  variant="filled"
+                  color="primary"
+                  required
+                  fullWidth
+                  InputProps={{
+                    className: classes.input,
+                  }}
+                />
+                <div className="saveButton">
+                  <Button
+                    onClick={handleOnSaveComment}
+                    startIcon={<SaveIcon />}
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                    // marginLeft="20px"
+                  >
+                    Save
+                  </Button>
+                </div>
+              </form>
+            ) : (
+              <Link to="/login">Login to comment</Link>
+            )}
           </div>
           {comments.map((comment) => (
             <div className="test">

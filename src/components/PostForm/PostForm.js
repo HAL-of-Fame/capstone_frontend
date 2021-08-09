@@ -10,6 +10,7 @@ import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { Block } from "@material-ui/icons";
+import NotAllowed from "../NotAllowed/NotAllowed";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -47,18 +48,20 @@ export default function NewPost({ user }) {
   // };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(title);
-    console.log(text);
+    // console.log(title);
+    // console.log(text);
     setTitleError(false);
     setTextError(false);
 
-    if (title === "") {
-      setTitleError(true);
-    }
+    // if (title === "") {
+    //   console.log("title is blank");
+    //   setTitleError(true);
+    // }
 
-    if (text === "") {
-      setTextError(true);
-    }
+    // if (text === "") {
+    //   setTextError(true);
+    //   console.log("text is blank");
+    // }
 
     const { data, error } = await apiClient.createPost({
       // title: form.title,
@@ -127,7 +130,9 @@ export default function NewPost({ user }) {
   //     </div>
   //   );
   // };
-
+  if (!user) {
+    return <NotAllowed />;
+  }
   return (
     <div className="test">
       <Container>

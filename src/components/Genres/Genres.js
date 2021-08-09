@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import "./Genres.css";
 import apiClient from "../Services/apiClient";
 import PostCard from "../PostCard/PostCard";
-import { formatDate } from "../../utils/format";
+// import { formatDate } from "../../utils/format";
 import adventure from "../../assets/adventure.jpg";
 import action from "../../assets/action.jpg";
 import romance from "../../assets/romance.jpg";
@@ -11,21 +11,16 @@ import drama from "../../assets/drama.jpg";
 import family from "../../assets/family.jpg";
 import thriller from "../../assets/thriller.jpg";
 import animation from "../../assets/animation.jpg";
-import fantasy from "../../assets/fantasy.jpg";
+import fantasy from "../../assets/fantasy2.jpg";
 import horror from "../../assets/horror.jpg";
-import comedy from "../../assets/comedy.jpg";
+import comedy from "../../assets/comedy2.jpg";
 import sciencefiction from "../../assets/sciencefiction.jpg";
 import Button from "@material-ui/core/Button";
-
+import Typography from "@material-ui/core/Typography";
 export default function Genres({ user }) {
-  // console.log("user in genre", user);
   let { genres } = useParams();
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
-
-  const addPost = (newPost) => {
-    setPosts((oldPosts) => [...oldPosts, newPost]);
-  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -57,7 +52,8 @@ export default function Genres({ user }) {
     <div className="Genre">
       <div className="subgenre">
         <div className="header">
-          <h9>{genres}</h9>
+          <Typography variant="h2">{genres}</Typography>
+          {/* <h9>{genres}</h9> */}
         </div>
         <div className="hero">
           <img src={Switch(genres)} alt={genres}></img>

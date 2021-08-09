@@ -97,7 +97,7 @@ class ApiClient {
   }
 
   async listMoviePosts(movieName) {
-    console.log("this is inside api client", { movieName });
+    // console.log("this is inside api client", { movieName });
     return await this.request({
       endpoint: `posts/movieposts/${movieName}`,
       method: `GET`,
@@ -120,7 +120,6 @@ class ApiClient {
   }
 
   async deletePostById({ postId }) {
-    console.log("inside apiClient postId", postId);
     return await this.request({
       endpoint: `posts/${postId}/`,
       method: `DELETE`,
@@ -160,7 +159,6 @@ class ApiClient {
   }
 
   async deleteCommentById({ commentId }) {
-    console.log("inside apiclient", commentId);
     return await this.request({
       endpoint: `comments/${commentId}/delete`,
       method: `DELETE`,

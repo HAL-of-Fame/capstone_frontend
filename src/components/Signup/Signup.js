@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 import "./Signup.css";
 import apiClient from "../Services/apiClient";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography, Button, Divider } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 export default function Signup({ user, setUser }) {
   const navigate = useNavigate();
+  const classes = useStyles();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({
@@ -169,14 +179,16 @@ export default function Signup({ user, setUser }) {
               <span className="error">{errors.passwordConfirm}</span>
             )}
           </div>
-
-          <button
-            className="btn"
-            disabled={isProcessing}
-            onClick={handleOnSubmit}
-          >
-            {isProcessing ? "Loading..." : "Create Account"}
-          </button>
+          <div className="submitbtn">
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={isProcessing}
+              onClick={handleOnSubmit}
+            >
+              {isProcessing ? "Loading..." : "Create Account"}
+            </Button>
+          </div>
         </div>
 
         <div className="footer">

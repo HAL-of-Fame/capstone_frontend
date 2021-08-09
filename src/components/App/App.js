@@ -1,35 +1,30 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
 import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
 import GenrePage from "../GenrePage/GenrePage";
-import Sidebar from "../Sidebar/Sidebar";
+// import Sidebar from "../Sidebar/Sidebar";
 import Footer from "../Footer/Footer";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
 import apiClient from "../Services/apiClient";
 import SearchPage from "../SearchPage/SearchPage";
 import MerchStore from "../MerchStore/MerchStore";
 import PostForm from "../PostForm/PostForm";
-import data from "../../data";
+// import data from "../../data";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Orders from "../Orders/Orders";
-import axios from "axios";
+// import axios from "axios";
 import PostDetail from "../PostDetail/PostDetail";
 import Genres from "../Genres/Genres";
 import MTT from "../MTT/MTT";
 import MoviePost from "../MoviePostForm/MoviePostForm";
 
 export default function App() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
@@ -43,7 +38,8 @@ export default function App() {
   const [genre, setGenre] = useState("");
   const [movieName, setMovieName] = useState("");
   const [moviePoster, setMoviePoster] = useState("");
-  const Navigate = useNavigate();
+  const [movieId, setMovieId] = useState("");
+
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
   };
@@ -60,7 +56,7 @@ export default function App() {
         console.log("orders in app", orders);
         setIsCheckingOut(false);
         setCartItems([]);
-
+        navigate("/orders");
         return res.data.order;
       } else {
         setError("Error checking out.");
@@ -175,96 +171,98 @@ export default function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
-        {/* <Sidebar /> */}
-        <Routes>
-          <Route path="/" element={<Home user={user} />} />
-          <GenrePage path="/genre" />
-          <Route
-            path="/movie/:movie_id"
-            element={
-              <IndividualMoviePage
-                user={user}
-                genre={genre}
-                setGenre={setGenre}
-                movieName={movieName}
-                setMovieName={setMovieName}
-                onAdd={onAdd}
-                moviePoster={moviePoster}
-                setMoviePoster={setMoviePoster}
-              />
-            }
-          />
-          {/* <Route path="/movie/:movie_id/create" element={<MoviePost/>} /> */}
-          <Route path="*" element={<NotFound user={user} error={error} />} />
-          <Route
-            path="/login"
-            element={<Login user={user} setUser={setUser} />}
-          />
-          <Route
-            path="/register"
-            element={<Signup user={user} setUser={setUser} />}
-          />
-          <Route
-            path="/shopping-cart"
-            element={
-              <ShoppingCart
-                cartItems={cartItems}
-                handleOnCheckout={handleOnCheckout}
-                onAdd={onAdd}
-                onRemove={onRemove}
-                user={user}
-              />
-            }
-          />
-          <Route
-            path="/orders"
-            element={
-              <Orders
-                user={user}
-                error={error}
-                orders={orders}
-                setUser={setUser}
-                products={products}
-                isFetching={isFetching}
-                activeCategory={activeCategory}
-                setActiveCategory={setActiveCategory}
-                searchInputValue={searchInputValue}
-                handleOnSearchInputChange={handleOnSearchInputChange}
-              />
-            }
-          />
-          <Route path="/search/:searchInputValue" element={<SearchPage />} />
-          <Route path="/genre" element={<GenrePage user={user} />} />
-          <Route path="/genre/:genres" element={<Genres user={user} />} />
-          <Route
-            path="/genre/:genres/create"
-            element={<PostForm user={user} posts={posts} addPost={addPost} />}
-          />
-          <Route
-            path="/movie/:postId/create"
-            element={
-              <MoviePost
-                genre={genre}
-                movieName={movieName}
-                moviePoster={moviePoster}
-              />
-            }
-          />
+      <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
+      {/* <Sidebar /> */}
+      <Routes>
+        <Route path="/" element={<Home user={user} />} />
+        <GenrePage path="/genre" />
+        <Route
+          path="/movie/:movie_id"
+          element={
+            <IndividualMoviePage
+              user={user}
+              genre={genre}
+              setGenre={setGenre}
+              movieName={movieName}
+              setMovieName={setMovieName}
+              onAdd={onAdd}
+              moviePoster={moviePoster}
+              setMoviePoster={setMoviePoster}
+              movieId={movieId}
+              setMovieId={setMovieId}
+            />
+          }
+        />
+        {/* <Route path="/movie/:movie_id/create" element={<MoviePost/>} /> */}
+        <Route path="*" element={<NotFound user={user} error={error} />} />
+        <Route
+          path="/login"
+          element={<Login user={user} setUser={setUser} />}
+        />
+        <Route
+          path="/register"
+          element={<Signup user={user} setUser={setUser} />}
+        />
+        <Route
+          path="/shopping-cart"
+          element={
+            <ShoppingCart
+              cartItems={cartItems}
+              handleOnCheckout={handleOnCheckout}
+              onAdd={onAdd}
+              onRemove={onRemove}
+              user={user}
+            />
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <Orders
+              user={user}
+              error={error}
+              orders={orders}
+              setUser={setUser}
+              products={products}
+              isFetching={isFetching}
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+              searchInputValue={searchInputValue}
+              handleOnSearchInputChange={handleOnSearchInputChange}
+            />
+          }
+        />
+        <Route path="/search/:searchInputValue" element={<SearchPage />} />
+        <Route path="/genre" element={<GenrePage user={user} />} />
+        <Route path="/genre/:genres" element={<Genres user={user} />} />
+        <Route
+          path="/genre/:genres/create"
+          element={<PostForm user={user} posts={posts} addPost={addPost} />}
+        />
+        <Route
+          path="/movie/:postId/create"
+          element={
+            <MoviePost
+              user={user}
+              genre={genre}
+              movieName={movieName}
+              moviePoster={moviePoster}
+              movieId={movieId}
+            />
+          }
+        />
 
-          <Route
-            path="/posts/:postId"
-            element={<PostDetail user={user} updatePost={updatePost} />}
-          />
-          <Route
-            path="/store"
-            element={<MerchStore products={products} onAdd={onAdd} />}
-          />
-          <Route path="/meet-the-team" element={<MTT />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+        <Route
+          path="/posts/:postId"
+          element={<PostDetail user={user} updatePost={updatePost} />}
+        />
+        <Route
+          path="/store"
+          element={<MerchStore products={products} onAdd={onAdd} />}
+        />
+        <Route path="/meet-the-team" element={<MTT />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
