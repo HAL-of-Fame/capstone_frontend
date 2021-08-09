@@ -20,7 +20,7 @@ import Orders from "../Orders/Orders";
 // import axios from "axios";
 import PostDetail from "../PostDetail/PostDetail";
 import Genres from "../Genres/Genres";
-// import MTT from "../MTT/MTT";
+import MTT from "../MTT/MTT";
 import MoviePost from "../MoviePostForm/MoviePostForm";
 import ContactUs from "../ContactUs/ContactUs"
 
@@ -51,13 +51,12 @@ export default function App() {
     console.log(user);
     try {
       const res = await apiClient.createOrder(cartItems, user);
-      console.log(res);
+      // console.log(res);
       if (res?.data?.order) {
         setOrders((o) => [...res.data.order, ...o]);
-        // console.log("orders in app", orders);
+        console.log("orders in app", orders);
         setIsCheckingOut(false);
         setCartItems([]);
-        navigate("/orders");
         return res.data.order;
       } else {
         setError("Error checking out.");
@@ -68,6 +67,7 @@ export default function App() {
       setError(message ?? String(err));
     } finally {
       setIsCheckingOut(false);
+      navigate("/orders");
     }
   };
   const onAdd = (product) => {
@@ -145,7 +145,7 @@ export default function App() {
       }
     };
     fetchOrders();
-  }, [user]);
+  }, [user, isCheckingOut]);
 
   const addPost = (newPost) => {
     setPosts((oldPosts) => [...oldPosts, newPost]);
@@ -265,7 +265,7 @@ export default function App() {
           path="/store"
           element={<MerchStore products={products} onAdd={onAdd} />}
         />
-        {/* <Route path="/meet-the-team" element={<MTT />} /> */}
+        <Route path="/meet-the-team" element={<MTT />} />
       </Routes>
       <Footer />
     </div>

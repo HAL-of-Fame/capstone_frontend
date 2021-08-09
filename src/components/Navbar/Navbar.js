@@ -114,11 +114,11 @@ export default function Navbar({ user, handleLogout }) {
             <Sidebar />
           </IconButton>
 
-          <Button href="/">
-            <Typography variant="h6" className={classes.title}>
-              MovieCentral
+          <Link to="/">
+            <Typography variant="h4" className={classes.title}>
+              MOVIECENTRAL
             </Typography>
-          </Button>
+          </Link>
 
           <div className={classes.search}>
             <form onSubmit={handleOnSubmit}>
@@ -163,13 +163,16 @@ export default function Navbar({ user, handleLogout }) {
             ) : (
               <>
                 <Box width="300px" display="flex" justifyContent="space-around">
-                  <Button color="inherit" href="/login" variant="outlined">
-                    Login
-                  </Button>
-
-                  <Button href="/register" color="inherit" variant="outlined">
-                    Register
-                  </Button>
+                  <Link to="/login">
+                    <Button color="inherit" variant="outlined">
+                      Login
+                    </Button>
+                  </Link>
+                  <Link to="/register">
+                    <Button color="inherit" variant="outlined">
+                      Register
+                    </Button>
+                  </Link>
                   <Link to="/shopping-cart">
                     <Button variant="outlined" color="inherit" size="large">
                       <FaIcons.FaCartPlus fontSize="larger" />
@@ -178,14 +181,6 @@ export default function Navbar({ user, handleLogout }) {
                 </Box>
               </>
             )}
-            {/* <Button
-                href="/shopping-cart"
-                color="inherit"
-                variant="outlined"
-                onClick={onClickHandler}
-              >
-                <FaIcons.FaCartPlus />
-              </Button> */}
           </div>
         </Toolbar>
       </AppBar>

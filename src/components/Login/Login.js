@@ -57,6 +57,7 @@ export default function Login({ user, setUser }) {
       apiClient.setToken(data.token);
     }
 
+
     setIsProcessing(false);
   };
 
@@ -93,6 +94,7 @@ export default function Login({ user, setUser }) {
             {errors.password && (
               <span className="error">{errors.password}</span>
             )}
+
           </div>
           <div className="footer">
             <Button
