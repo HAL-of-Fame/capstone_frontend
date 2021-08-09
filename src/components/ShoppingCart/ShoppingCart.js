@@ -13,12 +13,12 @@ export default function Basket(props) {
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
   console.log(cartItems);
 
-  const onCheckoutSubmit = async () => {
-    const order = handleOnCheckout();
-    // if (order) {
-    //   navigate("/orders");
-    // }
-  };
+  // const onCheckoutSubmit = async () => {
+  //   const order = handleOnCheckout();
+  //   // if (order) {
+  //   //   navigate("/orders");
+  //   // }
+  // };
 
   return (
     <aside className="all">
@@ -84,8 +84,8 @@ export default function Basket(props) {
                   <Button
                     color="inherit"
                     variant="outlined"
-                    href="/orders"
-                    onClick={onCheckoutSubmit}
+                    // href="/orders"
+                    onClick={handleOnCheckout}
                   >
                     Checkout
                   </Button>

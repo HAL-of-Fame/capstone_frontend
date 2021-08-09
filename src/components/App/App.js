@@ -1,6 +1,12 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
@@ -20,7 +26,7 @@ import Orders from "../Orders/Orders";
 import axios from "axios";
 import PostDetail from "../PostDetail/PostDetail";
 import Genres from "../Genres/Genres";
-// import MTT from "../MTT/MTT";
+import MTT from "../MTT/MTT";
 import MoviePost from "../MoviePostForm/MoviePostForm";
 
 export default function App() {
@@ -37,7 +43,7 @@ export default function App() {
   const [genre, setGenre] = useState("");
   const [movieName, setMovieName] = useState("");
   const [moviePoster, setMoviePoster] = useState("");
-
+  const Navigate = useNavigate();
   const handleOnSearchInputChange = (event) => {
     setSearchInputValue(event.target.value);
   };
@@ -50,10 +56,11 @@ export default function App() {
       const res = await apiClient.createOrder(cartItems, user);
       console.log(res);
       if (res?.data?.order) {
-        // setOrders((o) => [...res.data.order, ...o]);
-        // console.log("orders in app", orders);
+        setOrders((o) => [...res.data.order, ...o]);
+        console.log("orders in app", orders);
         setIsCheckingOut(false);
         setCartItems([]);
+
         return res.data.order;
       } else {
         setError("Error checking out.");
@@ -254,7 +261,7 @@ export default function App() {
             path="/store"
             element={<MerchStore products={products} onAdd={onAdd} />}
           />
-          {/* <Route path="/meet-the-team" element={<MTT />} /> */}
+          <Route path="/meet-the-team" element={<MTT />} />
         </Routes>
         <Footer />
       </BrowserRouter>
