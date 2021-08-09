@@ -20,9 +20,6 @@ const api_key = config.api_key;
 const useStyles = makeStyles({
   root: {
     minWidth: 750,
-    // flexDirection: "row-reverse",
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   title: {
     fontSize: 14,
@@ -166,10 +163,7 @@ export default function IndividualMoviePage(props) {
             {video ? (
               <Button
                 variant="contained"
-                onClick={() => {
-                  window.scrollTo({ top: 0 });
-                  togglePopup();
-                }}
+                onClick={togglePopup}
                 size="small"
                 color="primary"
               >
