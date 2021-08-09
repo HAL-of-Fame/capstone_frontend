@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Signup.css";
 import apiClient from "../Services/apiClient";
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Button, Divider } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography, Button, Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -179,8 +179,15 @@ export default function Signup({ user, setUser }) {
               <span className="error">{errors.passwordConfirm}</span>
             )}
           </div>
-<div className="submitbtn">
-          <Button variant="contained" color="primary" disabled={isProcessing} onClick={handleOnSubmit}>{isProcessing ? "Loading..." : "Create Account"}</Button>
+          <div className="footer">
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={isProcessing}
+              onClick={handleOnSubmit}
+            >
+              {isProcessing ? "Loading..." : "Create Account"}
+            </Button>
           </div>
         </div>
 
