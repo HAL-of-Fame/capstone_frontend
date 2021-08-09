@@ -185,8 +185,8 @@ export default function IndividualMoviePage(props) {
                     <div className="trailer">
                       <iframe
                         title="movie trailer"
-                        width="560"
-                        height="315"
+                        width="760"
+                        height="415"
                         src={videolink}
                         frameborder="0"
                         allow="autoplay; encrypted-media"
@@ -224,14 +224,14 @@ export default function IndividualMoviePage(props) {
                 </Typography>
                 <Typography
                   className={classes.description}
-                  variant="body2"
+                  variant="caption"
                   component="p"
                 >
                   {formatDate(individual.release_date)}
                 </Typography>
                 <Typography
                   className={classes.description}
-                  variant="body2"
+                  variant="caption"
                   component="p"
                 >
                   ⭐ {individual.vote_average}/10
