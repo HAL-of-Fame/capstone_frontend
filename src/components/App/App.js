@@ -52,7 +52,7 @@ export default function App() {
       const res = await apiClient.createOrder(cartItems, user);
       console.log(res);
       if (res?.data?.order) {
-        // setOrders((o) => [...res.data.order, ...o]);
+        setOrders((o) => [...res.data.order, ...o]);
         // console.log("orders in app", orders);
         setIsCheckingOut(false);
         setCartItems([]);
