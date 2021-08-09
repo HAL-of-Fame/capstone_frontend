@@ -57,7 +57,7 @@ export default function Login({ user, setUser }) {
       apiClient.setToken(data.token);
     }
 
-    console.log("login user", user);
+
     setIsProcessing(false);
   };
 
@@ -94,15 +94,18 @@ export default function Login({ user, setUser }) {
             {errors.password && (
               <span className="error">{errors.password}</span>
             )}
+
           </div>
-          <Button
-            variant="contained"
-            color="primary"
-            disabled={isProcessing}
-            onClick={handleOnSubmit}
-          >
-            {isProcessing ? "Loading..." : "Login"}
-          </Button>
+          <div className="footer">
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={isProcessing}
+              onClick={handleOnSubmit}
+            >
+              {isProcessing ? "Loading..." : "Login"}
+            </Button>
+          </div>
         </div>
 
         <div className="footer">
