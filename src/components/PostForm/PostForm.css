@@ -74,6 +74,22 @@
 }
 
 .test {
+  display: flex;
+  justify-content: center;
   background-color: white;
   color: black;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }

@@ -11,11 +11,17 @@
 
 .trailerPurchase {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  margin-bottom: 1%;
   /* flex-direction: column; */
   /* align-items: center;
   justify-content: center; */
 }
+
+/* .trailerPurchase .trailer {
+  display: flex;
+  justify-content: space-between;
+} */
 
 .individualMoviePage .column .top .right {
   display: flex;

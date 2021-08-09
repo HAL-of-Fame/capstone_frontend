@@ -19,7 +19,7 @@ const api_key = config.api_key;
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 700,
+    minWidth: 750,
     // flexDirection: "row-reverse",
     // alignItems: "center",
     // justifyContent: "center",

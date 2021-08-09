@@ -24,6 +24,10 @@ const useStyles = makeStyles({
     marginBotttom: 20,
     display: Block,
   },
+  // button: {
+  //   justifyContent: "flex-end",
+
+  // },
 });
 
 export default function NewPost({ user }) {
@@ -48,102 +52,35 @@ export default function NewPost({ user }) {
   // };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    // console.log(title);
-    // console.log(text);
+
     setTitleError(false);
     setTextError(false);
 
-    // if (title === "") {
-    //   console.log("title is blank");
-    //   setTitleError(true);
-    // }
-
-    // if (text === "") {
-    //   setTextError(true);
-    //   console.log("text is blank");
-    // }
-
     const { data, error } = await apiClient.createPost({
-      // title: form.title,
-      // text: form.text,
       title: title,
       text: text,
       genre: genre,
     });
     if (data) {
       console.log(data);
-
-      // setForm({ title: "", text: "" });
       Navigate(`/genre/${genre}`);
     }
     if (error) {
       setError(error);
     }
   };
-  // const handleOnSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const { data, error } = await apiClient.createPost({
-  //     title: form.title,
-  //     text: form.text,
-  //     genre: genre,
-  //   });
-  //   if (data) {
-  //     console.log(data);
 
-  //     setForm({ title: "", text: "" });
-  //     Navigate(`/genre/${genre}`);
-  //   }
-  //   if (error) {
-  //     setError(error);
-  //   }
-  // };
-
-  // const renderForm = () => {
-  // if (!user?.email) {
-  //   return <NotAllowed />
-  // }
-  //   return (
-  //     <div className="form">
-  //       <div className="input-field">
-  //         <label htmlFor="title">Title</label>
-  //         <input
-  //           type="text"
-  //           name="title"
-  //           placeholder="Enter Title Here"
-  //           value={form.title}
-  //           onChange={handleOnInputChange}
-  //         />
-  //       </div>
-
-  //       <div className="input-field">
-  //         <label htmlFor="text">Text</label>
-  //         <input
-  //           type="text"
-  //           name="text"
-  //           placeholder="Enter Text Here"
-  //           value={form.text}
-  //           onChange={handleOnInputChange}
-  //         />
-  //       </div>
-
-  //       <button className="btn" onClick={handleOnSubmit}></button>
-  //     </div>
-  //   );
-  // };
   if (!user) {
     return <NotAllowed />;
   }
   return (
     <div className="test">
       <Container>
-        <Typography
-          variant="h6"
-          color="textSecondary"
-          component="h2"
-          gutterBottom
-        >
-          Create a new post in {genreCapitalized}
-        </Typography>
+        <div className="header">
+          <Typography variant="h6" color="textSecondary" component="h2">
+            Create a new post in {genreCapitalized}
+          </Typography>
+        </div>
 
         <form noValidate autoComplete="off" onSubmit={handleOnSubmit}>
           <TextField
@@ -169,22 +106,22 @@ export default function NewPost({ user }) {
             required
             error={textError}
           />
-
-          <Button
-            onClick={() => console.log("you clikced me")}
-            type="submit"
-            color="primary"
-            variant="contained"
-            endIcon={<KeyboardArrowRightIcon />}
-          >
-            Submit
-          </Button>
+          <div className="center">
+            <Button
+              // onClick={() => console.log("you clikced me")}
+              type="submit"
+              color="primary"
+              variant="contained"
+              // className={classes.button}
+              endIcon={<KeyboardArrowRightIcon />}
+            >
+              Submit
+            </Button>
+          </div>
         </form>
       </Container>
       <div className="NewPostForm">
         <div className="card">
-          {/* <h2>Create a new post</h2> */}
-          {/* <p>Genre: {genreCapitalized}</p> */}
           <p></p>
 
           {Boolean(error) && <span className="error">{error}</span>}

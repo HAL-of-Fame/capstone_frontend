@@ -77,23 +77,18 @@ export default function MoviePost({
       setError(error);
     }
   };
-  // let test = ["one", "two", "three", "four"];
-  // console.log(test);
+
   if (!user) {
     return <NotAllowed />;
   }
   return (
     <div className="test">
       <Container>
-        <Typography
-          variant="h6"
-          color="textSecondary"
-          component="h2"
-          gutterBottom
-        >
-          Create a new post{" "}
-        </Typography>
-
+        <div className="header">
+          <Typography variant="h6" color="textSecondary" component="h2">
+            Create a new post in {genre}
+          </Typography>
+        </div>
         <form noValidate autoComplete="off" onSubmit={handleOnSubmit}>
           <TextField
             onChange={(e) => setTitle(e.target.value)}
@@ -145,16 +140,17 @@ export default function MoviePost({
               />
             </RadioGroup>
           </FormControl> */}
-
-          <Button
-            onClick={() => console.log("you clikced me")}
-            type="submit"
-            color="primary"
-            variant="contained"
-            endIcon={<KeyboardArrowRightIcon />}
-          >
-            Submit
-          </Button>
+          <div className="center">
+            <Button
+              // onClick={() => console.log("you clikced me")}
+              type="submit"
+              color="primary"
+              variant="contained"
+              endIcon={<KeyboardArrowRightIcon />}
+            >
+              Submit
+            </Button>
+          </div>
         </form>
       </Container>
       <div className="NewPostForm">
