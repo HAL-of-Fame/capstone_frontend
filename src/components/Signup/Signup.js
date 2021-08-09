@@ -82,6 +82,7 @@ export default function Signup({ user, setUser }) {
     if (data?.user) {
       setUser(data.user);
       apiClient.setToken(data.token);
+      console.log("signup user", user);
     }
   };
 

@@ -24,7 +24,7 @@ export default function MTT() {
             <div> Ashanijewell@gmail.com</div>
             <a href="https://www.linkedin.com/in/ashani-jewell/"> LinkedIn</a>
             <div>Github:</div>
-            <div>Description:</div>
+            <div></div>
           </div>
         </div>
         <div className="person2">

@@ -9,11 +9,12 @@
   flex-direction: row;
 }
 
-.individualMoviePage .column .top .left {
+.trailerPurchase {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  /* flex-direction: column; */
+  /* align-items: center;
+  justify-content: center; */
 }
 
 .individualMoviePage .column .top .right {
@@ -22,18 +23,7 @@
   margin-top: 100%;
 }
 
-.individualMoviePage .column .top .left .moviePoster {
-  /* width: 350px;
-  height: 460px; */
-
-  /* background: #39a4a4;
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  border-radius: 10px;
-  margin-top: 3%; */
-}
-
-.individualMoviePage .column .top .left .moviePoster .poster {
+.individualMoviePage .column .top .moviePoster .poster {
   margin-top: 10%;
   height: 480px;
   width: 820px;

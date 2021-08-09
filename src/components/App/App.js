@@ -50,13 +50,12 @@ export default function App() {
     console.log(user);
     try {
       const res = await apiClient.createOrder(cartItems, user);
-      console.log(res);
+      // console.log(res);
       if (res?.data?.order) {
         setOrders((o) => [...res.data.order, ...o]);
         console.log("orders in app", orders);
         setIsCheckingOut(false);
         setCartItems([]);
-        navigate("/orders");
         return res.data.order;
       } else {
         setError("Error checking out.");
@@ -67,6 +66,7 @@ export default function App() {
       setError(message ?? String(err));
     } finally {
       setIsCheckingOut(false);
+      navigate("/orders");
     }
   };
   const onAdd = (product) => {
@@ -144,7 +144,7 @@ export default function App() {
       }
     };
     fetchOrders();
-  }, [user]);
+  }, [user, isCheckingOut]);
 
   const addPost = (newPost) => {
     setPosts((oldPosts) => [...oldPosts, newPost]);

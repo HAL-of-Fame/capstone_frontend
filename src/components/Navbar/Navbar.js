@@ -163,13 +163,16 @@ export default function Navbar({ user, handleLogout }) {
             ) : (
               <>
                 <Box width="300px" display="flex" justifyContent="space-around">
-                  <Button color="inherit" href="/login" variant="outlined">
-                    Login
-                  </Button>
-
-                  <Button href="/register" color="inherit" variant="outlined">
-                    Register
-                  </Button>
+                  <Link to="/login">
+                    <Button color="inherit" variant="outlined">
+                      Login
+                    </Button>
+                  </Link>
+                  <Link to="/register">
+                    <Button color="inherit" variant="outlined">
+                      Register
+                    </Button>
+                  </Link>
                   <Link to="/shopping-cart">
                     <Button variant="outlined" color="inherit" size="large">
                       <FaIcons.FaCartPlus fontSize="larger" />
