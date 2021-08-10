@@ -22,3 +22,13 @@
 .person1 img {
   width: 250px;
 }
+.person2 img {
+  width: 250px;
+}
+.person3 img {
+  width: 250px;
+}
+.info {
+  display: flex;
+  justify-content: center;
+}

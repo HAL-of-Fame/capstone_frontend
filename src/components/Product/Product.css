@@ -1,12 +1,12 @@
-.small{
+.small {
   display: flex;
   flex-direction: row;
 }
-.all{
-    border-style: solid;
-    border-color: red;
+.all {
+  border-style: solid;
+  border-color: red;
 }
-.add{
+.add {
   background-color: hotpink; /* Green */
   border: none;
   padding: 10px 25px;
