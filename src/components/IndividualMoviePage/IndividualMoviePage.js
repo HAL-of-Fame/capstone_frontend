@@ -106,7 +106,7 @@ export default function IndividualMoviePage(props) {
     fetchIndividual();
     fetchVideo();
     fetchPosts();
-  }, []);
+  }, [movieName]);
 
   useEffect(() => {
     const setGenreMovieName = async () => {
