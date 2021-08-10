@@ -1,14 +1,21 @@
-.row{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 200px;
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 100px;
+  padding-top: 70px;
+  padding-right: 200px;
+  padding-left: 200px;
 }
-Product{
-    border: 25px solid white;
+Product {
+  border: 25px solid white;
 }
-.store{
-    text-align: center;
-    color: white
+.store {
+  text-align: center;
+  color: white;
+}
+
+.store h2 {
+  margin-top: 70px;
 }
