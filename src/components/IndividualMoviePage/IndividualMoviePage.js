@@ -103,7 +103,7 @@ export default function IndividualMoviePage(props) {
     fetchIndividual();
     fetchVideo();
     fetchPosts();
-  }, []);
+  }, [movieName]);
 
   useEffect(() => {
     const setGenreMovieName = async () => {
@@ -163,7 +163,10 @@ export default function IndividualMoviePage(props) {
             {video ? (
               <Button
                 variant="contained"
-                onClick={togglePopup}
+                onClick={() => {
+                  window.scrollTo({ top: 0 });
+                  togglePopup();
+                }}
                 size="small"
                 color="primary"
               >

@@ -136,6 +136,8 @@ export default function PostDetail({ user, updatePost }) {
     const { data, error } = await apiClient.createComment(comment, postId);
     if (data) {
       listAllComments();
+      setComment("");
+      setComments([]);
     }
     if (error) setError(error);
     setIsUpdating(false);
@@ -187,51 +189,6 @@ export default function PostDetail({ user, updatePost }) {
         <div className="Comments">
           <p>Comments:</p>
           <div className="comment-section">
-            {/* <textarea
-              value={comment}
-              onChange={(event) => setComment(event.target.value)}
-              name="text"
-            ></textarea> */}
-
-            {/* <Link to="/login">here</Link> */}
-
-            {/* 
-{userIsLoggedIn === true && (
-              <form
-                noValidate
-                autoComplete="off"
-                onSubmit={handleOnSaveComment}
-              >
-                <TextField
-                  onChange={(e) => setComment(e.target.value)}
-                  className={classes.field}
-                  label="Comment"
-                  variant="filled"
-                  color="primary"
-                  required
-                  fullWidth
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  // size="large"
-                />
-                <div className="saveButton">
-                  <Button
-                    onClick={handleOnSaveComment}
-                    startIcon={<SaveIcon />}
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                  >
-                    Save
-                  </Button>
-                </div>
-                {/* <button className="btn" onClick={handleOnSaveComment}>
-              Save Comment
-            </button> */}
-            {/* </div> */}
-            {/* </form> */}
-
             {userIsLoggedIn ? (
               <form
                 noValidate
@@ -257,7 +214,6 @@ export default function PostDetail({ user, updatePost }) {
                     size="small"
                     variant="contained"
                     color="primary"
-                    // marginLeft="20px"
                   >
                     Save
                   </Button>
@@ -272,21 +228,12 @@ export default function PostDetail({ user, updatePost }) {
               <CommentCard comment={comment} user={user} />
             </div>
           ))}
-          {/* <textarea
-              value={comments}
-              onChange={(event) => setComments(event.target.value)}
-              name="comments"
-            ></textarea>
-              <button className="btn" onClick={handleOnSaveComment}>
-              {isUpdating ? "Loading..." : "Save Comment"}
-            </button> */}
         </div>
       </div>
 
       {error && <span className="error">Error: {error}</span>}
 
       <div className="actions">
-        {/* <input type="button" value="Edit post" onClick={togglePopup} /> */}
         {isOpen && (
           <Popup
             content={

@@ -28,8 +28,8 @@ export default function Basket(props) {
             <img
               className="col-2"
               src={item.image}
-              height={200}
-              width={200}
+              height={275}
+              width={100}
               alt="product"
             />
             <div className="col-2">
