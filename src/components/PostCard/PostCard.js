@@ -15,7 +15,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 
 import Avatar from "@material-ui/core/Avatar";
 import { yellow } from "@material-ui/core/colors";
-
 import adventure from "../../assets/adventure.jpg";
 import action from "../../assets/action.jpg";
 import romance from "../../assets/romance.jpg";
@@ -59,18 +58,6 @@ const useStyles = makeStyles({
   },
   poster: {
     height: 280,
-    // maxHeight: 200,
-    // maxWidth: 200,
-  },
-  overlay: {
-    position: "absolute",
-    // top: "30%",
-    top: "70px",
-    // bottom: "30%",
-    left: "5px",
-    // left: "80%",
-    color: "black",
-    backgroundColor: "white(255, 255, 255, 1.0)",
   },
 });
 
@@ -93,7 +80,6 @@ export default function PostCard({ post, user }) {
   }, [post]);
 
   useEffect(() => {
-    console.log("post at 95", post);
     if (post.created_at !== post.updated_at) {
       setEdited(true);
     }
@@ -130,9 +116,6 @@ export default function PostCard({ post, user }) {
                 image={poster}
                 title={post.moviename}
               />
-              {/* <div className={classes.overlay}>
-                <p>{post.moviename}</p>
-              </div> */}
             </Link>
           ) : (
             <Link
@@ -170,32 +153,6 @@ export default function PostCard({ post, user }) {
           <Button size="small" color="primary">
             Comment
           </Button>
-          {/* <div className="sadf">
-            {userOwnsPost === true && (
-              <div className="tea">
-                <Button size="small" color="primary">
-                  Edit
-                </Button>
-                <Button size="small" color="primary">
-                  Delete
-                </Button>
-              </div>
-            )}
-          </div> */}
-          {/* {userOwnsPost ? (
-            <div className="tea">
-              <Button size="small" color="primary">
-                Comment
-              </Button>
-              <Button size="small" color="primary">
-                Delete
-              </Button>
-            </div>
-          ) : (
-            <Button size="small" color="primary">
-              Edit
-            </Button>
-          )} */}
         </CardActions>
       </Card>
     </div>

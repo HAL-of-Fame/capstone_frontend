@@ -116,7 +116,6 @@ export default function PostDetail({ user, updatePost }) {
     const postUpdate = { text, title };
     const { data, error } = await apiClient.updatePost({ postId, postUpdate });
     if (data) {
-      console.log("post.updated_at", post.updated_at);
       setPost({
         ...post,
         text: data.post.text,
