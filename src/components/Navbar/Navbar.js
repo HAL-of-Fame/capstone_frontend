@@ -142,7 +142,7 @@ export default function Navbar({ user, handleLogout }) {
                 <Box width="300px" display="flex" justifyContent="space-around">
                   <Button variant="outlined" color="inherit" mx={30}>
                     {/* <Typography style={{ marginRight: 16 }}>{user.email}</Typography> */}
-                    {user.email}
+                    {user.username}
                   </Button>
 
                   <Button
