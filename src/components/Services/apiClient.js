@@ -97,7 +97,6 @@ class ApiClient {
   }
 
   async listMoviePosts(movieName) {
-    // console.log("this is inside api client", { movieName });
     return await this.request({
       endpoint: `posts/movieposts/${movieName}`,
       method: `GET`,

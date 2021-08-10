@@ -84,7 +84,7 @@ export default function Navbar({ user, handleLogout }) {
   };
 
   const handleOnInputChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setSearchInputValue(event.target.value);
   };
 

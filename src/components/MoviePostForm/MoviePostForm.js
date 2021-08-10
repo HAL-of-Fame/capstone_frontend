@@ -69,8 +69,6 @@ export default function MoviePost({
       movieId: movieId,
     });
     if (data) {
-      // setForm({ title: "", text: "" });
-      // Navigate(`/genre/${genre}`)
       Navigate(-1); //goes back one to the movie detail page
     }
     if (error) {
@@ -142,7 +140,6 @@ export default function MoviePost({
           </FormControl> */}
           <div className="center">
             <Button
-              // onClick={() => console.log("you clikced me")}
               type="submit"
               color="primary"
               variant="contained"
@@ -155,58 +152,9 @@ export default function MoviePost({
       </Container>
       <div className="NewPostForm">
         <div className="card">
-          {/* <h2>Create a new post in {genre} forum</h2> */}
-
           {Boolean(error) && <span className="error">{error}</span>}
-
-          {/* {renderForm()} */}
         </div>
       </div>
     </div>
   );
-  // const renderForm = () => {
-  // if (!user?.email) {
-  //   return <NotAllowed />
-  // }
-  // return (
-  //   <div className="form">
-  //     <div className="input-field">
-  //       <label htmlFor="title">Title</label>
-  //       <input
-  //         type="text"
-  //         name="title"
-  //         placeholder="Enter Title Here"
-  //         value={form.title}
-  //         onChange={handleOnInputChange}
-  //       />
-  //     </div>
-
-  //     <div className="input-field">
-  //       <label htmlFor="text">Text</label>
-  //       <input
-  //         type="text"
-  //         name="text"
-  //         placeholder="Enter Text Here"
-  //         value={form.text}
-  //         onChange={handleOnInputChange}
-  //       />
-  //     </div>
-
-  //     <button className="btn" onClick={handleOnSubmit}></button>
-  //   </div>
-  // );
 }
-
-//   return (
-//     <div className="NewPostForm">
-//       <div className="card">
-//         <h2>Create a new post in {genre} forum</h2>
-//         {/* <p>Genre: {genreCapitalized}</p> */}
-
-//         {Boolean(error) && <span className="error">{error}</span>}
-
-//         {renderForm()}
-//       </div>
-//     </div>
-//   );
-// }

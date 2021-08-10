@@ -26,7 +26,6 @@ import fantasy from "../../assets/fantasy2.jpg";
 import horror from "../../assets/horror.jpg";
 import comedy from "../../assets/comedy2.jpg";
 import sciencefiction from "../../assets/sciencefiction.jpg";
-import { relativeTimeRounding } from "moment";
 
 const Switch = (str) =>
   ({
@@ -65,8 +64,6 @@ const useStyles = makeStyles({
 });
 
 export default function PostCard({ post, user }) {
-  // const userOwnsPost = user?.username && post?.userName === user?.username;
-  // console.log("postcard", post);
   let timeinfo = `by ${post.userName} - ${formatDate(
     post.created_at
   )} @ ${formatTime(post.created_at)}`;
@@ -136,7 +133,6 @@ export default function PostCard({ post, user }) {
               <CardMedia
                 component="img"
                 alt="Movie Poster"
-                // height="100"
                 className={classes.poster}
                 image={poster}
                 title="Movie Poster"
@@ -150,16 +146,9 @@ export default function PostCard({ post, user }) {
                 {formatTime(post.updated_at)}]
               </Typography>
             )}
-            {/* {post.created_at !== post.updated_at && (
-              <Typography variant="caption" color="textSecondary" component="p">
-                [Updated: {formatDate(post.updated_at)} @
-                {formatTime(post.updated_at)}]
-              </Typography>
-            )} */}
           </CardContent>
         </CardActionArea>
         <div className="buttonwrapper">
-          {/* <CardActions> */}
           <Button size="small" color="primary">
             Comment
           </Button>
@@ -180,7 +169,6 @@ export default function PostCard({ post, user }) {
               {post.genre}
             </Button>
           </Link>
-          {/* </CardActions> */}
         </div>
       </Card>
     </div>

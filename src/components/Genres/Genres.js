@@ -53,7 +53,6 @@ export default function Genres({ user }) {
       <div className="subgenre">
         <div className="header">
           <Typography variant="h2">{genres}</Typography>
-          {/* <h9>{genres}</h9> */}
         </div>
         <div className="hero">
           <img src={Switch(genres)} alt={genres}></img>
@@ -75,8 +74,6 @@ export default function Genres({ user }) {
       <div className="items">
         {posts.map((post) => (
           <div className="info">
-            {/* <li>PostId: {post.id}</li>
-            <li>Date: {formatDate(post.created_at)}</li> */}
             <Link
               to={{
                 pathname: "/posts",

@@ -27,15 +27,12 @@ const useStyles = makeStyles({
 });
 
 export default function CommentCard({ setComments, comment, user }) {
-  console.log("comment", comment);
-  let Navigate = useNavigate();
+  // let Navigate = useNavigate();
   let commentId = comment.id;
 
   const handleOnDeleteComment = async () => {
     const { data, error } = await apiClient.deleteCommentById({ commentId });
     if (data) {
-      console.log("i deleted", data);
-      console.log("commentId", commentId);
       setComments((oldComments) =>
         oldComments.filter((comment) => comment.id !== commentId)
       );

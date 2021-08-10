@@ -62,7 +62,7 @@ export default function NewPost({ user }) {
       genre: genre,
     });
     if (data) {
-      console.log(data);
+      // console.log(data);
       Navigate(`/genre/${genre}`);
     }
     if (error) {
@@ -108,7 +108,6 @@ export default function NewPost({ user }) {
           />
           <div className="center">
             <Button
-              // onClick={() => console.log("you clikced me")}
               type="submit"
               color="primary"
               variant="contained"

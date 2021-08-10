@@ -139,9 +139,6 @@ export default function IndividualMoviePage(props) {
     setGenreMovieName();
   }, [individual, video]);
 
-  // console.log('individual', individual)
-  // console.log('posts', posts)
-
   const poster = `https://www.themoviedb.org/t/p/original/${individual.backdrop_path}`;
   const allData = {
     name: individual.original_title,
@@ -176,9 +173,6 @@ export default function IndividualMoviePage(props) {
               <Button variant="outlined" size="small" color="inherit">
                 No trailer available
               </Button>
-              // <div className="teste">
-              //   <p>No trailer available</p>
-              // </div>
             )}
 
             {isOpen && (
