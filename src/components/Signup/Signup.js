@@ -180,7 +180,8 @@ export default function Signup({ user, setUser }) {
               <span className="error">{errors.passwordConfirm}</span>
             )}
           </div>
-          <div className="submitbtn">
+
+          <div className="footer">
             <Button
               variant="contained"
               color="primary"
