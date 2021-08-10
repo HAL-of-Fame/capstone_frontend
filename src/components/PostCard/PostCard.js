@@ -59,6 +59,9 @@ const useStyles = makeStyles({
   poster: {
     height: 280,
   },
+  test: {
+    justifyContent: "center",
+  },
 });
 
 export default function PostCard({ post, user }) {
@@ -108,6 +111,9 @@ export default function PostCard({ post, user }) {
                 pathname: "/movie",
                 search: `/${post.movieid}`,
               }}
+              onClick={() => {
+                window.scrollTo({ top: 0 });
+              }}
             >
               <CardMedia
                 component="img"
@@ -122,6 +128,9 @@ export default function PostCard({ post, user }) {
               to={{
                 pathname: "/genre",
                 search: `/${post.genre}`,
+              }}
+              onClick={() => {
+                window.scrollTo({ top: 0 });
               }}
             >
               <CardMedia
@@ -149,11 +158,30 @@ export default function PostCard({ post, user }) {
             )} */}
           </CardContent>
         </CardActionArea>
-        <CardActions>
+        <div className="buttonwrapper">
+          {/* <CardActions> */}
           <Button size="small" color="primary">
             Comment
           </Button>
-        </CardActions>
+          <Link
+            to={{
+              pathname: "/genre",
+              search: `/${post.genre}`,
+            }}
+          >
+            <Button
+              onClick={() => {
+                window.scrollTo({ top: 0 });
+              }}
+              className={classes.test}
+              size="small"
+              color="primary"
+            >
+              {post.genre}
+            </Button>
+          </Link>
+          {/* </CardActions> */}
+        </div>
       </Card>
     </div>
   );

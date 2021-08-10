@@ -1,3 +1,9 @@
 .all {
   margin-top: 5%;
 }
+
+.buttonwrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 550px;
+}
