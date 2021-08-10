@@ -6,7 +6,7 @@ export default function NotAllowed() {
     <div className="NotAllowed">
       <h2>You must be logged in to do this</h2>
       <span>
-        Login <Link to="/login">here</Link>
+        <Link to="/login">here</Link>
       </span>
     </div>
   );

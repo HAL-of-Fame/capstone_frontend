@@ -4,6 +4,7 @@ import apiClient from "../Services/apiClient";
 import "./Login.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
+// import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,8 +56,8 @@ export default function Login({ user, setUser }) {
     if (data?.user) {
       setUser(data.user);
       apiClient.setToken(data.token);
+      navigate(-1);
     }
-
 
     setIsProcessing(false);
   };
@@ -94,7 +95,6 @@ export default function Login({ user, setUser }) {
             {errors.password && (
               <span className="error">{errors.password}</span>
             )}
-
           </div>
           <div className="footer">
             <Button

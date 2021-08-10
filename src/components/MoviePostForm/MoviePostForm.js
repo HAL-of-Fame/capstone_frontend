@@ -79,7 +79,7 @@ export default function MoviePost({
   };
 
   if (!user) {
-    return <NotAllowed />;
+    return <NotAllowed movieId={movieId} genre={genre} />;
   }
   return (
     <div className="test">
