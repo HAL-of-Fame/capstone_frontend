@@ -93,13 +93,13 @@ export default function CommentCard({ setComments, comment, user }) {
         <div className="testing">
           {userOwnsComment === true && (
             <div className="altering">
-              <Button
+              {/* <Button
                 onClick={handleOnUpdateComment}
                 size="small"
                 color="primary"
               >
                 Edit
-              </Button>
+              </Button> */}
               <Button
                 size="small"
                 onClick={handleOnDeleteComment}
