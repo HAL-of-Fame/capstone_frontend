@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   root: {
     width: 450,
     margin: 5,
-    // height: 100,
+    height: 165,
   },
   avatar: {
     backgroundColor: red[500],
