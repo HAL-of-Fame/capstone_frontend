@@ -22,7 +22,7 @@ import PostDetail from "../PostDetail/PostDetail";
 import Genres from "../Genres/Genres";
 // import MTT from "../MTT/MTT";
 import MoviePost from "../MoviePostForm/MoviePostForm";
-import ContactUs from "../ContactUs/ContactUs"
+import ContactUs from "../ContactUs/ContactUs";
 
 export default function App() {
   const navigate = useNavigate();
@@ -204,10 +204,7 @@ export default function App() {
           path="/register"
           element={<Signup user={user} setUser={setUser} />}
         />
-        <Route
-          path="/contact-us/"
-          element={<ContactUs/>}
-        />
+        <Route path="/contact-us/" element={<ContactUs />} />
         <Route
           path="/shopping-cart"
           element={
