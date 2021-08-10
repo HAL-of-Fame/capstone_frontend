@@ -14,12 +14,7 @@ import "./PostCard.css";
 import CardHeader from "@material-ui/core/CardHeader";
 
 import Avatar from "@material-ui/core/Avatar";
-// import IconButton from "@material-ui/core/IconButton";
 import { yellow } from "@material-ui/core/colors";
-// import FavoriteIcon from "@material-ui/icons/Favorite";
-// import ShareIcon from "@material-ui/icons/Share";
-// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-// import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import adventure from "../../assets/adventure.jpg";
 import action from "../../assets/action.jpg";
@@ -86,6 +81,7 @@ export default function PostCard({ post, user }) {
     post.created_at
   )} @ ${formatTime(post.created_at)}`;
   const [poster, setPoster] = useState("");
+  const [edited, setEdited] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -95,6 +91,13 @@ export default function PostCard({ post, user }) {
       setPoster(Switch(post.genre));
     }
   }, [post]);
+
+  useEffect(() => {
+    console.log("post at 95", post);
+    if (post.created_at !== post.updated_at) {
+      setEdited(true);
+    }
+  }, [post.updated_at]);
 
   return (
     <div className="all">
@@ -149,12 +152,18 @@ export default function PostCard({ post, user }) {
             </Link>
           )}
           <CardContent>
-            {post.created_at !== post.updated_at && (
+            {edited && (
               <Typography variant="caption" color="textSecondary" component="p">
                 [Updated: {formatDate(post.updated_at)} @
                 {formatTime(post.updated_at)}]
               </Typography>
             )}
+            {/* {post.created_at !== post.updated_at && (
+              <Typography variant="caption" color="textSecondary" component="p">
+                [Updated: {formatDate(post.updated_at)} @
+                {formatTime(post.updated_at)}]
+              </Typography>
+            )} */}
           </CardContent>
         </CardActionArea>
         <CardActions>

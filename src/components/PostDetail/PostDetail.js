@@ -116,10 +116,17 @@ export default function PostDetail({ user, updatePost }) {
     const postUpdate = { text, title };
     const { data, error } = await apiClient.updatePost({ postId, postUpdate });
     if (data) {
-      setPost({ ...post, text: data.post.text, title: data.post.title });
+      console.log("post.updated_at", post.updated_at);
+      setPost({
+        ...post,
+        text: data.post.text,
+        title: data.post.title,
+        updated_at: data.post.updated_at,
+        created_at: data.post.created_at,
+      });
       updatePost({ postId, postUpdate });
       setEdited(true);
-      window.location.reload();
+      // window.location.reload();
     }
     if (error) {
       setError(error);
@@ -134,7 +141,6 @@ export default function PostDetail({ user, updatePost }) {
     if (data) {
       listAllComments();
       setComment("");
-      setComments([]);
     }
     if (error) setError(error);
     setIsUpdating(false);
@@ -145,15 +151,13 @@ export default function PostDetail({ user, updatePost }) {
 
   if (!post && !isFetching) return null;
   if (!post) return <h1>Loading...</h1>;
-  // console.log("post inside postdetail", post);
+
   return (
     <div className="PostDetail">
       <div className="Post">
         <div className="body">
           <div className="info">
             <PostCard post={post} user={user} />
-            {/* <p className="text">Title: {post.title}</p>
-            <p className="text">Text: {post.text}</p> */}
           </div>
         </div>
         {userOwnsPost === true && (
@@ -196,6 +200,7 @@ export default function PostDetail({ user, updatePost }) {
                   onChange={(e) => setComment(e.target.value)}
                   className={classes.field}
                   // label="Comment"
+                  value={comment}
                   variant="filled"
                   color="primary"
                   required
