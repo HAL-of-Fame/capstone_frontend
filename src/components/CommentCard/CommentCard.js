@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CommentCard({ comment, user }) {
+export default function CommentCard({ setComments, comment, user }) {
   console.log("comment", comment);
   let Navigate = useNavigate();
   let commentId = comment.id;
@@ -36,12 +36,11 @@ export default function CommentCard({ comment, user }) {
     if (data) {
       console.log("i deleted", data);
       console.log("commentId", commentId);
-
-      // Navigate(`/posts/${comment.post_id}`); //will return an error not found
+      setComments((oldComments) =>
+        oldComments.filter((comment) => comment.id !== commentId)
+      );
       // window.location.reload();
-    }
-    // if (error) setError(error);
-    else {
+    } else {
       console.log("did not succeeded in deleting");
     }
   };
@@ -69,7 +68,6 @@ export default function CommentCard({ comment, user }) {
   )}`;
   const userOwnsComment =
     user?.username && comment?.userName === user?.username;
-  // console.log("userOwnsComment", userOwnsComment);
   let commenter = `${comment.userName} says:`;
   // console.log("comment", comment);
   const classes = useStyles();

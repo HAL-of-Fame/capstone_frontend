@@ -227,7 +227,11 @@ export default function PostDetail({ user, updatePost }) {
           </div>
           {comments.map((comment) => (
             <div className="test">
-              <CommentCard comment={comment} user={user} />
+              <CommentCard
+                setComments={setComments}
+                comment={comment}
+                user={user}
+              />
             </div>
           ))}
         </div>
