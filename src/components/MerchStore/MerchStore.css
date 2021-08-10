@@ -14,6 +14,7 @@ Product {
 .store {
   text-align: center;
   color: white;
+  margin-bottom: 100px;
 }
 
 .store h2 {
