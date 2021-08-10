@@ -8,7 +8,12 @@ export default function MovieCard({ movie }) {
   return (
     <div className="Card">
       <span className="Poster">
-        <Link to={`/movie/${movie.id}`}>
+        <Link
+          to={`/movie/${movie.id}`}
+          onClick={() => {
+            window.scrollTo({ top: 0 });
+          }}
+        >
           <img src={poster} alt="movie poster" width="200px" />
         </Link>
       </span>

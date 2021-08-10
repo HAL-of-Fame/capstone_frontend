@@ -22,7 +22,14 @@ const socialsLookup = {
 
 const links = {
   Information: [
-    <Link to="/meet-the-team">Meet The Team</Link>,
+    <Link
+      to="/meet-the-team"
+      onClick={() => {
+        window.scrollTo({ top: 0 });
+      }}
+    >
+      Meet The Team
+    </Link>,
     <Link to="contact-us/">Contact Us</Link>,
     <Link to="/shopping-cart">My Cart</Link>,
   ],

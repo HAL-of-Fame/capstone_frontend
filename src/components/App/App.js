@@ -6,7 +6,7 @@ import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
 import Home from "../Home/Home";
 import NotFound from "../NotFound/NotFound";
-import GenrePage from "../GenrePage/GenrePage";
+// import GenrePage from "../GenrePage/GenrePage";
 // import Sidebar from "../Sidebar/Sidebar";
 import Footer from "../Footer/Footer";
 import IndividualMoviePage from "../IndividualMoviePage/IndividualMoviePage";
@@ -176,7 +176,7 @@ export default function App() {
       {/* <Sidebar /> */}
       <Routes>
         <Route path="/" element={<Home user={user} />} />
-        <GenrePage path="/genre" />
+        {/* <GenrePage path="/genre" /> */}
         <Route
           path="/movie/:movie_id"
           element={
@@ -235,7 +235,7 @@ export default function App() {
           }
         />
         <Route path="/search/:searchInputValue" element={<SearchPage />} />
-        <Route path="/genre" element={<GenrePage user={user} />} />
+        {/* <Route path="/genre" element={<GenrePage user={user} />} /> */}
         <Route path="/genre/:genres" element={<Genres user={user} />} />
         <Route
           path="/genre/:genres/create"
