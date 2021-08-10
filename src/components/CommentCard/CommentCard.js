@@ -38,7 +38,7 @@ export default function CommentCard({ comment, user }) {
       console.log("commentId", commentId);
 
       // Navigate(`/posts/${comment.post_id}`); //will return an error not found
-      window.location.reload();
+      // window.location.reload();
     }
     // if (error) setError(error);
     else {
