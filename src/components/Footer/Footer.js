@@ -83,14 +83,14 @@ export default function Footer() {
           </div>
         </div>
         {/* Bottom Section */}
-        <div className="bottom">
-          <div className="row">
-            <p className="col-sm">
+        {/* <div className="bottom">
+          <div className="row"> */}
+        {/* <p className="col-sm">
               &copy;{new Date().getFullYear()} OUR COMPANY NAME | All rights
               reserved | Terms Of Service | Privacy
-            </p>
-          </div>
-        </div>
+            </p> */}
+        {/* </div>
+        </div> */}
       </div>
     </div>
   );
