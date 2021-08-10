@@ -173,9 +173,12 @@ export default function IndividualMoviePage(props) {
                 Watch Trailer
               </Button>
             ) : (
-              <div className="teste">
-                <p>No trailer available</p>
-              </div>
+              <Button variant="outlined" size="small" color="inherit">
+                No trailer available
+              </Button>
+              // <div className="teste">
+              //   <p>No trailer available</p>
+              // </div>
             )}
 
             {isOpen && (
