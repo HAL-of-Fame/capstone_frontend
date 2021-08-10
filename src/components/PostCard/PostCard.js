@@ -105,21 +105,6 @@ export default function PostCard({ post, user }) {
               {post.userName[0].toUpperCase()}
             </Avatar>
           }
-          // {userOwnsPost ? (
-          // action={
-          //   <IconButton onClick={() => console.log("delete")}>
-          //     <MoreVertIcon />
-          //     {/* <DeleteOutlined /> */}
-          //   </IconButton>
-          // }
-          // ):(
-          // action={
-          //   <IconButton onClick={() => console.log("delete")}>
-          //     <MoreVertIcon />
-          //     {/* <DeleteOutlined /> */}
-          //   </IconButton>
-          // }
-          // ) }
           title={post.title}
           subheader={timeinfo}
         />
@@ -164,12 +149,6 @@ export default function PostCard({ post, user }) {
             </Link>
           )}
           <CardContent>
-            {/* <Link to="/">
-              <div className="testss">
-                <img src={poster} alt="dsaf"></img>
-              </div>
-            </Link> */}
-
             {post.created_at !== post.updated_at && (
               <Typography variant="caption" color="textSecondary" component="p">
                 [Updated: {formatDate(post.updated_at)} @

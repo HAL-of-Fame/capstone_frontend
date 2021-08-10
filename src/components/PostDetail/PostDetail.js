@@ -25,10 +25,9 @@ const fetchPostById = async ({
 
   const { data, error } = await apiClient.fetchPostById(postId);
   if (data) {
-    // console.log("data. title.title", data.post.title);
     setPost(data.post);
     setText(data.post.text);
-    // setTitle(data.post.title);
+    setTitle(data.post.title);
   }
   if (error) {
     setError(error);
@@ -42,8 +41,6 @@ const useStyles = makeStyles({
     marginTop: 0,
     marginBotttom: 20,
     width: "90%",
-    // marginLeft: "auto",
-    // marginRight: "auto",
     paddingBottom: `30px, 30px`,
     fontWeight: 500,
   },
