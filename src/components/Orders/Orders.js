@@ -85,6 +85,7 @@ const OrderItem = ({ orderItems, orderId }) => {
             </span>
           </div>
         ))}
+        <hr></hr>
         <div className="receipt">
           <div className="receipt-subtotal">
             <span className="label">Subtotal</span>
@@ -118,6 +119,7 @@ const OrderItem = ({ orderItems, orderId }) => {
             </span>
           </div>
         </div>
+        <hr></hr>
       </div>
     </div>
   );

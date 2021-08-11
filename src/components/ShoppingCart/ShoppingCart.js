@@ -1,5 +1,5 @@
 import React from "react";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 import { useNavigate, Link } from "react-router-dom";
 export default function Basket(props) {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ export default function Basket(props) {
   const itemsPrice = cartItems.reduce((a, c) => a + c.quantity * c.price, 0);
   console.log(typeof itemsPrice);
   const taxPrice = itemsPrice * 0.14;
-  const shippingPrice = itemsPrice > 2000 ? 0 : 20;
+  const shippingPrice = itemsPrice > 2000 ? 0 : 3.99;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
   console.log(cartItems);
 
@@ -21,8 +21,12 @@ export default function Basket(props) {
 
   return (
     <aside className="all">
-      <Button><Link to="/">Buy More Movies</Link></Button>
-      <Button><Link to="/store">Buy More Merch</Link></Button>
+      <Button>
+        <Link to="/">Buy More Movies</Link>
+      </Button>
+      <Button>
+        <Link to="/store">Buy More Merch</Link>
+      </Button>
       <h2>Cart Items</h2>
       <div>
         {cartItems.length === 0 && <div>Cart is empty</div>}
