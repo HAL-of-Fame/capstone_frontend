@@ -1,17 +1,20 @@
-export const calculateItemSubtotal = (price, quantity) => price * quantity
+export const calculateItemSubtotal = (price, quantity) => price * quantity;
 
 export const calculateOrderSubtotal = (items) => {
-  return items.reduce((acc, item) => (acc += calculateItemSubtotal(item.price, item.quantity)), 0)
-}
+  return items.reduce(
+    (acc, item) => (acc += calculateItemSubtotal(item.price, item.quantity)),
+    0
+  );
+};
 
 export const calculateTaxesAndFees = (subTotal) => {
-  return subTotal * 0.14
-}
+  return subTotal * 0.14;
+};
 
-export const shipping =() =>{
-  return 20
-}
+export const shipping = () => {
+  return 3.99;
+};
 
 export const calculateTotal = (subTotal) => {
-  return subTotal + calculateTaxesAndFees(subTotal) + shipping()
-}
+  return subTotal + calculateTaxesAndFees(subTotal) + shipping();
+};

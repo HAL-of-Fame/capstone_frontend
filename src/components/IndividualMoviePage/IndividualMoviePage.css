@@ -14,6 +14,10 @@
   margin-bottom: 1%;
 }
 
+.trailer {
+  padding-right: 20px;
+}
+
 .individualMoviePage .column .top .right {
   display: flex;
   margin-left: 50%;
