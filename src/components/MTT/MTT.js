@@ -15,22 +15,21 @@ export default function MTT() {
   return (
     <div>
       <div className="greeting">Meet The Team</div>
+
       <div className="people">
         <div className="person1">
           <img src={cruella} alt="cruellashani" />
           <div className="name"> Ashani Jewell </div>
           <div className="info">
-            <div> Connect with Us:</div>
-
             <div> Ashanijewell@gmail.com</div>
             <a href="https://www.linkedin.com/in/ashani-jewell/"> LinkedIn</a>
             <a href="https://github.com/ashanij123"> GitHub</a>
             <div>
-              Description: Ashani Jewell is a Junior at Kalamazoo College
-              studying Economics and Computer Science. The 20-year-old Virgo, is
-              very passionate about music and creating a space for everyone to
-              express their creativity. Her favorite movie is The Parent Trap
-              and you can check it out here!
+              Ashani Jewell is a Junior at Kalamazoo College studying Economics
+              and Computer Science. The 20-year-old Virgo, is very passionate
+              about music and creating a space for everyone to express their
+              creativity. Her favorite movie is The Parent Trap and you can
+              check it out here!
             </div>
           </div>
         </div>
@@ -42,11 +41,11 @@ export default function MTT() {
             <a href="https://www.linkedin.com/in/hmu/"> LinkedIn</a>
             <a href="https://github.com/rrll3553/"> GitHub</a>
             <div>
-              Description: Henry is studying computer science at Oregon State
-              University 📚. His favorite Disney movie is Moana. 🌴 Moana > ❄️
-              Frozen forever. When not coding Henry can be found watching
-              badminton videos, doing outdoorsy stuff, and sleeping 💤. He hopes
-              to one day travel to Egypt and explore the pyramids. ✈️
+              Henry is studying computer science at Oregon State University 📚.
+              His favorite Disney movie is Moana. 🌴 Moana > ❄️ Frozen forever.
+              When not coding Henry can be found watching badminton videos,
+              doing outdoorsy stuff, and sleeping 💤. He hopes to one day travel
+              to Egypt and explore the pyramids. ✈️
             </div>
           </div>
         </div>
@@ -61,12 +60,12 @@ export default function MTT() {
             <a href="https://github.com/lriveracastro407"> GitHub</a>
 
             <div>
-              Description: Leo is a Junior studying Data Science at the
-              University of California, Berkeley 🐻. He likes to watch movies🎥,
-              TV shows📺, Football🏈, Basketball🏀, UFC, read, and play Video
-              Games in his freetime. He also loves to listen to The Weeknd,
-              Drake, and Spanish Music (reggaeton). You can find his favorite
-              movie "Spiderman: Into the SpiderVerse" on our site!{" "}
+              Leo is a Junior studying Data Science at the University of
+              California, Berkeley 🐻. He likes to watch movies🎥, TV shows📺,
+              Football🏈, Basketball🏀, UFC, read, and play Video Games in his
+              freetime. He also loves to listen to The Weeknd, Drake, and
+              Spanish Music (reggaeton). You can find his favorite movie
+              "Spiderman: Into the SpiderVerse" on our site!{" "}
             </div>
           </div>
         </div>
